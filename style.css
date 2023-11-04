@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300;700&family=Concert+One&family=Lalezar&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital@1&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --font-family-almarai: 'Almarai', sans-serif;
+    --font-family-concertOne: 'Concert One', sans-serif;
+    --font-family-lalezar: 'Lalezar', sans-serif;
+    --font-family-archivo: 'Archivo', sans-serif;
+}
+
+body {
+    background-image: url('./assets/Group\ 1.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    height: 100vh;
+}
+
+.up-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    /* background-color: lightcoral; */
+    height: 70px;
+}
+
+.up-section .contain {
+    display: flex;
+    /* background-color: lightblue; */
+}
+
+.up-section .contain-logo .logomd {
+    width: 80px;
+    height: 64px;
+    margin: 10px 17px;
+    background-color: #eeeeeeee;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 10px;
+    border: 1px solid rgb(206, 206, 206);
+    align-items: center;
+    box-shadow: 0 4px 10px 2px rgba(0, 0, 0, 0.1);
+}
+
+.up-section .contain-logo .logomd img:nth-child(1) {
+    padding-top: 15px;
+    width: 60px;
+}
+
+.up-section .contain-logo .logomd img:nth-child(2) {
+    width: 20px;
+    height: 44px;
+    transform: rotate(180deg);
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.up-section .contain-buttons {
+    /* background-color: lightblue; */
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.up-section .contain-buttons button {
+    background-color: #414141;
+    color: #E3E3E3;
+    font-family: var(--font-family-concertOne);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 7px;
+    font-size: 23px;
+    cursor: pointer;
+}
+
+.up-section .contain-buttons button:active {
+    transform: scale(.98);
+}
+
+/* SECTION OF TABLE */
+.nextOne-section {
+    width: 100%;
+    /* background-color: lightblue; */
+    height: 400px;
+    margin-top: 20px;
+    padding: 0 9px;
+    display: grid;
+    grid-template-columns: 90% 10%;
+}
+
+/* TABLE */
+.contain-table {
+   width: 1290px;
+   height: 320px;
+   overflow: auto;
+   /* background-color: lightblue; */
+   /* box-shadow: 0 4px 10px 2px rgba(0, 0, 0, 0.29); */
+   border-radius: 5px;
+}
+
+.contain-table::-webkit-scrollbar {
+    width: 8px;
+    height: 10px;
+    visibility: hidden;
+}
+
+.contain-table::-webkit-scrollbar:vertical {
+    background-color: #bebebe;
+    visibility: visible;
+}
+
+/* .contain-table::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+} */
+
+.contain-table::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+.contain-table table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.contain-table table thead {
+    position: sticky;
+    top: 0;
+    bottom: 0;
+}
+
+.contain-table table th, 
+.contain-table table tbody td {
+    border-bottom: 1px solid rgba(177, 177, 177, 0.4);
+    background-color: #EEEEEE;
+}
+
+table {
+    width: 100%;
+    background-color: #EEEEEE;
+    /* border: 1px solid rgba(35, 35, 35, 0.4); */
+    box-shadow: 0 4px 10px 2px rgba(0, 0, 0, 0.29);
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+thead {
+    border-bottom: 1px solid black;
+}
+
+th {
+    font-family: var(--font-family-almarai);
+    font-size: 11px;
+    padding: 10px 10px;
+}
+
+td {
+    padding: 0 10px;
+    border-bottom: 1px solid rgba(177, 177, 177, 0.4);
+    text-align: center;
+    font-family: var(--font-family-archivo);
+}
+
+td:nth-child(2), td:nth-child(3), td:nth-child(5) {
+    font-weight: bold;
+}
+
+/* thead, tbody {
+    display: block;
+} */
+
+tbody {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+tbody tr:hover {
+    background-color: #e6e6e6;
+}
+/* TABLE */
+
+/* AJUSTES TEMPORALES */
+td img {
+    width: 30px;
+    cursor: pointer;
+    
+}
+
+.up-section .contain-empty {
+    opacity: 0;
+}

@@ -22,7 +22,8 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     margin: 0;
-    height: 100vh;
+    min-height: 100vh;
+    overflow-y: hidden;
 }
 
 .up-section {
@@ -95,7 +96,7 @@ body {
 .nextOne-section {
     width: 100%;
     /* background-color: lightblue; */
-    height: 400px;
+    height: 270px;
     margin-top: 20px;
     padding: 0 9px;
     display: grid;
@@ -104,9 +105,13 @@ body {
 }
 
 /* TABLE */
+.table-section {
+    height: 320px;
+}
+
 .contain-table {
    width: 1290px;
-   height: 320px;
+   height: 300px;
    overflow: auto;
    /* background-color: lightblue; */
    box-shadow: 0 4px 10px 2px rgba(0, 0, 0, 0.167);
@@ -140,8 +145,13 @@ body {
 .contain-table table thead {
     position: sticky;
     top: 0;
-    bottom: 0;
+    /* bottom: 0; */
 }
+
+/* tbody tr:hover {
+    background-color: #9b2d2d;
+    background: #9b2d2d;
+} */
 
 .contain-table table th, 
 .contain-table table tbody td {
@@ -156,6 +166,7 @@ table {
     box-shadow: 0 4px 10px 2px rgba(0, 0, 0, 0.29);
     border-radius: 10px;
     font-size: 14px;
+    height: 320px;
 }
 
 thead {
@@ -178,7 +189,6 @@ td {
 td img {
     width: 25px;
     cursor: pointer;
-    
 }
 
 td:nth-child(2), td:nth-child(3), td:nth-child(5) {
@@ -190,9 +200,7 @@ tbody {
     overflow-x: hidden;
 }
 
-tbody tr:hover {
-    background-color: #e6e6e6;
-}
+
 /* TABLE */
 
 /* up-section 3 column empty */
@@ -205,9 +213,10 @@ tbody tr:hover {
 /* settings section */
 .settings-section {
     width: 100%;
-    height: 320px;
+    height: 300px;
     display: flex;
     flex-direction: column;
+    gap: 8px;
     justify-content: space-between;
     align-items: center;
     /* background-color: #bebebe; */
@@ -347,6 +356,22 @@ tbody tr:hover {
 .settings-section .content-request-btns .container-req-btns button:active {
     transform: var(--scale-button);
 }
-
-
 /* settings section */
+
+.chart-and-table {
+    width: 100%;
+    /* background-color: lightcoral; */
+    padding: 0 9px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    min-height: 330px;
+}
+
+canvas {
+    max-width: 750px;
+    /* background-color: rgb(255, 255, 255); */
+    min-height: 200px;
+    /* padding: 40px 0; */
+    margin: 25px 0;
+    padding: 5px 0;
+}

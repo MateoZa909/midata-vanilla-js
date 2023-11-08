@@ -1,6 +1,8 @@
 {
   "dependencies": {
+    "chart.js": "^4.4.0",
     "datatables.net-dt": "^1.13.7",
-    "jquery": "^3.7.1"
+    "dotenv": "^16.3.1",
+    "mysql": "^2.18.1"
   }
 }

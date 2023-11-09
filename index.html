@@ -216,16 +216,235 @@
     </div>
 
     <div class="chart-and-table">
-        <div class="section-chart">
+        <div class="section-chart" style="position: relative; height: 50vh; width: 50vw;">
             <canvas id="myGraphic"></canvas>
         </div>
-        <div class="section-table">
-            <div class="some">
-                <h1></h1>
-            </div>
+
+        <div class="section-table-db">
+            <table id="database-table">
+                <thead>
+                    <th>CAL_ID</th>
+                    <th>CAL_CONTACT</th>
+                    <th>CAL_AGENT_FN</th>
+                    <th>CAL_AGENT_LN</th>
+                    <th>CAL_PHONE</th>
+                    <th>CAL_CALL_START</th>
+                    <th>CAL_CALL_FINISH</th>
+                    <th>CAL_CAMPAIGN</th>
+                    <th>CAL_QUEUE</th>
+                    <th>CAL_TIME_LENGTH</th>
+                    <th>CAL_TIME_QUEUE</th>
+                    <th>CAL_TIME_SPEAKE</th>
+                    <th>CAL_TIME_WRAP</th>
+                    <th>CAL_HANGUP</th>
+                    <th>CAL_TYPEDOC</th>
+                    <th>CAL_DOCUMENTO</th>
+                    <th>CAL_MOTIVO</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>34</td>
+                        <td>134123</td>
+                        <td>CGN_YARELIS SOFIA</td>
+                        <td>PEDROZA GÚZMAN</td>
+                        <td>3132535523</td>
+                        <td>8/10/2022 8:31 A.M</td>
+                        <td>8/10/2022 8:41 A.M</td>
+                        <td>GNC Consulta Externa</td>
+                        <td>5</td>
+                        <td>575</td>
+                        <td>115</td>
+                        <td>399</td>
+                        <td>60</td>
+                        <td>TRANSFER</td>
+                        <td>No data</td>
+                        <td>No data</td>
+                        <td>Agendamiento</td>
+                    </tr>
+
+                    <tr>
+                        <td>34</td>
+                        <td>424444</td>
+                        <td>CGN_YARELIS SOFIA</td>
+                        <td>PEDROZA GÚZMAN</td>
+                        <td>3132535523</td>
+                        <td>8/10/2022 8:31 A.M</td>
+                        <td>8/10/2022 8:41 A.M</td>
+                        <td>GNC Consulta Externa</td>
+                        <td>5</td>
+                        <td>575</td>
+                        <td>115</td>
+                        <td>399</td>
+                        <td>60</td>
+                        <td>TRANSFER</td>
+                        <td>No data</td>
+                        <td>No data</td>
+                        <td>Agendamiento</td>
+                    </tr>
+
+                    <tr>
+                        <td>34</td>
+                        <td>424444</td>
+                        <td>CGN_YARELIS SOFIA</td>
+                        <td>PEDROZA GÚZMAN</td>
+                        <td>3132535523</td>
+                        <td>8/10/2022 8:31 A.M</td>
+                        <td>8/10/2022 8:41 A.M</td>
+                        <td>GNC Consulta Externa</td>
+                        <td>5</td>
+                        <td>575</td>
+                        <td>115</td>
+                        <td>399</td>
+                        <td>60</td>
+                        <td>TRANSFER</td>
+                        <td>No data</td>
+                        <td>No data</td>
+                        <td>Agendamiento</td>
+                    </tr>
+
+                    <tr>
+                        <td>34</td>
+                        <td>424444</td>
+                        <td>CGN_YARELIS SOFIA</td>
+                        <td>PEDROZA GÚZMAN</td>
+                        <td>3132535523</td>
+                        <td>8/10/2022 8:31 A.M</td>
+                        <td>8/10/2022 8:41 A.M</td>
+                        <td>GNC Consulta Externa</td>
+                        <td>5</td>
+                        <td>575</td>
+                        <td>115</td>
+                        <td>399</td>
+                        <td>60</td>
+                        <td>TRANSFER</td>
+                        <td>No data</td>
+                        <td>No data</td>
+                        <td>Agendamiento</td>
+                    </tr>
+
+                    <tr>
+                        <td>34</td>
+                        <td>424444</td>
+                        <td>CGN_YARELIS SOFIA</td>
+                        <td>PEDROZA GÚZMAN</td>
+                        <td>3132535523</td>
+                        <td>8/10/2022 8:31 A.M</td>
+                        <td>8/10/2022 8:41 A.M</td>
+                        <td>GNC Consulta Externa</td>
+                        <td>5</td>
+                        <td>575</td>
+                        <td>115</td>
+                        <td>399</td>
+                        <td>60</td>
+                        <td>TRANSFER</td>
+                        <td>No data</td>
+                        <td>No data</td>
+                        <td>Agendamiento</td>
+                    </tr>
+
+                    <tr>
+                        <td>34</td>
+                        <td>424444</td>
+                        <td>CGN_YARELIS SOFIA</td>
+                        <td>PEDROZA GÚZMAN</td>
+                        <td>3132535523</td>
+                        <td>8/10/2022 8:31 A.M</td>
+                        <td>8/10/2022 8:41 A.M</td>
+                        <td>GNC Consulta Externa</td>
+                        <td>5</td>
+                        <td>575</td>
+                        <td>115</td>
+                        <td>399</td>
+                        <td>60</td>
+                        <td>TRANSFER</td>
+                        <td>No data</td>
+                        <td>No data</td>
+                        <td>Agendamiento</td>
+                    </tr>
+
+                    <tr>
+                        <td>34</td>
+                        <td>424444</td>
+                        <td>CGN_YARELIS SOFIA</td>
+                        <td>PEDROZA GÚZMAN</td>
+                        <td>3132535523</td>
+                        <td>8/10/2022 8:31 A.M</td>
+                        <td>8/10/2022 8:41 A.M</td>
+                        <td>GNC Consulta Externa</td>
+                        <td>5</td>
+                        <td>575</td>
+                        <td>115</td>
+                        <td>399</td>
+                        <td>60</td>
+                        <td>TRANSFER</td>
+                        <td>No data</td>
+                        <td>No data</td>
+                        <td>Agendamiento</td>
+                    </tr>
+
+                    <tr>
+                        <td>34</td>
+                        <td>424444</td>
+                        <td>CGN_YARELIS SOFIA</td>
+                        <td>PEDROZA GÚZMAN</td>
+                        <td>3132535523</td>
+                        <td>8/10/2022 8:31 A.M</td>
+                        <td>8/10/2022 8:41 A.M</td>
+                        <td>GNC Consulta Externa</td>
+                        <td>5</td>
+                        <td>575</td>
+                        <td>115</td>
+                        <td>399</td>
+                        <td>60</td>
+                        <td>TRANSFER</td>
+                        <td>No data</td>
+                        <td>No data</td>
+                        <td>Agendamiento</td>
+                    </tr>
+
+                    <tr>
+                        <td>34</td>
+                        <td>424444</td>
+                        <td>CGN_YARELIS SOFIA</td>
+                        <td>PEDROZA GÚZMAN</td>
+                        <td>3132535523</td>
+                        <td>8/10/2022 8:31 A.M</td>
+                        <td>8/10/2022 8:41 A.M</td>
+                        <td>GNC Consulta Externa</td>
+                        <td>5</td>
+                        <td>575</td>
+                        <td>115</td>
+                        <td>399</td>
+                        <td>60</td>
+                        <td>TRANSFER</td>
+                        <td>No data</td>
+                        <td>No data</td>
+                        <td>Agendamiento</td>
+                    </tr>
+
+                    <tr>
+                        <td>34</td>
+                        <td>424444</td>
+                        <td>CGN_YARELIS SOFIA</td>
+                        <td>PEDROZA GÚZMAN</td>
+                        <td>3132535523</td>
+                        <td>8/10/2022 8:31 A.M</td>
+                        <td>8/10/2022 8:41 A.M</td>
+                        <td>GNC Consulta Externa</td>
+                        <td>5</td>
+                        <td>575</td>
+                        <td>115</td>
+                        <td>399</td>
+                        <td>60</td>
+                        <td>TRANSFER</td>
+                        <td>No data</td>
+                        <td>No data</td>
+                        <td>Agendamiento</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -272,13 +491,13 @@
                     legend: {
                         display: true,
                         labels: {
-                            color: 'rgb(255, 255, 255)'
+                            color: 'rgb(0, 0, 0)'
                         }
                     },
                     title: {
                         display: true,
                         text: 'Crecimiento de la base de datos',
-                        color: 'rgb(255, 255, 255)',
+                        color: 'rgb(0, 0, 0 )',
                         font: {
                             size: 20,
                             family: 'Almarai'

@@ -1,8 +1,16 @@
 {
+  "name": "mi-data",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+
+  },
   "dependencies": {
     "chart.js": "^4.4.0",
     "datatables.net-dt": "^1.13.7",
     "dotenv": "^16.3.1",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "mysql2": "^3.6.3"
   }
 }

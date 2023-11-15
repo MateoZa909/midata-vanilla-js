@@ -1,25 +1,34 @@
-require('dotenv').config({path:'./.env'});
+const btnGetFive = document.querySelector('.get-give');
 
-const port = process.env.PORT_DB;
-const nameDatabase = process.env.NAME_DB;
-const nameUser = process.env.NAME_USER;
-const passwordDB = process.env.PORT_DB;
-
-const mysql = require('mysql');
+import mysql from './node_modules/mysql2';
 
 const connection = mysql.createConnection({
-    host: port,
-    user: nameUser,
-    password: passwordDB,
-    database: nameDatabase,
+    host: '72.167.77.8',
+    user: 'IT_USER',
+    password: '{Nd8=[So7Uk3',
+    database: 'DATA_NACIONAL',
 });
 
-connection.connect((err) => {
+export const functionBtn = btnGetFive.addEventListener('click', connectionDB);
+
+const connectionDB = () => connection.connect((err) => {
     if (err) {
         console.log('Error al conectar a la base de datos');
         return
     }
     console.log('Conexión a la base de datos');
+
+    const query = 'SELECT * FROM NACIONAL_OCGN LIMIT 5';
+
+    connection.query(query, (error, results) => {
+    if (error) {
+        console.log(`Error al ejecutar la consulta: ${error}`);
+        throw error
+    }
+
+    console.log(`Registros seleccionados: ${results}`);
+
+    connection.end();
+})
 })
 
-connection.query('SELECT')

@@ -29,6 +29,38 @@ $(document).ready(function() {
   });
 });
 
+// Boton 5 ultimos
+$(document).ready(function() {
+    $('#btn-all').click(function() {
+        // Aquí pones la consulta que deseas enviar al backend
+        const query = "SELECT * FROM CGN_LLAMADAS_INBOUND WHERE STR_TO_DATE(CAL_CALL_START, '%Y-%m-%d %H:%i') BETWEEN STR_TO_DATE('2023-11-1', '%Y-%m-%d') AND STR_TO_DATE('2023-11-2', '%Y-%m-%d') LIMIT 5";
+  
+        $.ajax({
+            url: 'http://localhost:3000/query', // Asegúrate de que esta sea la URL correcta de tu backend
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ query: query}),
+            success: function(data) {
+                // Vaciar la tabla actual
+                $('#database-table tbody').empty();
+  
+                // Iterar sobre los datos y agregar filas a la tabla
+                data.forEach(row => {
+                    let html = '<tr>';
+                    for (let key in row) {
+                        html += `<td>${row[key]}</td>`;
+                    }
+                    html += '</tr>';
+                    $('#database-table tbody').append(html);
+                });
+            },
+            error: function(error) {
+                console.error('Error:', error);
+            }
+        });
+    });
+});
+
 // Boton actualizar todo
 $(document).ready(function() {
     $('#btn-updateAll').click(function() {
@@ -61,10 +93,10 @@ $(document).ready(function() {
 
 // Boton traer 10 ultimos
 $(document).ready(function() {
-
     // Agrega un evento de clic al botón "10 últimos"
     $('#btn-last-ten').on('click', function() {
-        const lastTen = 'SELECT * FROM tu_tabla LIMIT 10';
+        const lastTen = "SELECT * FROM CGN_LLAMADAS_INBOUND WHERE STR_TO_DATE(CAL_CALL_START, '%Y-%m-%d %H:%i') BETWEEN STR_TO_DATE('2023-11-1', '%Y-%m-%d') AND STR_TO_DATE('2023-11-2', '%Y-%m-%d') LIMIT 5";
+
         $.ajax({
             url: 'http://localhost:3000/query',
             type: 'POST',
@@ -124,7 +156,6 @@ $(document).ready(function () {
         });
     });
 });
-
 
 // Boton eliminar
 $(document).ready(function () {

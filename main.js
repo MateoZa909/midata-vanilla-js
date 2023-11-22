@@ -1,7 +1,7 @@
 $(document).ready(function() {
   $('#btn-all').click(function() {
       // Aquí pones la consulta que deseas enviar al backend
-      const query = "SELECT * FROM CGN_LLAMADAS_INBOUND WHERE STR_TO_DATE(CAL_CALL_START, '%Y-%m-%d %H:%i') BETWEEN STR_TO_DATE('2023-11-1', '%Y-%m-%d') AND STR_TO_DATE('2023-11-2', '%Y-%m-%d') LIMIT 5";
+      const query = "SELECT * FROM CGN_LLAMADAS_INBOUND WHERE STR_TO_DATE(CAL_CALL_START, '%Y-%m-%d %H:%i') BETWEEN STR_TO_DATE('2023-11-1', '%Y-%m-%d') AND STR_TO_DATE('2023-11-2', '%Y-%m-%d') LIMIT 50";
 
       $.ajax({
           url: 'http://localhost:3000/query', // Asegúrate de que esta sea la URL correcta de tu backend
@@ -123,7 +123,7 @@ $(document).ready(function() {
 });
 
 // boton actualizar ahora
-document.getElementById('btn-updateNow').addEventListener('click', function() {
+document.getElementById('update-now').addEventListener('click', function() {
     // Hacer una solicitud al nuevo endpoint
     fetch('http://localhost:3000/update-now', {
         method: 'POST',

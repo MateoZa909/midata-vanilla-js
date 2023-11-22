@@ -69,9 +69,9 @@
                                 <td>Campaña 1</td>
                                 <td>1370</td>
                                 <td>50</td>
-                                <td>30/10/2020 15:00</td>
+                                <td>15:00</td>
                                 <td>4</td>
-                                <td>5/11/2020 10:00</td>
+                                <td class="countdown" data-time="10:00">10:00</td>
                                 <td><img src="./assets/ojo.png" alt="eye icon"></td>
                             </tr>
         
@@ -79,9 +79,9 @@
                                 <td>Campaña 2</td>
                                 <td>500</td>
                                 <td>50</td>
-                                <td>30/10/2020 15:00</td>
+                                <td>15:00</td>
                                 <td>3</td>
-                                <td>5/11/2020 10:00</td>
+                                <td class="countdown" data-time="10:00"> 10:00</td>
                                 <td><img src="./assets/ojo.png" alt="eye icon"></td>
                             </tr>
         
@@ -89,9 +89,9 @@
                                 <td>Campaña 3</td>
                                 <td>2000</td>
                                 <td>100</td>
-                                <td>30/10/2020 15:00</td>
+                                <td>15:00</td>
                                 <td>5</td>
-                                <td>5/11/2020 10:00</td>
+                                <td class="countdown" data-time="10:00"> 10:00</td>
                                 <td><img src="./assets/ojo.png" alt="eye icon"></td>
                             </tr>
         
@@ -99,9 +99,9 @@
                                 <td>Campaña 4</td>
                                 <td>800</td>
                                 <td>30</td>
-                                <td>30/10/2020 15:00</td>
+                                <td>15:00</td>
                                 <td>2</td>
-                                <td>5/11/2020 10:00</td>
+                                <td class="countdown" data-time="10:00"> 10:00</td>
                                 <td><img src="./assets/ojo.png" alt="eye icon"></td>
                             </tr>
         
@@ -109,9 +109,9 @@
                                 <td>Campaña 5</td>
                                 <td>500</td>
                                 <td>20</td>
-                                <td>30/10/2020 15:00</td>
+                                <td>15:00</td>
                                 <td>3</td>
-                                <td>5/11/2020 10:00</td>
+                                <td class="countdown" data-time="10:00"> 10:00</td>
                                 <td><img src="./assets/ojo.png" alt="eye icon"></td>
                             </tr>
         
@@ -119,9 +119,9 @@
                                 <td>Campaña 6</td>
                                 <td>2000</td>
                                 <td>100</td>
-                                <td>30/10/2020 15:00</td>
+                                <td>15:00</td>
                                 <td>5</td>
-                                <td>5/11/2020 10:00</td>
+                                <td class="countdown" data-time="10:00"> 10:00</td>
                                 <td><img src="./assets/ojo.png" alt="eye icon"></td>
                             </tr>
         
@@ -129,9 +129,9 @@
                                 <td>Campaña 7</td>
                                 <td>800</td>
                                 <td>30</td>
-                                <td>30/10/2020 15:00</td>
+                                <td>15:00</td>
                                 <td>2</td>
-                                <td>5/11/2020 10:00</td>
+                                <td class="countdown" data-time="10:00"> 10:00</td>
                                 <td><img src="./assets/ojo.png" alt="eye icon"></td>
                             </tr>
         
@@ -139,9 +139,9 @@
                                 <td>Campaña 8</td>
                                 <td>2000</td>
                                 <td>100</td>
-                                <td>30/10/2020 15:00</td>
+                                <td>15:00</td>
                                 <td>5</td>
-                                <td>5/11/2020 10:00</td>
+                                <td class="countdown" data-time="10:00"> 10:00</td>
                                 <td><img src="./assets/ojo.png" alt="eye icon"></td>
                             </tr>
     
@@ -149,9 +149,9 @@
                                 <td>Campaña 9</td>
                                 <td>2000</td>
                                 <td>100</td>
-                                <td>30/10/2020 15:00</td>
+                                <td>15:00</td>
                                 <td>5</td>
-                                <td>5/11/2020 10:00</td>
+                                <td class="countdown" data-time="10:00"> 10:00</td>
                                 <td><img src="./assets/ojo.png" alt="eye icon"></td>
                             </tr>
     
@@ -159,9 +159,9 @@
                                 <td>Campaña 10</td>
                                 <td>2000</td>
                                 <td>100</td>
-                                <td>30/10/2020 15:00</td>
+                                <td>15:00</td>
                                 <td>5</td>
-                                <td>5/11/2020 10:00</td>
+                                <td class="countdown" data-time="10:00"> 10:00</td>
                                 <td><img src="./assets/ojo.png" alt="eye icon"></td>
                             </tr>
     
@@ -169,9 +169,9 @@
                                 <td>Campaña 11</td>
                                 <td>2000</td>
                                 <td>100</td>
-                                <td>30/10/2020 15:00</td>
+                                <td>15:00</td>
                                 <td>5</td>
-                                <td>5/11/2020 10:00</td>
+                                <td class="countdown" data-time="10:00">10:00</td>
                                 <td><img src="./assets/ojo.png" alt="eye icon"></td>
                             </tr>
                         </tbody>
@@ -362,6 +362,46 @@
     });
     </script>
     <!-- Script fila seleccionada -->
+
+    <!-- Función para actualizar el contador de la próxima actualización -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Obtener todas las celdas con la clase 'countdown'
+      var countdownElements = document.querySelectorAll('.countdown');
+
+      // Función para actualizar el contador regresivo
+      const actualizarContadorRegresivo = (element) => {
+        var tiempoFinal = element.dataset.time;
+        var fechaFinal = new Date('2023-11-30T' + tiempoFinal + ':00');
+        
+        const actualizar = () => {
+          var ahora = new Date();
+          var diferencia = Math.floor((fechaFinal - ahora) / 1000);
+
+          if (diferencia <= 0) {
+            element.textContent = '¡Tiempo terminado!';
+            return;
+          }
+
+          var horas = Math.floor(diferencia / 3600);
+          var minutos = Math.floor((diferencia % 3600) / 60);
+          var segundos = diferencia % 60;
+
+          element.textContent = horas + 'h ' + minutos + 'm ' + segundos + 's';
+
+          setTimeout(actualizar, 1000);
+        }
+
+        actualizar();
+      }
+
+      countdownElements.forEach(function (element) {
+        actualizarContadorRegresivo(element);
+      });
+    });
+    </script>
+    <!-- Función para actualizar el contador de la próxima actualización -->
+
 
     <script src="./main.js" ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js" integrity="sha256-JG6hsuMjFnQ2spWq0UiaDRJBaarzhFbUxiUTxQDA9Lk=" crossorigin="anonymous"></script>

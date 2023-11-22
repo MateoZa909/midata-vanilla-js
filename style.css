@@ -163,7 +163,7 @@ body {
     transform: scale(.98);
 }
 
-/* SECTION OF TABLE */
+/* SECTION TABLE */
 .nextOne-section {
     width: 100%;
     /* background-color: lightblue; */
@@ -196,8 +196,9 @@ body {
 }
 
 .contain-table::-webkit-scrollbar:vertical {
-    background-color: #bebebe;
+    background-color: #464646;
     visibility: visible;
+    border-radius: 20px;
 }
 
 /* .contain-table::-webkit-scrollbar-thumb {
@@ -211,28 +212,43 @@ body {
 .contain-table table {
     border-collapse: separate;
     border-spacing: 0;
+    background-color: #f2f2f2;
 }
 
-.contain-table table thead {
+/* Encabezado fijo */
+thead th {
+    position: -webkit-sticky;
     position: sticky;
     top: 0;
-    /* bottom: 0; */
 }
 
-/* tbody tr:hover {
-    background-color: #9b2d2d;
-    background: #9b2d2d;
+/* #table-campaigns  tbody tr:active {
+    background-color: #171717;
 } */
 
-.contain-table table th, 
+/* Seleccion de fila */
+#table-campaigns  tbody tr.selected {
+    background-color: #000000;
+}
+/* Seleccion de fila */
+
+/* Color de fondo encabezado */
+.contain-table table th {
+    background-color: #b5b5b5d7;
+}
+/* Color de fondo encabezado */
+
+/* Color de fondo cuerpo */
 .contain-table table tbody td {
     border-bottom: 1px solid rgba(177, 177, 177, 0.4);
-    background-color: #EEEEEE;
+    background-color: #d6ceced7;
 }
+/* Color de fondo cuerpo */
+
 
 #table-campaigns {
     width: 100%;
-    background-color: #EEEEEE;
+    /* background-color: #EEEEEE; */
     /* border: 1px solid rgba(35, 35, 35, 0.4); */
     box-shadow: 0 4px 10px 2px rgba(0, 0, 0, 0.29);
     border-radius: 10px;
@@ -248,6 +264,10 @@ body {
     font-family: var(--font-family-almarai);
     font-size: 11px;
     padding: 10px 10px;
+}
+
+#table-campaigns tr {
+    cursor: pointer;
 }
 
 #table-campaigns td {
@@ -292,7 +312,7 @@ body {
 }
 
 .settings-section .content-updateAll {
-    background-color: #F9F9F9;
+    background-color: #f1f1f1;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -325,7 +345,7 @@ body {
     border-radius: 10px;
     box-shadow: var(--box-shadow-main);
     align-items: center;
-    background-color: #F9F9F9;
+    background-color: #f1f1f1;
 }
 
 .settings-section .content-back-set-del img {
@@ -372,7 +392,7 @@ body {
     border-radius: 10px;
     box-shadow: var(--box-shadow-main);
     align-items: center;
-    background-color: #F9F9F9;
+    background-color: #f1f1f1;
     box-shadow: 0 4px 10px 2px rgba(0, 0, 0, 0.317);
     padding: 5px 5px;
     display: flex;

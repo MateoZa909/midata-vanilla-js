@@ -179,7 +179,7 @@
                 </div>
             </div>
     
-            <div class="settings-section" >
+            <div class="settings-section">
                 <!-- first section | setting-section -->
                 <div class="content-updateAll">
                         <button id="btn-updateAll">Actualizar todo</button>
@@ -323,7 +323,45 @@
                 }
             }
         })
+
+        // Url del servidor 
+        let url = 'http://localhost:3000'
+
+        // Peticion
+        fetch(url)
+            .then( response => response.json() )
+            .then( datos => mostrar(datos) )
+            .catch( err => console.log(err) )
+
+        const mostrar = (data) => {
+            data.forEach(element => {
+                myChart.data['labels'].push(element)
+            })
+        }
+
     </script>
+
+    <!-- Script fila seleccionada -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+      var rows = document.querySelectorAll('#table-campaigns tbody tr');
+
+      rows.forEach((row) => {
+        row.addEventListener('click', () => {
+          var isSelected = row.classList.contains('selected');
+
+          rows.forEach((otherRow) => {
+            otherRow.classList.remove('selected');
+          });
+
+          if (!isSelected) {
+            row.classList.add('selected');
+          }
+        });
+      });
+    });
+    </script>
+    <!-- Script fila seleccionada -->
 
     <script src="./main.js" ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js" integrity="sha256-JG6hsuMjFnQ2spWq0UiaDRJBaarzhFbUxiUTxQDA9Lk=" crossorigin="anonymous"></script>

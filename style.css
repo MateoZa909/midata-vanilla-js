@@ -178,6 +178,7 @@ body {
 /* TABLE */
 .table-section {
     height: 250px;
+    position: relative;
 }
 
 .contain-table {
@@ -286,11 +287,69 @@ thead th {
     font-weight: bold;
 }
 
-#table-campaignstbody {
+#table-campaigns tbody {
     overflow-y: auto;
     overflow-x: hidden;
 }
 /* TABLE */
+
+/* SEGUNDA TABLA */
+#second-table  {
+    position: absolute;
+    z-index: 1000;
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(22, 22, 22, 0.189);
+    max-height: 200px;
+    overflow-y: auto;
+    top: 20%;
+    right: 20px;
+    border-radius: 5px;
+    animation: secondTable 0.3s;
+    cursor:move;
+    min-width: 200px;
+}
+
+#second-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px;
+}
+
+#second-table  th, #second-table  td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    text-align: center;
+}
+
+#second-table  th {
+    background-color: #f2f2f2;
+}
+
+#second-table tr td {
+    text-align: center;
+}
+
+.x-icon {
+    cursor: pointer;
+}
+
+#second-table .eye-icon,
+.x-icon {
+    width: 25px;
+    margin: 0 5px;
+}
+
+@keyframes secondTable {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+/********************************************++ */
 
 /* up-section 3 column empty */
 .up-section .contain-empty {

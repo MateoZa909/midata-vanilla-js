@@ -95,8 +95,6 @@ $(document).ready(function() {
 $(document).ready(function() {
     // Agrega un evento de clic al botón "10 últimos"
     $('#btn-last-ten').on('click', function() {
-        const lastTen = "SELECT * FROM CGN_LLAMADAS_INBOUND WHERE STR_TO_DATE(CAL_CALL_START, '%Y-%m-%d %H:%i') BETWEEN STR_TO_DATE('2023-11-1', '%Y-%m-%d') AND STR_TO_DATE('2023-11-2', '%Y-%m-%d') LIMIT 5";
-
         $.ajax({
             url: 'http://localhost:3000/query',
             type: 'POST',

@@ -1,0 +1,160 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(186, 186, 186);
+}
+
+.container-modal {
+    width: 246px;
+    height: 290px;
+    border-radius: 12px;
+    background: #F5F5F5;
+    box-shadow: 0 4px 10px 2px rgba(0, 0, 0, 0.167);
+    padding: 10px 15px;
+}
+
+.title-and-form {
+    /* background-color: lightcoral; */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.title-and-form #timeoutForm {
+    /* background-color: lightblue; */
+    display: flex;
+    flex-direction: column;
+}
+
+#timeoutForm .labels-and-inputs {
+    display: flex;
+    /* background-color: lightgreen; */
+    justify-content: space-between;
+}
+
+#timeoutForm .labels-and-inputs .labels {
+    display: flex;
+    flex-direction: column;
+    padding: 5px 5px;
+    font-size: 18px;
+}
+
+#timeoutForm .labels-and-inputs .inputs {
+    display: flex;
+    flex-direction: column;
+    padding: 5px 5px;
+    font-size: 20px;
+    gap: 5px;
+}
+
+.title-and-form {
+    /* background-color: lightcoral; */
+    border-bottom: 1px solid #A8A8A8;
+}
+
+.title-and-form #timeoutForm input {
+    background: transparent;
+    text-align: end;
+    border: none;
+    width: 35px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.title-and-form #timeoutForm input::placeholder {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.btn-apply-content {
+    display: flex;
+    /* background-color: lightblue; */
+    justify-content: center;
+}
+
+.btn-apply-content button {
+    width: 83px;
+    height: 25px;
+    border-radius: 20px;
+    background: #3A3A3A;
+    color: #F5F5F5;
+    font-size: 15px;
+    margin: 14px 0;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-apply-content button:active {
+    transform: scale(.98);
+}
+
+.name-and-inactive {
+    /* background-color: lightcoral; */
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+
+.name-and-inactive .name-campaign {
+    /* background-color: lightblue; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.name-and-inactive .name-campaign h1 {
+    font-size: 16px;
+}
+
+.name-and-inactive .name-campaign label {
+    font-size: 12px;
+}
+
+.name-and-inactive .name-campaign .changeName-and-img {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.name-and-inactive img {
+    width: 26px;
+    cursor: pointer;
+}
+
+.name-and-inactive img:active {
+    transform: scale(.94);
+}
+
+.content-btn {
+    display: flex;
+    /* background-color: lightblue; */
+    margin: 10px 0;
+    justify-content: center;
+}
+
+.content-btn button {
+    width: 130px;
+    height: 30px;
+    border-radius: 20px;
+    background: #3A3A3A;
+    color: #F5F5F5;
+    /* font-weight: bold; */
+    font-size: 12px;
+    font-weight: bold;
+    margin: 12px 0;
+    cursor: pointer;
+}
+
+
+.content-btn button:active {
+    transform: scale(.98);
+}
+
+
+/* MODAL */
+
+/* MODAL */

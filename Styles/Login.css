@@ -1,0 +1,232 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --font-family-almarai: 'Almarai', sans-serif;
+    --font-family-concertOne: 'Concert One', sans-serif;
+    --font-family-lalezar: 'Lalezar', sans-serif;
+    --font-family-archivo: 'Archivo', sans-serif;
+    --box-shadow-main: 0 4px 10px 2px rgba(0, 0, 0, 0.167);
+    --scale-button: scale(.98);
+    --color-blue: #0d74cf;
+    --color-orange: #F96D0E;
+}
+
+body {
+    background-color: rgb(225, 225, 225);
+}
+
+main {
+    width: 100%;
+    padding: 20px;
+    margin: auto;
+    margin-top: 100px;
+}
+
+.contain-all {
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    position: relative;
+}
+
+.box-back {
+    width: 100%;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    backdrop-filter: blur(25px);
+    background-color: rgba(249, 108, 14, 0.724);
+    box-shadow: var(--box-shadow-main);
+}
+
+.box-back div {
+    margin: 100px 40px;
+    transition:  all 1000ms;
+    color: #ffff;
+}
+
+.box-back div p {
+    font-size: 17px;
+    font-weight: 500;
+    font-family: var(--font-family-lalezar);
+}
+
+.box-back div p, 
+.box-back div button {
+    margin-top: 30px;
+}
+
+.box-back .box-back-register h3, 
+.box-back .box-back-register p, 
+.box-back .box-back-register button {
+    margin-left: 20%;
+}
+
+.box-back div h3 {
+    font-weight: bold;
+    font-size: 26px;
+    font-family: var(--font-family-concertOne);
+}
+
+.box-back button {
+    padding: 10px 40px;
+    border: none;
+    background-color: #0d74cf;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    transition: all 300ms;
+    box-shadow: var(--box-shadow-main);
+}
+
+.box-back button:hover {
+    background-color: #e7e7e7;
+    color: black;
+}
+
+/* Formularios */
+
+.contain-login-register {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    top: -198px;
+    left: 20px;
+    box-shadow: var(--box-shadow-main);
+    transition: left 500ms cubic-bezier(0.175, 0.995, 0.320, 1.275);
+}
+
+.contain-login-register form {
+    width: 100%;
+    padding: 80px 20px;
+    background-color: #f6f6f6;
+    position: absolute;
+    border-radius: 20px;
+}
+
+.form-login {
+    margin-top: -50px;
+}
+
+.form-login, 
+.form-register {
+    box-shadow: 2px 1px 20px  rgba(33, 33, 33, 0.137);
+}
+
+.contain-login-register form h2 {
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: var(--font-family-concertOne);
+    text-shadow: 1px 12px 12px rgb(225, 225, 225);
+}
+
+.contain-login-register form input {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    border: none;
+    background: #eae9e9;
+    font-size: 16px;
+    outline: none;
+}
+
+.contain-login-register form button {
+    padding: 10px 40px;
+    margin-top: 40px;
+    border-radius: 5px;
+    border: none;
+    background-color: var(--color-orange);
+    color: #ffff;
+    font-weight: bold;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+/* Boton */
+/* #btn-register, 
+#btn-login {
+    transition: .5s;
+    position: relative;
+    overflow: hidden;
+}
+
+#btn-register, 
+#btn-login span {
+    position: absolute;
+    background-color: #0d74cf;
+    transition: .5s;
+}
+
+#btn-register, 
+#btn-login span:nth-child(1) {
+    width: 100%;
+    height: 2px;
+    top: 0;
+    left: -100%;
+}
+
+#btn-register, 
+#btn-login span:nth-child(2) {
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    right: -100%;
+}
+
+#btn-register, 
+#btn-login span:nth-child(3) {
+    width: 2px;
+    height: 100%;
+    bottom: -100%;
+    left: 0;
+}
+
+#btn-register, 
+#btn-login span:nth-child(4) {
+    width: 2px;
+    height: 100%;
+    top: -100%;
+    right: 0;
+}
+
+#btn-register:hover, 
+#btn-login:hover span:nth-child(1) {
+    left: 0;
+}
+
+#btn-register:hover, 
+#btn-login:hover span:nth-child(2) {
+    right: 0;
+}
+
+#btn-register:hover, 
+#btn-login:hover span:nth-child(3) {
+    bottom: 0;
+}
+
+#btn-register:hover, 
+#btn-login:hover span:nth-child(4) {
+    top: 0;
+} */
+
+.form-login {
+    opacity: 1;
+    display: block;
+}
+
+.form-register {
+    display: none;
+    margin-top: 30px;
+}
+
+

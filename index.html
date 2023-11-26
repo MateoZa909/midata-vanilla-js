@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Data</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./Styles/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="shortcut icon" href="./assets/MD.png" type="image/x-icon">
@@ -204,7 +204,7 @@
         
                         <div class="content-empty-icons">
                             <div class="container-set-icon">
-                                <img class="btn-setting" src="./assets/setting.png" alt="setting icon">
+                                <img id="btn-setting" class="btn-setting" src="./assets/setting.png" alt="setting icon">
                             </div>
                             
                             <div class="container-del-icon">
@@ -227,7 +227,7 @@
     
                     <div class="container-req-btns">
                         <button id="btn-all">50 últimos</button>
-                        <button class="get-five">5 primeros</button>
+                        <button class="get-five">5 últimos</button>
                         <button>10 últimos</button>
                     </div>
                 </div>
@@ -268,6 +268,47 @@
             </div>
         </div>
         
+        <div class="container-modal" style="display: none;">
+            <div class="title-and-form">
+                <div class="title-h1">
+                    <h1>Periodicidad</h1>
+                </div>
+
+                <form id="timeoutForm">
+                    <div class="labels-and-inputs">
+                        <div class="labels">
+                            <label for="days">Días:</label>
+                            <label for="hours">Horas:</label>
+                            <label for="minutes">Minutos:</label>
+                        </div>
+    
+                        <div class="inputs">
+                            <input type="number" id="days" name="days" placeholder="0" required>
+                            <input type="number" id="hours" name="hours" placeholder="0" required>
+                            <input type="number" id="minutes" name="minutes" placeholder="0" required>
+                        </div>
+                    </div>
+                    
+                    <div class="btn-apply-content">
+                        <button id="btn-apply" type="button" onclick="startCustomTimeout()">Aplicar</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="name-and-inactive">
+                <div class="name-campaign">
+                    <h1>Campaña 1</h1>
+                    <div class="changeName-and-img">
+                        <label for="icon-edit">Cambiar nombre</label>
+                        <img id="icon-edit" src="./assets/edit.svg" alt="editar nombre">
+                    </div>
+                </div>
+
+                <div class="content-btn">
+                    <button id="inactive-campaign">Desactivar campaña</button>
+                </div>
+            </div>
+        </div>
     </div>
     
     <!-- Link Font Awesome -->
@@ -469,6 +510,41 @@
 
     </script>
     <!-- Mostrar segunda tabla y fila seleccionada -->
+
+    <!-- Editar periodicidad de Campañas -->
+    <script>
+        function startCustomTimeout() {
+            const days = parseInt(document.getElementById('days').value) || 0;
+            const hours = parseInt(document.getElementById('hours').value) || 0;
+            const minutes = parseInt(document.getElementById('minutes').value) || 0;
+
+            customTimeout(days, hours, minutes, function() {
+                console.log("¡El temporizador ha finalizado!");
+            });
+        }
+
+        function customTimeout(days, hours, minutes, callback) {
+            const totalMilliseconds = (days * 24 * 60 * 60 * 1000) + (hours * 60 * 60 * 1000) + (minutes * 60 * 1000);
+            setTimeout(callback, totalMilliseconds);
+        }
+    </script>
+    <!-- Editar periodicidad de Campañas -->
+    
+
+    <!-- Mostrar y esconder modal para ajustes -->
+    <script>
+        var btnSetting = document.getElementById("btn-setting");
+        var containerModal = document.querySelector(".container-modal");
+
+        btnSetting.addEventListener("click", function() {
+
+            if (containerModal.style.display === "none" || containerModal.style.display === "") {
+                containerModal.style.display = "block";
+            } else {
+                containerModal.style.display = "none";
+            }
+        });
+    </script>
 
     <!-- Demas scripts -->
     <script src="./main.js" ></script>

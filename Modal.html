@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./Styles/Modal-setting.css">
+</head>
+<body>
+        <div class="container-modal">
+            <div class="title-and-form">
+                <div class="title-h1">
+                    <h1>Periodicidad</h1>
+                </div>
+
+                <form id="timeoutForm">
+                    <div class="labels-and-inputs">
+                        <div class="labels">
+                            <label for="days">Días:</label>
+                            <label for="hours">Horas:</label>
+                            <label for="minutes">Minutos:</label>
+                        </div>
+    
+                        <div class="inputs">
+                            <input type="number" id="days" name="days" placeholder="0" required>
+                            <input type="number" id="hours" name="hours" placeholder="0" required>
+                            <input type="number" id="minutes" name="minutes" placeholder="0" required>
+                        </div>
+                    </div>
+                    
+                    <div class="btn-apply-content">
+                        <button id="btn-apply" type="button" onclick="startCustomTimeout()">Aplicar</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="name-and-inactive">
+                <div class="name-campaign">
+                    <h1>Campaña 1</h1>
+                    <div class="changeName-and-img">
+                        <label for="icon-edit">Cambiar nombre</label>
+                        <img id="icon-edit" src="./assets/edit.svg" alt="editar nombre">
+                    </div>
+                </div>
+
+                <div class="content-btn">
+                    <button>Desactivar campaña</button>
+                </div>
+            </div>
+        </div>
+</body>
+</html>

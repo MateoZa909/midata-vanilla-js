@@ -6,10 +6,20 @@
     $correo = $_POST['correo'];
     $usuario = $_POST['usuario'];
     $clave = $_POST['clave'];
+    $clave = hash('sha512', $clave);
 
-    $query = "INSERT INTO users(nombre, correo, usuario, clave)
-              VALUES ('$nombre', '$correo', '$usuario', '$clave')
+    $query = "INSERT INTO 
+              users(nombre, correo, usuario, clave)
+              VALUES 
+              ('$nombre', '$correo', '$usuario','$clave')
     ";
 
-    $consulta = mysqli_query($conexion ,$query);
+    $resultado = $conexion->query($query);
+
+    if ($resultado){
+        return "true";
+    }else{
+        return "false";
+    }
+
 ?>

@@ -1,11 +1,15 @@
 <?php
+    $host = "localhost";
+    $usuario = "root";
+    $clave = "";
+    $base_de_datos = "user";
 
-    $conexion = mysqli_connect("localhost", "root", "", "user");
+$conexion = new mysqli($host, $usuario, $clave, $base_de_datos);
 
-    if ($conexion) {
-        echo "Conectado exitosamente";
-    } else {
-        echo "Error en la conexión";
-    }
+// Verificar la conexión
+if ($conexion->connect_error) {
+    die("Error de conexión: " . $conexion->connect_error);
+}
 
+$conexion->set_charset("utf8");
 ?>

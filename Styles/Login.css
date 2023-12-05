@@ -152,6 +152,54 @@ main {
     cursor: pointer;
 }
 
+.msg {
+    position: absolute;
+    background-color: #ffffff;
+    width: 210px;
+    height: 50px;
+    border-radius: 8px;
+    display: flex;
+    top: 20px;
+    left: 43%;
+    box-shadow: var(--box-shadow-main);
+    animation: modalMsg 0.5s;
+    display: none;
+}
+
+.msg p {
+    font-family: var(--font-family-almarai);
+    font-size: 14px;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.name-warning, 
+.correo-warning, 
+.user-warning, 
+.password-warning {
+    margin-top: 8px;
+    font-size: 13px;
+    animation: show 0.3s;
+}
+
+@keyframes show {
+    from {
+        opacity: 0;
+    } to {
+        opacity: 1;
+    }
+}
+
+@keyframes modalMsg {
+    from  {
+        opacity: 0;
+        transform: translateY(-30px);
+    }  to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Boton */
 /* #btn-register, 
 #btn-login {

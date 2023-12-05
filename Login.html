@@ -44,10 +44,10 @@
                 <!-- Formulario registro -->
                 <form action="" class="form-register">
                     <h2>Regístrarse</h2>
-                    <input type="text" placeholder="Nombre Completo">
-                    <input type="text" placeholder="Correo electronico">
-                    <input type="text" placeholder="Nombre de usuario">
-                    <input type="password" placeholder="Contraseña">
+                    <input type="text" name="nombre" placeholder="Nombre Completo">
+                    <input type="text" name="correo" placeholder="Correo electronico">
+                    <input type="text" name="usuario" placeholder="Nombre de usuario">
+                    <input type="password" name="clave" placeholder="Contraseña">
                     <button id="btn-register">
                         <span></span>
                         <span></span>
@@ -59,9 +59,11 @@
             </div>
 
         </div>
+        
+        <div class="msg">
+            <p>Registrado exitosamente!</p>
+        </div>
     </main>
-
- 
 
     <script src="./Login.js"></script>
 </body>

@@ -17,10 +17,16 @@ var btnRegisterForm = document.querySelector('#btn-register');
 var formulario = document.querySelector('.form-register');
 
 // Inputs
-var nombreInput = document.querySelector('input[name="nombre"]');
-var correoInput = document.querySelector('input[name="correo"]');
-var usuarioInput = document.querySelector('input[name="usuario"]');
-var claveInput = document.querySelector('input[name="clave"]');
+var nameInput = document.querySelector('input[name="nombre"]');
+var emailInput = document.querySelector('input[name="correo"]');
+var userInput = document.querySelector('input[name="usuario"]');
+var passwordInput = document.querySelector('input[name="clave"]');
+
+// Variables de control
+var nameMessage = false;
+var emailMessage = false;
+var userMessage = false;
+var passwordMessage = false;
 
 const Login = () => {
     formRegister.style.display = 'none';
@@ -50,6 +56,46 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    // Función ocultar mensaje de error
+    const hideMessageError = (inputElement, messageElement) => {
+        if (!messageElement) {
+            return;
+        }
+        messageElement.style.display = 'none';
+    }
+
+    // Evento input campo nombre
+    nameInput.addEventListener('input', () => {
+        if (nameMessage) {
+            hideMessageError(nameInput, form.querySelector(".name-warning"));
+            nameMessage = false;
+        }
+    })
+
+    // Evento input campo correo
+    emailInput.addEventListener('input', () => {
+        if (emailMessage) {
+            hideMessageError(emailInput, form.querySelector(".correo-warning"));
+            emailMessage = false;
+        }
+    })
+
+    // Evento input campo usuario
+    userInput.addEventListener('input', () => {
+        if (userMessage) {
+            hideMessageError(userInput, form.querySelector(".user-warning"));
+            userMessage = false;
+        }
+    })
+
+    // Evento input campo clave
+    passwordInput.addEventListener('input', () => {
+        if (passwordMessage) {
+            hideMessageError(passwordInput, form.querySelector(".password-warning"));
+            passwordMessage = false;
+        }
+    })
+
     form.addEventListener("submit", function(event) {
         event.preventDefault();
 
@@ -63,35 +109,47 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
 
-        if (nombreInput.value.trim() === "") {
-            const pElement = document.createElement("p");
-            pElement.classList.add("name-warning");
-            pElement.textContent = "Debe escribir el nombre";
-            form.insertBefore(pElement, correoInput);
+        if (nameInput.value.trim() === "") {
+            if (!nameMessage) {
+                const pElement = document.createElement("p");
+                pElement.classList.add("name-warning");
+                pElement.textContent = "Debe escribir el nombre";
+                form.insertBefore(pElement, emailInput);
+                nameMessage = true;
+            }
             camposVacios = true;
         }
 
-        if (correoInput.value.trim() === "") {
-            const pElement = document.createElement("p");
-            pElement.classList.add("correo-warning");
-            pElement.textContent = "Debe escribir el correo";
-            form.insertBefore(pElement, usuarioInput);
+        if (nameInput.value.trim() === "") {
+            if (!emailMessage) {
+                const pElement = document.createElement("p");
+                pElement.classList.add("correo-warning");
+                pElement.textContent = "Debe escribir el correo";
+                form.insertBefore(pElement, userInput);
+                emailMessage = true;
+            }
             camposVacios = true;
         }
 
-        if (usuarioInput.value.trim() === "") {
-            const pElement = document.createElement("p");
-            pElement.classList.add("user-warning");
-            pElement.textContent = "Debe escribir el nombre de usuario";
-            form.insertBefore(pElement, claveInput);
+        if (userInput.value.trim() === "") {
+            if (!userMessage) {
+                 const pElement = document.createElement("p");
+                pElement.classList.add("user-warning");
+                pElement.textContent = "Debe escribir el nombre de usuario";
+                form.insertBefore(pElement, passwordInput);
+                userMessage = true;
+            }
             camposVacios = true;
         }
 
-        if (claveInput.value.trim() === "") {
-            const pElement = document.createElement("p");
-            pElement.classList.add("password-warning");
-            pElement.textContent = "Debe escribir la contraseña";
-            form.insertBefore(pElement, btnRegisterForm);
+        if (passwordInput.value.trim() === "") {
+            if (!passwordMessage) {
+                const pElement = document.createElement("p");
+                pElement.classList.add("password-warning");
+                pElement.textContent = "Debe escribir la contraseña";
+                form.insertBefore(pElement, btnRegisterForm);
+                passwordMessage = true;
+            }
             camposVacios = true;
         }
 

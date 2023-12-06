@@ -319,6 +319,52 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- CHART JS -->
 
+    <!-- Traer registros tabla de datos inferior -->
+    <script>
+        $(document).ready(function () {
+            try {
+                // Realizar una solicitud AJAX para obtener los datos desde el servidor
+                $.ajax({
+                    url: 'php/conexion_tabla.php', // Reemplaza 'conexion_tabla.php' con la URL de tu script PHP que obtiene los datos
+                    method: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        // Iterar a través de los datos y agregar filas a la tabla
+                        $.each(data, function (index, record) {
+                            $('#tbody_datos').append(`
+                                <tr>
+                                    <td>${record.CAL_ID}</td>
+                                    <td>${record.CAL_CONTACT}</td>
+                                    <td>${record.CAL_AGENT_FN}</td>
+                                    <td>${record.CAL_AGENT_LN}</td>
+                                    <td>${record.CAL_PHONE}</td>
+                                    <td>${record.CAL_CALL_START}</td>
+                                    <td>${record.CAL_CALL_FINISH}</td>
+                                    <td>${record.CAL_CAMPAIGN}</td>
+                                    <td>${record.CAL_QUEUE}</td>
+                                    <td>${record.CAL_TIME_LENGTH}</td>
+                                    <td>${record.CAL_TIME_QUEUE}</td>
+                                    <td>${record.CAL_TIME_SPEAKE}</td>
+                                    <td>${record.CAL_TIME_WRAP}</td>
+                                    <td>${record.CAL_HANGUP}</td>
+                                    <td>${record.CAL_TYPEDOC}</td>
+                                    <td>${record.CAL_DOCUMENTO}</td>
+                                    <td>${record.CAL_MOTIVO}</td>
+                                </tr>
+                            `);
+                        });
+                    },
+                    error: function () {
+                        throw new Error('Error al obtener los datos.');
+                    }
+                });
+            } catch (error) {
+                console.error(error.message);
+            }
+    });;
+    </script>
+    <!-- Traer registros tabla de datos inferior -->
+
     <!-- Script Chart.js -->
     <script>
         var ctx = 'myGraphic';
@@ -326,24 +372,23 @@
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
+                labels: [], // Inicializamos las etiquetas vacías
                 datasets: [{
                     label: 'Mes',
-                    data: [1050, 1880, 950, 2090, 3350, 3890, 5352, 7704],
-                    backgroundColor: [
-                        'rgb(250, 103, 8)',
-                    ],
-
+                    backgroundColor: 'rgb(250, 103, 8)',
+                    data: [] // Inicializamos los datos vacíos
                 }, {
-                    type: 'bar',
                     label: 'Año',
-                    data: [300, 424, 312, 54, 513, 524, 2325, 213],
-                    backgroundColor: [
-                        'rgb(51, 51, 255)',
-                    ]
+                    backgroundColor: 'rgb(51, 51, 255)',
+                    data: [] // Inicializamos los datos vacíos
                 }],
-                labels: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'],
             },
             options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
                 plugins: {
                     legend: {
                         display: true,
@@ -354,7 +399,7 @@
                     title: {
                         display: true,
                         text: 'Crecimiento de la base de datos',
-                        color: 'rgb(0, 0, 0 )',
+                        color: 'rgb(0, 0, 0)',
                         font: {
                             size: 20,
                             family: 'Almarai'
@@ -362,22 +407,35 @@
                     }
                 }
             }
-        })
+        });
 
         // Url del servidor 
-        let url = 'http://localhost:3000'
+        let url = 'http://localhost/midata-vanilla-js/php/conexion_chart.php';
 
         // Peticion
         fetch(url)
-            .then( response => response.json() )
-            .then( datos => mostrar(datos) )
-            .catch( err => console.log(err) )
+            .then(response => response.json())
+            .then(datos => mostrar(datos))
+            .catch(err => console.log(err));
 
         const mostrar = (data) => {
-            data.forEach(element => {
-                myChart.data['labels'].push(element)
-            })
-        }
+             // Limpiar los datos actuales en el gráfico
+            myChart.data.labels = [];
+            myChart.data.datasets[0].data = [];
+            myChart.data.datasets[1].data = [];
+            
+            // Recorrer los nuevos datos y agregarlos al gráfico
+            data.valores.forEach(element => {
+                myChart.data.labels.push(element.año); // Agregar el año como etiqueta
+                myChart.data.datasets[0].data.push(element.valor_mes); // Agregar valor_mes para el conjunto de datos de Mes
+                myChart.data.datasets[1].data.push(element.valor_año); // Agregar valor_año para el conjunto de datos de Año
+            });
+
+            // Actualizar el gráfico
+            myChart.update();
+        };
+
+        console.log('Mostrando datos');
 
     </script>
     <!-- Script Chart.js -->
@@ -391,7 +449,7 @@
       // Función para actualizar el contador regresivo
       const actualizarContadorRegresivo = (element) => {
         var tiempoFinal = element.dataset.time;
-        var fechaFinal = new Date('2023-11-30T' + tiempoFinal + ':00');
+        var fechaFinal = new Date('2023-12-10T' + tiempoFinal + ':00');
         
         const actualizar = () => {
           var ahora = new Date();

@@ -1,0 +1,32 @@
+<?php
+
+$conex = mysqli_connect("localhost", "root", "", "año_mes"); // Cambié "año_mes" a "ano_mes" en la conexión
+
+if (!$conex) {
+    die("No se pudo conectar: " . mysqli_connect_error());
+}
+
+$sql = "SELECT año, valor_año, valor_mes FROM valores"; // Cambié la consulta SQL para seleccionar las columnas adecuadas
+
+$resultado = mysqli_query($conex, $sql);
+
+if (!$resultado) {
+    die("Error en la consulta: " . mysqli_error($conex));
+}
+
+// Crear un array asociativo para almacenar los datos
+$data = array();
+
+while ($fila = mysqli_fetch_assoc($resultado)) {
+    $data['valores'][] = $fila; // Almacenar toda la fila en el array 'valores'
+}
+
+// Convertir el array en formato JSON
+$json_data = json_encode($data);
+
+echo $json_data; // Imprimir el JSON resultante
+
+mysqli_free_result($resultado);
+mysqli_close($conex);
+
+?>

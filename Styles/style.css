@@ -636,8 +636,8 @@ canvas {
     box-shadow: 0 4px 10px 2px rgba(0, 0, 0, 0.167);
     padding: 10px 15px;
     position: fixed;
-    top: 24%;
-    right: 11px;
+    top: 23%;
+    right: 2.50%;
 }
 
 .title-and-form {
@@ -681,6 +681,7 @@ canvas {
 
 .title-and-form h1 {
     font-family: var(--font-family-archivo);
+    text-align: center;
 }
 
 .title-and-form #timeoutForm {
@@ -835,6 +836,12 @@ canvas {
     font-size: 18px;
     border-radius: 5px;
     cursor: pointer;
+    border: none;
+}
+
+.box-delete-campaings button:hover {
+    background-color: #c9c9c9;
+    color: black;
 }
 
 .box-delete-campaings button:active {

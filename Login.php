@@ -42,7 +42,7 @@
                 </form>
 
                 <!-- Formulario registro -->
-                <form action="" class="form-register">
+                <form action="php/registro.php" method="POST" class="form-register">
                     <h2>Regístrarse</h2>
                     <input type="text" name="nombre" placeholder="Nombre Completo">
                     <input type="text" name="correo" placeholder="Correo electronico">

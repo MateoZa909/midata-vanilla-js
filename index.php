@@ -312,7 +312,6 @@
         </div>
         <!-- Modal periodicidad -->
 
-        <!-- Modal validacion eliminar campaña -->
         <div class="box-behind" style="display: none;">
             <div class="delete-campaign">
                 <h2>¿Desea eliminar la campaña?</h2>
@@ -322,7 +321,6 @@
                 </div>
             </div>
         </div>
-        <!-- Modal validacion eliminar campaña -->
         
     </div>
     
@@ -330,7 +328,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Link Font Awesome -->
 
-    <!-- Contenedor validar eliminar campaña -->
+    <!-- PARA MANDAR AL LOGIN.PHP -->
     <script>
         // JavaScript para manejar la interactividad de la caja de diálogo
         const confirmButton = document.getElementById('confirm-button');
@@ -353,12 +351,13 @@
             closeDialog();
         });
     </script>
-    <!-- Contenedor validar eliminar campaña -->
+    <!-- PARA MANDAR AL LOGIN.PHP -->
 
     <!-- CHART JS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- CHART JS -->
 
+<<<<<<< HEAD:index.html
     <!-- Eliminar campaña seleccionada -->
     <script>
         // Variable para almacenar la fila seleccionada
@@ -401,6 +400,53 @@
         });
     </script>
     <!-- Eliminar campaña seleccionada -->
+=======
+    <!-- Traer registros tabla de datos inferior -->
+    <script>
+        $(document).ready(function () {
+            try {
+                // Realizar una solicitud AJAX para obtener los datos desde el servidor
+                $.ajax({
+                    url: 'php/conexion_tabla.php', // Reemplaza 'conexion_tabla.php' con la URL de tu script PHP que obtiene los datos
+                    method: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        // Iterar a través de los datos y agregar filas a la tabla
+                        $.each(data, function (index, record) {
+                            $('#tbody_datos').append(`
+                                <tr>
+                                    <td>${record.CAL_ID}</td>
+                                    <td>${record.CAL_CONTACT}</td>
+                                    <td>${record.CAL_AGENT_FN}</td>
+                                    <td>${record.CAL_AGENT_LN}</td>
+                                    <td>${record.CAL_PHONE}</td>
+                                    <td>${record.CAL_CALL_START}</td>
+                                    <td>${record.CAL_CALL_FINISH}</td>
+                                    <td>${record.CAL_CAMPAIGN}</td>
+                                    <td>${record.CAL_QUEUE}</td>
+                                    <td>${record.CAL_TIME_LENGTH}</td>
+                                    <td>${record.CAL_TIME_QUEUE}</td>
+                                    <td>${record.CAL_TIME_SPEAKE}</td>
+                                    <td>${record.CAL_TIME_WRAP}</td>
+                                    <td>${record.CAL_HANGUP}</td>
+                                    <td>${record.CAL_TYPEDOC}</td>
+                                    <td>${record.CAL_DOCUMENTO}</td>
+                                    <td>${record.CAL_MOTIVO}</td>
+                                </tr>
+                            `);
+                        });
+                    },
+                    error: function () {
+                        throw new Error('Error al obtener los datos.');
+                    }
+                });
+            } catch (error) {
+                console.error(error.message);
+            }
+    });;
+    </script>
+    <!-- Traer registros tabla de datos inferior -->
+>>>>>>> aa4e660cee97dadd13d34620961d1e6450d13510:index.php
 
     <!-- Script Chart.js -->
     <script>
@@ -409,20 +455,29 @@
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
+                labels: [], // Inicializamos las etiquetas vacías
                 datasets: [{
                     label: 'Mes',
+<<<<<<< HEAD:index.html
                     backgroundColor: [
                         'rgb(250, 103, 8)',
                     ],
 
+=======
+                    backgroundColor: 'rgb(250, 103, 8)',
+                    data: [] // Inicializamos los datos vacíos
+>>>>>>> aa4e660cee97dadd13d34620961d1e6450d13510:index.php
                 }, {
-                    type: 'bar',
                     label: 'Año',
+<<<<<<< HEAD:index.html
                     backgroundColor: [
                         'rgb(51, 51, 255)',
                     ]
+=======
+                    backgroundColor: 'rgb(51, 51, 255)',
+                    data: [] // Inicializamos los datos vacíos
+>>>>>>> aa4e660cee97dadd13d34620961d1e6450d13510:index.php
                 }],
-                labels: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'],
             },
             options: {
                 scales: {
@@ -440,7 +495,7 @@
                     title: {
                         display: true,
                         text: 'Crecimiento de la base de datos',
-                        color: 'rgb(0, 0, 0 )',
+                        color: 'rgb(0, 0, 0)',
                         font: {
                             size: 20,
                             family: 'Almarai'
@@ -448,22 +503,39 @@
                     }
                 }
             }
-        })
+        });
 
         // Url del servidor 
+<<<<<<< HEAD:index.html
         let url = 'http://localhost/midata-vanilla-js/php/conexion_chart.php'
+=======
+        let url = 'http://localhost/midata-vanilla-js/php/conexion_chart.php';
+>>>>>>> aa4e660cee97dadd13d34620961d1e6450d13510:index.php
 
         // Peticion
         fetch(url)
-            .then( response => response.json() )
-            .then( datos => mostrar(datos) )
-            .catch( err => console.log(err) )
+            .then(response => response.json())
+            .then(datos => mostrar(datos))
+            .catch(err => console.log(err));
 
         const mostrar = (data) => {
-            data.forEach(element => {
-                myChart.data['labels'].push(element)
-            })
-        }
+             // Limpiar los datos actuales en el gráfico
+            myChart.data.labels = [];
+            myChart.data.datasets[0].data = [];
+            myChart.data.datasets[1].data = [];
+            
+            // Recorrer los nuevos datos y agregarlos al gráfico
+            data.valores.forEach(element => {
+                myChart.data.labels.push(element.año); // Agregar el año como etiqueta
+                myChart.data.datasets[0].data.push(element.valor_mes); // Agregar valor_mes para el conjunto de datos de Mes
+                myChart.data.datasets[1].data.push(element.valor_año); // Agregar valor_año para el conjunto de datos de Año
+            });
+
+            // Actualizar el gráfico
+            myChart.update();
+        };
+
+        console.log('Mostrando datos');
 
     </script>
     <!-- Script Chart.js -->
@@ -509,57 +581,68 @@
 
     <!-- Mostrar segunda tabla y fila seleccionada -->
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const rows = document.querySelectorAll('#table-campaigns tbody tr');
+        // <!-- Script fila seleccionada -->
+        document.addEventListener('DOMContentLoaded', () => {
+        var rows = document.querySelectorAll('#table-campaigns tbody tr');
+
+            rows.forEach((row) => {
+                row.addEventListener('click', () => {
+                    var isSelected = row.classList.contains('selected');
+
+                    rows.forEach((otherRow) => {
+                        otherRow.classList.remove('selected');
+
+                    });
+
+                    if (!isSelected) {
+                        row.classList.add('selected');
+                    }
+                });
+            });
+        });
+        // <!-- Script fila seleccionada -->
+
+        // Script segunda tabla
+        document.addEventListener('DOMContentLoaded', function () {
+        var mainTable = document.getElementById('table-campaigns');
         const secondaryTable = document.getElementById('second-table');
         let selectedRow = null;
 
-        // Agregar un controlador de clic a las filas de la tabla principal
-        rows.forEach((row) => {
-            row.addEventListener('click', () => {
-                const isSelected = row.classList.contains('selected');
-
-                rows.forEach((otherRow) => {
-                    otherRow.classList.remove('selected');
-                });
-
-                if (!isSelected) {
-                    row.classList.add('selected');
-                    showSecondaryTable(row);
-                } else {
+        // Evento principal a la tabla
+        mainTable.addEventListener('click', (event) => {
+        const clickedRow = event.target.closest('tr');
+            if (clickedRow && mainTable.contains(clickedRow)) {
+                if (selectedRow === clickedRow) {
+                    // Si la fila clicada ya está seleccionada, oculta la tabla secundaria
                     hideSecondaryTable();
+                    selectedRow = null; // Reinicia la variable de la fila seleccionada
+                } else {
+                    // Oculta la tabla secundaria para todas 
+                    hideSecondaryTable();
+                    showSecondaryTable(clickedRow);
+                    selectedRow = clickedRow; // Guarda la fila seleccionada
                 }
-            });
-        });
-
-        // Controlador de clic para ocultar la segunda tabla y deseleccionar fila
-        document.addEventListener('click', (event) => {
-            if (!event.target.closest('#table-campaigns') && !event.target.closest('#second-table')) {
-                hideSecondaryTable();
-                rows.forEach((otherRow) => {
-                    otherRow.classList.remove('selected');
-                });
             }
         });
 
-        // Controlador de clic para ocultar la segunda tabla al hacer clic en la imagen x-icon
-        document.addEventListener('click', (event) => {
-            if (event.target.classList.contains('x-icon')) {
-                hideSecondaryTable();
-                // Desmarca la fila seleccionada
-                rows.forEach((otherRow) => {
-                    otherRow.classList.remove('selected');
-                });
-            }
-        });
-
-        // Función para ocultar la segunda tabla
-        function hideSecondaryTable() {
+        // Función para ocultar la tabla secundaria
+        const hideSecondaryTable = () => {
+            var secondaryTable = document.getElementById('second-table');
             secondaryTable.style.display = 'none';
         }
 
-        // Función para mostrar la segunda tabla con contenido personalizado
-        function showSecondaryTable(clickedRow) {
+        // Función para mostrar la tabla secundaria con contenido personalizado
+        const showSecondaryTable = (clickedRow) => {
+            var secondaryTable = document.getElementById('second-table');
+            var secondaryTableContent = generateSecondaryTableContent(clickedRow);
+
+            secondaryTable.innerHTML = secondaryTableContent;
+
+            secondaryTable.style.display = 'block';
+        }
+
+        // Función para generar el contenido de la tabla secundaria
+        const generateSecondaryTableContent = () => {
             const tables = [
                 { name: 'Tabla 1', icon: 'ojo.png' },
                 { name: 'Tabla 2', icon: 'ojo.png' }
@@ -571,10 +654,17 @@
                     ${tables.map(table => `<tr><td>${table.name}</td><td><img class="eye-icon" src="./assets/${table.icon}" alt=""></td></tr>`).join('')}
                 </table>`;
 
-            secondaryTable.innerHTML = content;
-            secondaryTable.style.display = 'block';
+            return content;
         }
+
+        // Cerrar segunda tabla
+        document.addEventListener('click', (event) => {
+            if (event.target.classList.contains('x-icon')) {
+                hideSecondaryTable();
+            }
+        });
     });
+    // Script segunda tabla
 
     </script>
     <!-- Mostrar segunda tabla y fila seleccionada -->
@@ -598,6 +688,7 @@
     </script>
     <!-- Editar periodicidad de Campañas -->
     
+
     <!-- Mostrar y esconder modal para ajustes -->
     <script>
         var btnSetting = document.getElementById("btn-setting");
@@ -612,7 +703,6 @@
             }
         });
     </script>
-    <!-- Mostrar y esconder modal para ajustes -->
 
     <!-- Demas scripts -->
     <script src="./main.js" ></script>

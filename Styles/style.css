@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300;700&family=Concert+One&family=Lalezar&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300;700&family=Concert+One&family=Lalezar&display=swap');
 
 @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@300&display=swap');
 
@@ -306,7 +306,6 @@ thead th {
     right: 20px;
     border-radius: 5px;
     animation: secondTable 0.3s;
-    cursor:move;
     min-width: 200px;
 }
 
@@ -788,6 +787,60 @@ canvas {
     transform: scale(.98);
 }
 /* MODAL */
+
+/* MODAL DELETE  */
+.box-behind {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Color de fondo oscuro con transparencia */
+    z-index: 1000; /* Asegura que esté por encima de todo lo demás */
+}
+
+.delete-campaign {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 120px;
+    gap: 10px;
+}
+
+.delete-campaign h2 {
+    font-family: var(--font-family-concertOne);
+    font-weight: lighter;
+}
+
+.box-delete-campaigns {
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.box-delete-campaings button {
+    width: 90px;
+    height: 30px;
+    background-color: #171717;
+    color: #ffff;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.box-delete-campaings button:active {
+    transform: scale(.98);
+}
+/* MODAL DELETE  */
 
 
 /* TABLA BASE DE DATOS */

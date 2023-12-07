@@ -268,6 +268,7 @@
             </div>
         </div>
         
+        <!-- Modal periodicidad -->
         <div class="container-modal" style="display: none;">
             <div class="title-and-form">
                 <div class="title-h1">
@@ -309,15 +310,95 @@
                 </div>
             </div>
         </div>
+        <!-- Modal periodicidad -->
+
+        <div class="box-behind" style="display: none;">
+            <div class="delete-campaign">
+                <h2>¿Desea eliminar la campaña?</h2>
+                <div class="box-delete-campaings">
+                    <button id="confirm-button">Si</button>
+                    <button id="cancel-button">Cancelar</button>
+                </div>
+            </div>
+        </div>
+        
     </div>
     
     <!-- Link Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Link Font Awesome -->
 
+    <!-- PARA MANDAR AL LOGIN.PHP -->
+    <script>
+        // JavaScript para manejar la interactividad de la caja de diálogo
+        const confirmButton = document.getElementById('confirm-button');
+        const cancelButton = document.getElementById('cancel-button');
+        const boxBehind = document.querySelector('.box-behind');
+
+        // Función para cerrar la caja de diálogo
+        function closeDialog() {
+            boxBehind.style.display = 'none';
+        }
+
+        // Agregar manejadores de eventos a los botones
+        confirmButton.addEventListener('click', () => {
+            // Aquí puedes agregar lógica para eliminar la campaña
+            // ...
+            closeDialog();
+        });
+
+        cancelButton.addEventListener('click', () => {
+            closeDialog();
+        });
+    </script>
+    <!-- PARA MANDAR AL LOGIN.PHP -->
+
     <!-- CHART JS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- CHART JS -->
+
+    <!-- Eliminar campaña seleccionada -->
+    <script>
+        // Variable para almacenar la fila seleccionada
+        let selectedRow = null;
+
+        // Agregar un controlador de clic a las filas de la tabla
+        const tableRows = document.querySelectorAll("#table-campaigns tbody tr");
+        tableRows.forEach((row) => {
+            row.addEventListener("click", () => {
+                selectedRow = row;
+            });
+        });
+
+        // Controlador de clic para el botón "btn-delete"
+        const deleteButton = document.querySelector(".btn-delete");
+        deleteButton.addEventListener("click", () => {
+            if (selectedRow) {
+                // Mostrar el fondo modal y la caja de confirmación
+                document.querySelector(".box-behind").style.display = "flex";
+            }
+        });
+
+        // Controlador de clic para el botón "Si" en la caja de confirmación
+        document.getElementById("confirm-button").addEventListener("click", () => {
+            if (selectedRow) {
+                // Eliminar la fila seleccionada
+                selectedRow.remove();
+                selectedRow = null;
+                // Ocultar el fondo modal y la caja de confirmación después de eliminar
+                document.querySelector(".box-behind").style.display = "none";
+            }
+        });
+
+        // Controlador de clic para el botón "Cancelar" en la caja de confirmación
+        document.getElementById("cancel-button").addEventListener("click", () => {
+            if (selectedRow) {
+                // Ocultar el fondo modal y la caja de confirmación al hacer clic en "Cancelar"
+                document.querySelector(".box-behind").style.display = "none";
+            }
+        });
+    </script>
+    <!-- Eliminar campaña seleccionada -->
 
     <!-- Script Chart.js -->
     <script>
@@ -328,7 +409,6 @@
             data: {
                 datasets: [{
                     label: 'Mes',
-                    data: [1050, 1880, 950, 2090, 3350, 3890, 5352, 7704],
                     backgroundColor: [
                         'rgb(250, 103, 8)',
                     ],
@@ -336,7 +416,6 @@
                 }, {
                     type: 'bar',
                     label: 'Año',
-                    data: [300, 424, 312, 54, 513, 524, 2325, 213],
                     backgroundColor: [
                         'rgb(51, 51, 255)',
                     ]
@@ -344,6 +423,11 @@
                 labels: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'],
             },
             options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
                 plugins: {
                     legend: {
                         display: true,
@@ -365,7 +449,7 @@
         })
 
         // Url del servidor 
-        let url = 'http://localhost:3000'
+        let url = 'http://localhost/midata-vanilla-js/php/conexion_chart.php'
 
         // Peticion
         fetch(url)
@@ -391,7 +475,7 @@
       // Función para actualizar el contador regresivo
       const actualizarContadorRegresivo = (element) => {
         var tiempoFinal = element.dataset.time;
-        var fechaFinal = new Date('2023-11-30T' + tiempoFinal + ':00');
+        var fechaFinal = new Date('2023-12-10T' + tiempoFinal + ':00');
         
         const actualizar = () => {
           var ahora = new Date();

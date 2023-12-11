@@ -210,6 +210,11 @@
                             <div class="container-del-icon">
                                 <img class="btn-delete" src="./assets/delete.png" alt="delete icon">
                             </div>
+
+                            <div class="msg-modal-delete" style="display: none;">
+                                <p>Selecciona una campaña para eliminar</p>
+                                <div class="arrow-delete"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -228,7 +233,7 @@
                     <div class="container-req-btns">
                         <button id="btn-all">50 últimos</button>
                         <button class="get-five">5 últimos</button>
-                        <button>10 últimos</button>
+                        <button class="get-ten">10 últimos</button>
                     </div>
                 </div>
                 <!-- third section | setting-section -->
@@ -243,7 +248,7 @@
             <div class="section-table-db">
                 <table id="database-table">
                     <thead>
-                        <th>CAL_ID</th>
+                        <!-- <th>CAL_ID</th>
                         <th>CAL_CONTACT</th>
                         <th>CAL_AGENT_FN</th>
                         <th>CAL_AGENT_LN</th>
@@ -259,10 +264,13 @@
                         <th>CAL_HANGUP</th>
                         <th>CAL_TYPEDOC</th>
                         <th>CAL_DOCUMENTO</th>
-                        <th>CAL_MOTIVO</th>
+                        <th>CAL_MOTIVO</th> -->
                     </thead>
                     <tbody id="tbody_datos">
-    
+                        <?php
+                        // include("php/allRegister.php");
+                        include("php/allRegister.php");
+                        ?>
                     </tbody>
                 </table>
             </div>
@@ -355,38 +363,58 @@
     </script>
     <!-- Contenedor validar eliminar campaña -->
 
-    <!-- CHART JS -->
+    <!-- CDN Chart.JS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- CHART JS -->
+    <!-- CDN Chart.JS -->
 
-    <!-- Eliminar campaña seleccionada -->
+    <!-- Eliminar campaña seleccionada, mensaje cuando se le da a eliminar sin haber seleccionado una campaña -->
     <script>
         // Variable para almacenar la fila seleccionada
         let selectedRow = null;
+        let isRowSelected = false;
 
         // Agregar un controlador de clic a las filas de la tabla
         const tableRows = document.querySelectorAll("#table-campaigns tbody tr");
         tableRows.forEach((row) => {
             row.addEventListener("click", () => {
-                selectedRow = row;
+                if (!isRowSelected) {
+                    selectedRow = row;
+                    row.classList.add("selected"); // Opcional: Puedes aplicar un estilo a la fila seleccionada
+                    isRowSelected = true;
+                } else if (row === selectedRow) {
+                    row.classList.remove("selected"); // Opcional: Quita el estilo de la fila seleccionada
+                    selectedRow = null;
+                    isRowSelected = false;
+                }
             });
         });
 
-        // Controlador de clic para el botón "btn-delete"
+        // Obtener el botón de eliminación
         const deleteButton = document.querySelector(".btn-delete");
+
+        // Controlador de clic para el botón "btn-delete"
         deleteButton.addEventListener("click", () => {
-            if (selectedRow) {
+            if (isRowSelected) {
                 // Mostrar el fondo modal y la caja de confirmación
                 document.querySelector(".box-behind").style.display = "flex";
+            } else {
+                // No hay fila seleccionada, muestra el mensaje de selección
+                document.querySelector(".msg-modal-delete").style.display = "flex";
+
+                // Ocultar el mensaje de selección después de 2 segundos
+                setTimeout(() => {
+                    document.querySelector(".msg-modal-delete").style.display = "none";
+                }, 2000); // 2 segundos (2000 milisegundos)
             }
         });
 
         // Controlador de clic para el botón "Si" en la caja de confirmación
         document.getElementById("confirm-button").addEventListener("click", () => {
-            if (selectedRow) {
+            if (isRowSelected) {
                 // Eliminar la fila seleccionada
                 selectedRow.remove();
                 selectedRow = null;
+                isRowSelected = false;
                 // Ocultar el fondo modal y la caja de confirmación después de eliminar
                 document.querySelector(".box-behind").style.display = "none";
             }
@@ -394,16 +422,18 @@
 
         // Controlador de clic para el botón "Cancelar" en la caja de confirmación
         document.getElementById("cancel-button").addEventListener("click", () => {
-            if (selectedRow) {
+            if (isRowSelected) {
                 // Ocultar el fondo modal y la caja de confirmación al hacer clic en "Cancelar"
                 document.querySelector(".box-behind").style.display = "none";
             }
         });
-    </script>
-    <!-- Eliminar campaña seleccionada -->
 
-    <!-- Script Chart.js -->
-    <script>
+
+    </script>
+    <!-- Eliminar campaña seleccionada, mensaje cuando se le da a eliminar sin haber seleccionado una campaña -->
+
+    <!-- Script Chart.js para pagina HTML -->
+    <!-- <script>
         var ctx = 'myGraphic';
 
         var myChart = new Chart(ctx, {
@@ -425,11 +455,6 @@
                 labels: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'],
             },
             options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                },
                 plugins: {
                     legend: {
                         display: true,
@@ -464,6 +489,81 @@
                 myChart.data['labels'].push(element)
             })
         }
+
+    </script> -->
+    <!-- Script Chart.js para pagina HTML -->
+
+     <!-- Script Chart.js -->
+    <script>
+        var ctx = 'myGraphic';
+
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [], // Inicializamos las etiquetas vacías
+                datasets: [{
+                    label: 'Mes',
+                    backgroundColor: 'rgb(250, 103, 8)',
+                    data: [] // Inicializamos los datos vacíos
+                }, {
+                    label: 'Año',
+                    backgroundColor: 'rgb(5, 89, 166)',
+                    data: [] // Inicializamos los datos vacíos
+                }],
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        labels: {
+                            color: 'rgb(0, 0, 0)'
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Crecimiento de la base de datos',
+                        color: 'rgb(0, 0, 0)',
+                        font: {
+                            size: 20,
+                            family: 'Almarai'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Url del servidor 
+        let url = 'http://localhost/midata-vanilla-js/php/conexion_chart.php';
+
+        // Peticion
+        fetch(url)
+            .then(response => response.json())
+            .then(datos => mostrar(datos))
+            .catch(err => console.log(err));
+
+        const mostrar = (data) => {
+             // Limpiar los datos actuales en el gráfico
+            myChart.data.labels = [];
+            myChart.data.datasets[0].data = [];
+            myChart.data.datasets[1].data = [];
+            
+            // Recorrer los nuevos datos y agregarlos al gráfico
+            data.valores.forEach(element => {
+                myChart.data.labels.push(element.año); 
+                myChart.data.datasets[0].data.push(element.valor_mes); 
+                myChart.data.datasets[1].data.push(element.valor_año); 
+            });
+
+            // Actualizar el gráfico
+            myChart.update();
+        };
+
+        console.log('Mostrando datos');
 
     </script>
     <!-- Script Chart.js -->
@@ -602,14 +702,44 @@
     <script>
         var btnSetting = document.getElementById("btn-setting");
         var containerModal = document.querySelector(".container-modal");
+        var modalTimer; // Variable para el temporizador
+        var modalVisible = false; // Variable para rastrear la visibilidad del modal
 
         btnSetting.addEventListener("click", function() {
-
-            if (containerModal.style.display === "none" || containerModal.style.display === "") {
+            if (!modalVisible) {
+                // Mostrar el contenedor modal si no está visible
                 containerModal.style.display = "block";
+                
+                // Iniciar el temporizador de 4 segundos para ocultar el contenedor
+                modalTimer = setTimeout(function() {
+                    containerModal.style.display = "none"; // Ocultar el contenedor después de 4 segundos
+                }, 4000); // 4000 milisegundos = 4 segundos
+                
+                modalVisible = true; // El modal está visible
             } else {
+                // Ocultar el contenedor modal si está visible y se hace clic nuevamente en el botón
                 containerModal.style.display = "none";
+                clearTimeout(modalTimer); // Cancelar el temporizador
+                modalVisible = false; // El modal está oculto
             }
+        });
+
+        // Agregar un event listener para detectar clics dentro de containerModal
+        containerModal.addEventListener("click", function(event) {
+            // Cancelar el temporizador si se hizo clic en algún elemento dentro de containerModal
+            clearTimeout(modalTimer);
+        });
+
+        // Agregar event listeners para detectar cambios en los campos de entrada dentro de containerModal
+        var daysInput = document.getElementById("days");
+        var hoursInput = document.getElementById("hours");
+        var minutesInput = document.getElementById("minutes");
+
+        [daysInput, hoursInput, minutesInput].forEach(function(input) {
+            input.addEventListener("input", function() {
+                // Cancelar el temporizador si se ha tocado algún elemento dentro del modal
+                clearTimeout(modalTimer);
+            });
         });
     </script>
     <!-- Mostrar y esconder modal para ajustes -->

@@ -1,12 +1,12 @@
 <?php
 
-$usuario = "root";
-$clave = "";
-$base_de_datos = "datatable";
-$host = "localhost"; // Reemplaza "localhost" con la dirección del servidor de la base de datos si es necesario
+$host =  '72.167.77.8';
+$user =  'IT_USER';
+$password =  '{Nd8=[So7Uk3';
+$database =  'DATA_NACIONAL';
 
 // Establecer la conexión a la base de datos
-$conexion = new mysqli($host, $usuario, $clave, $base_de_datos);
+$conexion = new mysqli($host, $user, $password, $database);
 
 // Verificar si la conexión tuvo éxito
 if ($conexion->connect_error) {
@@ -14,7 +14,7 @@ if ($conexion->connect_error) {
 }
 
 // Consulta SQL para traer todos los registros de la tabla (reemplaza "nombre_de_tabla" con el nombre real de tu tabla)
-$sql = "SELECT CAL_ID, CAL_CONTACT, CAL_AGENT_FN, CAL_AGENT_LN, CAL_PHONE, CAL_CALL_START, CAL_CALL_FINISH, CAL_CAMPAIGN, CAL_QUEUE, CAL_TIME_LENGTH, CAL_TIME_QUEUE, CAL_TIME_SPEAKE, CAL_TIME_WRAP, CAL_HANGUP, CAL_TYPEDOC, CAL_DOCUMENTO, CAL_MOTIVO FROM data";
+$sql = "SELECT CAL_ID, CAL_CONTACT, CAL_AGENT_FN, CALL_AGENT_LN, CAL_PHONE, CAL_CALL_START, CAL_CALL_FINISH, CAL_CAMPAIGN, CAL_QUEUE, CAL_TIME_LENGTH, CAL_TIME_QUEUE, CAL_TIME_SPEAKE, CAL_TIME_WRAP, CAL_HANGUP, CAL_TYPEDOC, CAL_DOCUMENTO, CAL_MOTIVO FROM CGN_LLAMADAS_INBOUND";
 
 // Ejecutar la consulta
 $resultado = $conexion->query($sql);
@@ -27,7 +27,7 @@ if ($resultado) {
         $calID = $fila["CAL_ID"];
         $calContacto = $fila["CAL_CONTACT"];
         $calAgenteNombre = $fila["CAL_AGENT_FN"];
-        $calAgenteApellido = $fila["CAL_AGENT_LN"];
+        $calAgenteApellido = $fila["CALL_AGENT_LN"];
         $calTelefono = $fila["CAL_PHONE"];
         $calInicioLlamada = $fila["CAL_CALL_START"];
         $calFinLlamada = $fila["CAL_CALL_FINISH"];

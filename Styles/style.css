@@ -465,6 +465,7 @@ thead th {
     border-right: 1px solid gray;
 }
 
+
 .settings-section .content-back-set-del .between-divs .content-empty-btn button {
     background-color: #414141;
     width: 110px;
@@ -478,6 +479,25 @@ thead th {
 
 .settings-section .content-back-set-del .between-divs .content-empty-btn button:active {
     transform: var(--scale-button);
+}
+
+.content-empty-icons {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.container-del-icon, 
+.container-set-icon {
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-del-icon:active, 
+.container-set-icon:active {
+    background-color: rgb(211, 211, 211);
 }
 
 .settings-section .content-request-btns {

@@ -357,7 +357,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- CHART JS -->
 
-<<<<<<< HEAD:index.html
     <!-- Eliminar campaña seleccionada -->
     <script>
         // Variable para almacenar la fila seleccionada
@@ -400,7 +399,7 @@
         });
     </script>
     <!-- Eliminar campaña seleccionada -->
-=======
+
     <!-- Traer registros tabla de datos inferior -->
     <script>
         $(document).ready(function () {
@@ -446,7 +445,6 @@
     });;
     </script>
     <!-- Traer registros tabla de datos inferior -->
->>>>>>> aa4e660cee97dadd13d34620961d1e6450d13510:index.php
 
     <!-- Script Chart.js -->
     <script>
@@ -458,25 +456,19 @@
                 labels: [], // Inicializamos las etiquetas vacías
                 datasets: [{
                     label: 'Mes',
-<<<<<<< HEAD:index.html
                     backgroundColor: [
                         'rgb(250, 103, 8)',
                     ],
 
-=======
                     backgroundColor: 'rgb(250, 103, 8)',
                     data: [] // Inicializamos los datos vacíos
->>>>>>> aa4e660cee97dadd13d34620961d1e6450d13510:index.php
                 }, {
                     label: 'Año',
-<<<<<<< HEAD:index.html
                     backgroundColor: [
                         'rgb(51, 51, 255)',
                     ]
-=======
                     backgroundColor: 'rgb(51, 51, 255)',
                     data: [] // Inicializamos los datos vacíos
->>>>>>> aa4e660cee97dadd13d34620961d1e6450d13510:index.php
                 }],
             },
             options: {
@@ -506,11 +498,8 @@
         });
 
         // Url del servidor 
-<<<<<<< HEAD:index.html
         let url = 'http://localhost/midata-vanilla-js/php/conexion_chart.php'
-=======
         let url = 'http://localhost/midata-vanilla-js/php/conexion_chart.php';
->>>>>>> aa4e660cee97dadd13d34620961d1e6450d13510:index.php
 
         // Peticion
         fetch(url)

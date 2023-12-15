@@ -231,7 +231,7 @@
                     </div>
     
                     <div class="container-req-btns">
-                        <button id="btn-all">50 últimos</button>
+                        <button id="btn-twentyFive">25 últimos</button>
                         <button class="get-five">5 últimos</button>
                         <button class="get-ten">10 últimos</button>
                     </div>
@@ -267,10 +267,7 @@
                         <th>CAL_MOTIVO</th> -->
                     </thead>
                     <tbody id="tbody_datos">
-                        <?php
-                        // include("php/allRegister.php");
-                        include("php/allRegister.php");
-                        ?>
+                        
                     </tbody>
                 </table>
             </div>
@@ -373,38 +370,33 @@
         let selectedRow = null;
         let isRowSelected = false;
 
-        // Agregar un controlador de clic a las filas de la tabla
-        const tableRows = document.querySelectorAll("#table-campaigns tbody tr");
-        tableRows.forEach((row) => {
-            row.addEventListener("click", () => {
-                if (!isRowSelected) {
-                    selectedRow = row;
-                    row.classList.add("selected"); // Opcional: Puedes aplicar un estilo a la fila seleccionada
-                    isRowSelected = true;
-                } else if (row === selectedRow) {
-                    row.classList.remove("selected"); // Opcional: Quita el estilo de la fila seleccionada
-                    selectedRow = null;
-                    isRowSelected = false;
-                }
-            });
-        });
-
-        // Obtener el botón de eliminación
-        const deleteButton = document.querySelector(".btn-delete");
-
-        // Controlador de clic para el botón "btn-delete"
-        deleteButton.addEventListener("click", () => {
+        // Función para mostrar el modal "msg-modal-delete"
+        function showModalDelete() {
             if (isRowSelected) {
-                // Mostrar el fondo modal y la caja de confirmación
                 document.querySelector(".box-behind").style.display = "flex";
             } else {
-                // No hay fila seleccionada, muestra el mensaje de selección
                 document.querySelector(".msg-modal-delete").style.display = "flex";
 
                 // Ocultar el mensaje de selección después de 2 segundos
                 setTimeout(() => {
                     document.querySelector(".msg-modal-delete").style.display = "none";
                 }, 2000); // 2 segundos (2000 milisegundos)
+            }
+        }
+
+        // Obtener el botón de eliminación
+        const deleteButton = document.querySelector(".btn-delete");
+
+        // Controlador de clic para el botón "btn-delete"
+        deleteButton.addEventListener("click", () => {
+            // Mostrar el modal correspondiente en función de si hay una fila seleccionada o no
+            showModalDelete();
+        });
+
+        // Controlador de clic para cerrar el modal "msg-modal-delete" al hacer clic en otro lugar del documento
+        document.addEventListener("click", (event) => {
+            if (event.target !== deleteButton && event.target !== selectedRow) {
+                document.querySelector(".msg-modal-delete").style.display = "none";
             }
         });
 
@@ -428,7 +420,21 @@
             }
         });
 
-
+        // Agregar un controlador de clic a las filas de la tabla
+        const tableRows = document.querySelectorAll("#table-campaigns tbody tr");
+        tableRows.forEach((row) => {
+            row.addEventListener("click", () => {
+                if (!isRowSelected) {
+                    selectedRow = row;
+                    row.classList.add("selected"); // Opcional: Puedes aplicar un estilo a la fila seleccionada
+                    isRowSelected = true;
+                } else if (row === selectedRow) {
+                    row.classList.remove("selected"); // Opcional: Quita el estilo de la fila seleccionada
+                    selectedRow = null;
+                    isRowSelected = false;
+                }
+            });
+        });
     </script>
     <!-- Eliminar campaña seleccionada, mensaje cuando se le da a eliminar sin haber seleccionado una campaña -->
 
@@ -577,7 +583,7 @@
       // Función para actualizar el contador regresivo
       const actualizarContadorRegresivo = (element) => {
         var tiempoFinal = element.dataset.time;
-        var fechaFinal = new Date('2023-12-10T' + tiempoFinal + ':00');
+        var fechaFinal = new Date('2023-12-17T' + tiempoFinal + ':00');
         
         const actualizar = () => {
           var ahora = new Date();

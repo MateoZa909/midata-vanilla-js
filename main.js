@@ -1,15 +1,15 @@
 // Eventos (Boton Actualizar todos), (Boton 5 ultimos), (Boton traer 50 registros), (Actualiza ahora), (Icono ajustes), (Boton eliminar), (Boton Nacional e Internacional)
 $(document).ready(function() {
     // Boton 50 ultimos
-    $('#btn-all').on('click', function() {
-        const query = "SELECT * FROM CGN_LLAMADAS_INBOUND WHERE STR_TO_DATE(CAL_CALL_START, '%Y-%m-%d %H:%i') BETWEEN STR_TO_DATE('2023-11-1', '%Y-%m-%d') AND STR_TO_DATE('2023-11-2', '%Y-%m-%d') LIMIT 50";
+    $('#btn-twentyFive').on('click', function() {
+        const query = "SELECT * FROM CGN_LLAMADAS_INBOUND WHERE STR_TO_DATE(CAL_CALL_START, '%Y-%m-%d %H:%i') BETWEEN STR_TO_DATE('2023-11-1', '%Y-%m-%d') AND STR_TO_DATE('2023-11-2', '%Y-%m-%d') LIMIT 25";
         updateTable(query);
     });
 
     // Boton "5 ultimos"
-    $('#btn-last-ten').on('click', function() {
+    $('.btn-last-five').on('click', function() {
         // Aquí pones la consulta que deseas enviar al backend para los últimos 10
-        const query = "SELECT * FROM CGN_LLAMADAS_INBOUND ORDER BY DESC LIMIT 10";
+        const query = "SELECT * FROM CGN_LLAMADAS_INBOUND ORDER BY DESC LIMIT 5";
         updateTable(query);
     });
 

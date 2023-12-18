@@ -328,6 +328,83 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Link Font Awesome -->
 
+    <!-- Carga de tabla respectiva a la fila seleccionada -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        var mainTable = document.getElementById('table-campaigns');
+        const secondaryTable = document.getElementById('second-table');
+        const databaseTable = document.getElementById('database-table');
+
+        let selectedRow = null;
+
+        // Evento principal a la tabla
+        mainTable.addEventListener('click', (event) => {
+            const clickedRow = event.target.closest('tr');
+            if (clickedRow && mainTable.contains(clickedRow)) {
+                if (selectedRow === clickedRow) {
+                    // Si la fila clicada ya está seleccionada, oculta la tabla secundaria
+                    hideSecondaryTable();
+                    selectedRow = null; // Reinicia la variable de la fila seleccionada
+                } else {
+                    // Oculta la tabla secundaria para todas 
+                    hideSecondaryTable();
+                    showSecondaryTable(clickedRow);
+                    selectedRow = clickedRow; // Guarda la fila seleccionada
+                }
+            }
+        });
+
+        // Función para ocultar la tabla secundaria
+        const hideSecondaryTable = () => {
+            secondaryTable.style.display = 'none';
+        }
+
+        // Función para mostrar la tabla secundaria con contenido personalizado
+        const showSecondaryTable = (clickedRow) => {
+            var secondaryTableContent = generateSecondaryTableContent(clickedRow);
+
+            secondaryTable.innerHTML = secondaryTableContent;
+
+            secondaryTable.style.display = 'block';
+        }
+
+        // Función para generar el contenido de la tabla secundaria
+        const generateSecondaryTableContent = (clickedRow) => {
+            const tables = [
+                { name: 'Tabla 1', icon: 'ojo.png', content: '<table>...</table>' },
+                { name: 'Tabla 2', icon: 'ojo.png', content: '<table>...</table>' }
+                // Agrega más tablas con sus contenidos aquí
+            ];
+
+            const selectedIndex = Array.from(clickedRow.parentNode.children).indexOf(clickedRow);
+
+            const content = tables[selectedIndex] ? tables[selectedIndex].content : '';
+
+            return content;
+        }
+
+        // Cerrar segunda tabla
+        document.addEventListener('click', (event) => {
+            if (event.target.classList.contains('x-icon')) {
+                hideSecondaryTable();
+            }
+        });
+
+        // Mostrar la tabla de la base de datos cuando se hace clic en el icono de ojo
+        secondaryTable.addEventListener('click', (event) => {
+            if (event.target.classList.contains('eye-icon')) {
+                databaseTable.innerHTML = event.target.dataset.tableContent;
+            }
+        });
+    });
+
+    </script>
+    <!-- Carga de tabla respectiva a la fila seleccionada -->
+
+    <!-- CHART JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- CHART JS -->
+
     <!-- PARA MANDAR AL LOGIN.PHP -->
     <script>
         // JavaScript para manejar la interactividad de la caja de diálogo
@@ -353,11 +430,6 @@
     </script>
     <!-- PARA MANDAR AL LOGIN.PHP -->
 
-    <!-- CHART JS -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- CHART JS -->
-
-<<<<<<< HEAD:index.html
     <!-- Eliminar campaña seleccionada -->
     <script>
         // Variable para almacenar la fila seleccionada
@@ -400,7 +472,7 @@
         });
     </script>
     <!-- Eliminar campaña seleccionada -->
-=======
+
     <!-- Traer registros tabla de datos inferior -->
     <script>
         $(document).ready(function () {
@@ -446,7 +518,6 @@
     });;
     </script>
     <!-- Traer registros tabla de datos inferior -->
->>>>>>> aa4e660cee97dadd13d34620961d1e6450d13510:index.php
 
     <!-- Script Chart.js -->
     <script>
@@ -458,25 +529,19 @@
                 labels: [], // Inicializamos las etiquetas vacías
                 datasets: [{
                     label: 'Mes',
-<<<<<<< HEAD:index.html
                     backgroundColor: [
                         'rgb(250, 103, 8)',
                     ],
 
-=======
                     backgroundColor: 'rgb(250, 103, 8)',
                     data: [] // Inicializamos los datos vacíos
->>>>>>> aa4e660cee97dadd13d34620961d1e6450d13510:index.php
                 }, {
                     label: 'Año',
-<<<<<<< HEAD:index.html
                     backgroundColor: [
                         'rgb(51, 51, 255)',
                     ]
-=======
                     backgroundColor: 'rgb(51, 51, 255)',
                     data: [] // Inicializamos los datos vacíos
->>>>>>> aa4e660cee97dadd13d34620961d1e6450d13510:index.php
                 }],
             },
             options: {
@@ -506,11 +571,8 @@
         });
 
         // Url del servidor 
-<<<<<<< HEAD:index.html
         let url = 'http://localhost/midata-vanilla-js/php/conexion_chart.php'
-=======
         let url = 'http://localhost/midata-vanilla-js/php/conexion_chart.php';
->>>>>>> aa4e660cee97dadd13d34620961d1e6450d13510:index.php
 
         // Peticion
         fetch(url)

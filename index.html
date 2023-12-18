@@ -241,7 +241,7 @@
                     </div>
     
                     <div class="container-req-btns">
-                        <button id="btn-all">50 últimos</button>
+                        <button id="btn-twentyFive">25 últimos</button>
                         <button class="get-five">5 últimos</button>
                         <button class="get-ten">10 últimos</button>
                     </div>
@@ -345,12 +345,87 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Link Font Awesome -->
 
+<<<<<<< HEAD
      <!-- CDN Chart.JS -->
      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
      <!-- CDN Chart.JS -->
 
      <!-- <script src="./Chart.js"></script>
      <script src="/Chart.js"></script> -->
+=======
+    <!-- Carga de tabla respectiva a la fila seleccionada -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        var mainTable = document.getElementById('table-campaigns');
+        const secondaryTable = document.getElementById('second-table');
+        const databaseTable = document.getElementById('database-table');
+
+        let selectedRow = null;
+
+        // Evento principal a la tabla
+        mainTable.addEventListener('click', (event) => {
+            const clickedRow = event.target.closest('tr');
+            if (clickedRow && mainTable.contains(clickedRow)) {
+                if (selectedRow === clickedRow) {
+                    // Si la fila clicada ya está seleccionada, oculta la tabla secundaria
+                    hideSecondaryTable();
+                    selectedRow = null; // Reinicia la variable de la fila seleccionada
+                } else {
+                    // Oculta la tabla secundaria para todas 
+                    hideSecondaryTable();
+                    showSecondaryTable(clickedRow);
+                    selectedRow = clickedRow; // Guarda la fila seleccionada
+                }
+            }
+        });
+
+        // Función para ocultar la tabla secundaria
+        const hideSecondaryTable = () => {
+            secondaryTable.style.display = 'none';
+        }
+
+        // Función para mostrar la tabla secundaria con contenido personalizado
+        const showSecondaryTable = (clickedRow) => {
+            var secondaryTableContent = generateSecondaryTableContent(clickedRow);
+
+            secondaryTable.innerHTML = secondaryTableContent;
+
+            secondaryTable.style.display = 'block';
+        }
+
+        // Función para generar el contenido de la tabla secundaria
+        const generateSecondaryTableContent = (clickedRow) => {
+            const tables = [
+                { name: 'Tabla 1', icon: 'ojo.png', content: '<table>...</table>' },
+                { name: 'Tabla 2', icon: 'ojo.png', content: '<table>...</table>' }
+                // Agrega más tablas con sus contenidos aquí
+            ];
+
+            const selectedIndex = Array.from(clickedRow.parentNode.children).indexOf(clickedRow);
+
+            const content = tables[selectedIndex] ? tables[selectedIndex].content : '';
+
+            return content;
+        }
+
+        // Cerrar segunda tabla
+        document.addEventListener('click', (event) => {
+            if (event.target.classList.contains('x-icon')) {
+                hideSecondaryTable();
+            }
+        });
+
+        // Mostrar la tabla de la base de datos cuando se hace clic en el icono de ojo
+        secondaryTable.addEventListener('click', (event) => {
+            if (event.target.classList.contains('eye-icon')) {
+                databaseTable.innerHTML = event.target.dataset.tableContent;
+            }
+        });
+    });
+
+    </script>
+    <!-- Carga de tabla respectiva a la fila seleccionada -->
+>>>>>>> 23062a32d62fd8898957f528e85e66cb22b802ed
 
     <!-- Contenedor validar eliminar campaña -->
     <script>
@@ -383,38 +458,33 @@
         let selectedRow = null;
         let isRowSelected = false;
 
-        // Agregar un controlador de clic a las filas de la tabla
-        const tableRows = document.querySelectorAll("#table-campaigns tbody tr");
-        tableRows.forEach((row) => {
-            row.addEventListener("click", () => {
-                if (!isRowSelected) {
-                    selectedRow = row;
-                    row.classList.add("selected"); // Opcional: Puedes aplicar un estilo a la fila seleccionada
-                    isRowSelected = true;
-                } else if (row === selectedRow) {
-                    row.classList.remove("selected"); // Opcional: Quita el estilo de la fila seleccionada
-                    selectedRow = null;
-                    isRowSelected = false;
-                }
-            });
-        });
-
-        // Obtener el botón de eliminación
-        const deleteButton = document.querySelector(".btn-delete");
-
-        // Controlador de clic para el botón "btn-delete"
-        deleteButton.addEventListener("click", () => {
+        // Función para mostrar el modal "msg-modal-delete"
+        function showModalDelete() {
             if (isRowSelected) {
-                // Mostrar el fondo modal y la caja de confirmación
                 document.querySelector(".box-behind").style.display = "flex";
             } else {
-                // No hay fila seleccionada, muestra el mensaje de selección
                 document.querySelector(".msg-modal-delete").style.display = "flex";
 
                 // Ocultar el mensaje de selección después de 2 segundos
                 setTimeout(() => {
                     document.querySelector(".msg-modal-delete").style.display = "none";
                 }, 2000); // 2 segundos (2000 milisegundos)
+            }
+        }
+
+        // Obtener el botón de eliminación
+        const deleteButton = document.querySelector(".btn-delete");
+
+        // Controlador de clic para el botón "btn-delete"
+        deleteButton.addEventListener("click", () => {
+            // Mostrar el modal correspondiente en función de si hay una fila seleccionada o no
+            showModalDelete();
+        });
+
+        // Controlador de clic para cerrar el modal "msg-modal-delete" al hacer clic en otro lugar del documento
+        document.addEventListener("click", (event) => {
+            if (event.target !== deleteButton && event.target !== selectedRow) {
+                document.querySelector(".msg-modal-delete").style.display = "none";
             }
         });
 
@@ -437,7 +507,27 @@
                 document.querySelector(".box-behind").style.display = "none";
             }
         });
+<<<<<<< HEAD
     </script> 
+=======
+
+        // Agregar un controlador de clic a las filas de la tabla
+        const tableRows = document.querySelectorAll("#table-campaigns tbody tr");
+        tableRows.forEach((row) => {
+            row.addEventListener("click", () => {
+                if (!isRowSelected) {
+                    selectedRow = row;
+                    row.classList.add("selected"); // Opcional: Puedes aplicar un estilo a la fila seleccionada
+                    isRowSelected = true;
+                } else if (row === selectedRow) {
+                    row.classList.remove("selected"); // Opcional: Quita el estilo de la fila seleccionada
+                    selectedRow = null;
+                    isRowSelected = false;
+                }
+            });
+        });
+    </script>
+>>>>>>> 23062a32d62fd8898957f528e85e66cb22b802ed
     <!-- Eliminar campaña seleccionada, mensaje cuando se le da a eliminar sin haber seleccionado una campaña -->
 
     <!-- Script para traer registros dependiendo de que boton se use -->
@@ -557,7 +647,11 @@
       // Función para actualizar el contador regresivo
       const actualizarContadorRegresivo = (element) => {
         var tiempoFinal = element.dataset.time;
+<<<<<<< HEAD
         var fechaFinal = new Date('2023-12-15T' + tiempoFinal + ':00');
+=======
+        var fechaFinal = new Date('2023-12-17T' + tiempoFinal + ':00');
+>>>>>>> 23062a32d62fd8898957f528e85e66cb22b802ed
         
         const actualizar = () => {
           var ahora = new Date();

@@ -1,15 +1,50 @@
 // Eventos (Boton Actualizar todos), (Boton 5 ultimos), (Boton traer 50 registros), (Actualiza ahora), (Icono ajustes), (Boton eliminar), (Boton Nacional e Internacional)
+
+document.addEventListener('DOMContentLoaded', function() {
+    const button = document.querySelector('.get-five');
+    const tableBody = document.querySelector('#tbody_datos'); // Selección del tbody de la tabla
+
+    button.addEventListener('click', function() {
+        fetch('/midata/last-ten') // Realiza una solicitud GET a la ruta /midata/last-ten
+            .then(response => response.json())
+            .then(data => {
+                // Imprime la respuesta en la consola
+                console.log('Respuesta del servidor:', data);
+
+                // Limpia el contenido actual del tbody
+                tableBody.innerHTML = '';
+
+                // Agrega los datos a la tabla
+                data.forEach(row => {
+                    const newRow = document.createElement('tr');
+                    for (const key in row) {
+                        if (row.hasOwnProperty(key)) {
+                            const cell = document.createElement('td');
+                            cell.textContent = row[key];
+                            newRow.appendChild(cell);
+                        }
+                    }
+                    tableBody.appendChild(newRow);
+                });
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    });
+});
+
+// Eventos (Boton Actualizar todos), (Boton 5 ultimos), (Boton traer 50 registros), (Actualiza ahora), (Icono ajustes), (Boton eliminar), (Boton Nacional e Internacional)
 $(document).ready(function() {
     // Boton 50 ultimos
-    $('#btn-all').on('click', function() {
-        const query = "SELECT * FROM CGN_LLAMADAS_INBOUND WHERE STR_TO_DATE(CAL_CALL_START, '%Y-%m-%d %H:%i') BETWEEN STR_TO_DATE('2023-11-1', '%Y-%m-%d') AND STR_TO_DATE('2023-11-2', '%Y-%m-%d') LIMIT 50";
+    $('#btn-twentyFive').on('click', function() {
+        const query = "SELECT * FROM CGN_LLAMADAS_INBOUND WHERE STR_TO_DATE(CAL_CALL_START, '%Y-%m-%d %H:%i') BETWEEN STR_TO_DATE('2023-11-1', '%Y-%m-%d') AND STR_TO_DATE('2023-11-2', '%Y-%m-%d') LIMIT 25";
         updateTable(query);
     });
 
     // Boton "5 ultimos"
-    $('#btn-last-ten').on('click', function() {
+    $('.btn-last-five').on('click', function() {
         // Aquí pones la consulta que deseas enviar al backend para los últimos 10
-        const query = "SELECT * FROM CGN_LLAMADAS_INBOUND ORDER BY DESC LIMIT 10";
+        const query = "SELECT * FROM CGN_LLAMADAS_INBOUND ORDER BY DESC LIMIT 5";
         updateTable(query);
     });
 
@@ -329,5 +364,4 @@ $(document).ready(function() {
         });
     });
 });
-
 

@@ -204,10 +204,76 @@ body {
     background-color: rgb(226, 226, 226);
     border-radius: 4px;
     cursor: pointer;
+    border-radius: 10px;
 }
 
 .add-campaign:active {
     transform: scale(.98);
+}
+
+.buttons-add-del-set {
+    position: absolute;
+    top: 25%;
+    right: 19px;
+    background-color: rgba(185, 185, 185, 0.459);
+    box-shadow: 0 4px 10px 2px rgba(172, 172, 172, 0.167);
+    border-radius: 4px;
+    width: 40px;
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2px 0;
+    animation: buttons-add-del-set 0.9s;
+    border: 1px solid rgb(165, 165, 165);
+}
+
+/* @keyframes buttons-add-del-set {
+    0% {
+        opacity: 0;
+        transform: translateY(190px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(-1%);
+    }
+} */
+
+#toggle-buttons {
+    /* background-color: lightblue; */
+    border: none;
+    width: 100%;
+    cursor: pointer;
+}
+/* 
+#toggle-buttons {
+    transform: rotate(180deg);
+} */
+
+.buttons-add-del-set .back-add, 
+.back-del, 
+.back-set {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* width: 35px;
+    height: 35px; */
+    width: 100%;
+    height: 100%;
+}
+
+.buttons-add-del-set .back-add img, 
+.back-del img, 
+.back-set img {
+    width: 22px;
+}
+
+.buttons-add-del-set .back-add:active, 
+.back-del:active, 
+.back-set:active {
+    background-color: rgba(211, 211, 211, 0.603);
 }
 
 .message-campaign {
@@ -298,14 +364,14 @@ thead th {
 
 /* Color de fondo encabezado */
 .contain-table table th {
-    background-color: #b5b5b5d7;
+    background-color: #adadadd7;
 }
 /* Color de fondo encabezado */
 
 /* Color de fondo cuerpo */
 .contain-table table tbody td {
-    border-bottom: 1px solid rgba(177, 177, 177, 0.4);
-    background-color: #d6ceced7;
+    border-bottom: 1px solid rgba(161, 161, 161, 0.4);
+    background-color: #cececed7;
 }
 /* Color de fondo cuerpo */
 
@@ -326,7 +392,7 @@ thead th {
 
 #table-campaigns th {
     font-family: var(--font-family-almarai);
-    font-size: 13px;
+    font-size: 14px;
     padding: 10px 10px;
 }
 
@@ -339,6 +405,7 @@ thead th {
     border-bottom: 1px solid rgba(177, 177, 177, 0.4);
     text-align: center;
     font-family: var(--font-family-almarai);
+    font-size: 14px;
 }
 
 #table-campaigns td img {
@@ -433,7 +500,7 @@ thead th {
 }
 
 .settings-section .content-updateAll {
-    background-color: #f1f1f1;
+    background-color: #e0e0e0c4;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -456,18 +523,6 @@ thead th {
 
 .settings-section .content-updateAll button:active {
     transform: var(--scale-button);
-}
-
-.settings-section .content-back-set-del {
-    height: 90px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    border-radius: 10px;
-    box-shadow: var(--box-shadow-main);
-    align-items: center;
-    background-color: #f1f1f1;
-    position: relative;
 }
 
 /* CAMBIOS QUE AGREGAR AL INDEX.PHP */
@@ -502,6 +557,17 @@ thead th {
 }
 /* CAMBIOS QUE AGREGAR AL INDEX.PHP */
 
+.settings-section .content-back-set-del {
+    height: 90px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow-main);
+    align-items: center;
+    background-color: #e0e0e0c4;
+    position: relative;
+}
 
 .settings-section .content-back-set-del img {
     width: 22px;
@@ -524,15 +590,15 @@ thead th {
     height: 40px;
     display: flex;
     align-items: center;
-    padding: 0 5px;
-    border-right: 1px solid gray;
+    /* padding: 0 5px; */
+    /* background-color: lightcoral; */
+    /* border-right: 1px solid gray; */
 }
-
 
 .settings-section .content-back-set-del .between-divs .content-empty-btn button {
     background-color: #414141;
-    width: 110px;
-    height: 35px;
+    width: 120px;
+    height: 30px;
     border-radius: 25px;
     color: #f3f3f3;
     font-family: var(--font-family-almarai);
@@ -544,13 +610,17 @@ thead th {
     transform: var(--scale-button);
 }
 
-.content-empty-icons {
+
+
+
+
+/* .content-empty-icons {
     display: flex;
     flex-direction: column;
     gap: 5px;
-}
+} */
 
-.container-del-icon, 
+/* .container-del-icon, 
 .container-set-icon {
     width: 30px;
     display: flex;
@@ -561,7 +631,7 @@ thead th {
 .container-del-icon:active, 
 .container-set-icon:active {
     background-color: rgb(211, 211, 211);
-}
+} */
 
 .settings-section .content-request-btns {
     height: 155px;
@@ -571,7 +641,7 @@ thead th {
     border-radius: 10px;
     box-shadow: var(--box-shadow-main);
     align-items: center;
-    background-color: #f1f1f1;
+    background-color: #e0e0e0c4;
     box-shadow: 0 4px 10px 2px rgba(0, 0, 0, 0.317);
     padding: 5px 5px;
     display: flex;
@@ -690,7 +760,7 @@ canvas {
 }
 
 #database-table thead {
-    background-color: #787878;
+    background-color: #afafaf;
 }
 
 #database-table thead tr:hover {
@@ -701,7 +771,7 @@ canvas {
     font-family: var(--font-family-almarai);
     font-size: 11px;
     padding: 10px 10px;
-    color: #EEEEEE;
+    color: #000000;
     font-weight: bold;
 }
 

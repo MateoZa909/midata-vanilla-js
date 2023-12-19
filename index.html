@@ -183,8 +183,23 @@
                         </tbody>
                     </table>
 
+
+                    <div class="buttons-add-del-set" style="display: none;">
+                        <div class="back-add">
+                            <img src="./assets/plu.svg" alt="Añadir campaña">
+                        </div>
+                        <div class="back-del">
+                            <img src="./assets/delete.png" alt="Eliminar campaña">
+                        </div>
+                        <div class="back-set">
+                            <img src="./assets/setting.svg" alt="Ajustes">
+                        </div>
+                    </div>
+
                     <div class="add-campaign">
-                        <img src="./assets/plu.svg" alt="Añadir campaña">
+                        <button id="toggle-buttons">
+                            <img class="ar-up" src="./assets/arrow-up.svg" alt="Añadir campaña">
+                        </button>
                     </div>
 
                     <table id="second-table" style="display: none;">
@@ -212,7 +227,7 @@
                                 <button id="update-now">Actualizar ahora</button>
                         </div>
         
-                        <div class="content-empty-icons">
+                        <!-- <div class="content-empty-icons">
                             <div class="container-set-icon">
                                 <img id="btn-setting" class="btn-setting" src="./assets/setting.png" alt="setting icon">
                             </div>
@@ -225,7 +240,7 @@
                                 <p>Selecciona una campaña para eliminar</p>
                                 <div class="arrow-delete"></div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <!-- second section | setting-section -->
@@ -724,7 +739,7 @@
     <!-- Mostrar y esconder modal para ajustes -->
 
     <!-- Informacion de boton con icono + -->
-    <script>
+    <!-- <script>
         const contentAddCampaign = document.querySelector('.add-campaign');
         const contentMessageCampaign = document.querySelector('.message-campaign');
 
@@ -734,8 +749,32 @@
                 contentMessageCampaign.style.display = 'none';
             }, 2000);
         })
-    </script>
+    </script> -->
     <!-- Informacion de boton con icono + -->
+
+    <!-- Mostrar botones (Añadir, Eliminar, Ajustes) -->
+    <script>
+        const toggleButton = document.getElementById("toggle-buttons");
+        const container = document.querySelector(".buttons-add-del-set");
+        const arrowIcon = toggleButton.querySelector(".ar-up");
+
+        toggleButton.addEventListener("click", function () {
+            if (container.style.display === "none" || container.style.display === "") {
+                container.style.animation = "buttons-add-del-set 0.9s";
+                container.style.transform = "translateY(0)";
+                container.style.display = "flex";
+                arrowIcon.style.transition = "transform 0.5s";
+                arrowIcon.style.transform = "rotate(180deg)";
+            } else {
+                container.style.animation = "none";
+                container.style.transform = "translateY(190px)";
+                container.style.display = "none";
+                arrowIcon.style.transition = "transform 0.1s"
+                arrowIcon.style.transform = "rotate(0deg)";
+            }
+        });
+    </script>
+    <!-- Mostrar botones (Añadir, Eliminar, Ajustes) -->
 
     <!-- Demas scripts -->
     <script src="./main.js" ></script>

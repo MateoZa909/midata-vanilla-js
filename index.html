@@ -704,7 +704,7 @@
     
     <!-- Mostrar y esconder modal para ajustes -->
     <script>
-        var btnSetting = document.getElementById("btn-setting");
+        var btnSetting = document.querySelector('.back-set img');
         var containerModal = document.querySelector(".container-modal");
         var modalTimer; // Variable para el temporizador
         var modalVisible = false; // Variable para rastrear la visibilidad del modal
@@ -751,34 +751,36 @@
     <!-- Informacion de boton con icono + -->
     <script>
         const backAdd = document.querySelector('.back-add');
-        const backDel = document.querySelector('.back-del');
-        const backSet = document.querySelector('.back-set');
-        const contentMessageCampaign = document.querySelector('.message-campaign');
-        const contentMessageDelete = document.querySelector('.message-delete');
-        const contentMessageSetting = document.querySelector('.message-setting');
+const backDel = document.querySelector('.back-del');
+const backSet = document.querySelector('.back-set');
+const contentMessageCampaign = document.querySelector('.message-campaign');
+const contentMessageDelete = document.querySelector('.message-delete');
+const contentMessageSetting = document.querySelector('.message-setting');
 
-        function showMessage(elementToShow, contentMessage) {
-            contentMessage.style.display = 'flex';
-            elementToShow.removeEventListener('mouseover', onMouseOver);
-            setTimeout(() => {
-                contentMessage.style.display = 'none';
-                elementToShow.addEventListener('mouseover', onMouseOver);
-            }, 1000);
+function showMessage(elementToShow, contentMessage) {
+    contentMessage.style.display = 'flex';
+    setTimeout(() => {
+        contentMessage.style.display = 'none';
+    }, 1000);
+}
+
+function executeMouseOverOnce(element, contentMessage) {
+    let mouseOverExecuted = false;
+
+    function onMouseOver() {
+        if (!mouseOverExecuted) {
+            showMessage(element, contentMessage);
+            mouseOverExecuted = true;
         }
+    }
 
-        function onMouseOver(event) {
-            if (event.target === backAdd) {
-                showMessage(backAdd, contentMessageCampaign);
-            } else if (event.target === backDel) {
-                showMessage(backDel, contentMessageDelete);
-            } else if (event.target === backSet) {
-                showMessage(backSet, contentMessageSetting);
-            }
-        }
+    element.addEventListener('mouseover', onMouseOver);
+}
 
-        backAdd.addEventListener('mouseover', onMouseOver);
-        backDel.addEventListener('mouseover', onMouseOver);
-        backSet.addEventListener('mouseover', onMouseOver);
+executeMouseOverOnce(backAdd, contentMessageCampaign);
+executeMouseOverOnce(backDel, contentMessageDelete);
+executeMouseOverOnce(backSet, contentMessageSetting);
+
     </script>
     <!-- Informacion de boton con icono + -->
 

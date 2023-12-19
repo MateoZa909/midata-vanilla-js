@@ -201,7 +201,7 @@ body {
     right: 17%;
     position: fixed;
     box-shadow: 0 4px 10px 2px rgba(0, 0, 0, 0.167);
-    background-color: rgb(226, 226, 226);
+    background-color: rgb(245, 245, 245);
     border-radius: 4px;
     cursor: pointer;
     border-radius: 10px;
@@ -212,12 +212,12 @@ body {
 }
 
 .buttons-add-del-set {
-    position: absolute;
-    top: 25%;
-    right: 19px;
-    background-color: rgba(185, 185, 185, 0.459);
+    position: fixed;
+    top: 20.10%;
+    right: 17%;
+    background-color: rgba(236, 236, 236, 0.116);
     box-shadow: 0 4px 10px 2px rgba(172, 172, 172, 0.167);
-    border-radius: 4px;
+    border-radius: 5px;
     width: 40px;
     height: 130px;
     display: flex;
@@ -245,6 +245,7 @@ body {
     border: none;
     width: 100%;
     cursor: pointer;
+    background-color: #e4e4e42a;
 }
 /* 
 #toggle-buttons {
@@ -276,6 +277,7 @@ body {
     background-color: rgba(211, 211, 211, 0.603);
 }
 
+/* // Mensaje  */
 .message-campaign {
     width: 150px;
     height: 20px;
@@ -285,11 +287,42 @@ body {
     border-radius: 5px;
     position: fixed;
     background-color: rgb(69, 70, 70);
-    top: 32%;
-    right: 17%;
+    top: 22%;
+    right: 338px;
     z-index: 2000;
     animation: msg-campaign 0.5s;
 }
+
+.message-delete {
+    width: 150px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    position: fixed;
+    background-color: rgb(69, 70, 70);
+    top: 27%;
+    right: 338px;
+    z-index: 2000;
+    animation: msg-campaign 0.5s;
+}
+
+.message-setting {
+    width: 150px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    position: fixed;
+    background-color: rgb(69, 70, 70);
+    top: 32.80%;
+    right: 338px;
+    z-index: 2000;
+    animation: msg-campaign 0.5s;
+}
+
 
 @keyframes msg-campaign {
     0% {
@@ -300,7 +333,9 @@ body {
     }
 }
 
-.message-campaign p {
+.message-campaign,
+.message-delete, 
+.message-setting p {
     color: #ffff;
 }
 
@@ -308,12 +343,37 @@ body {
     position: fixed;
     width: 0;
     height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 15px solid rgb(69, 70, 70);
-    top: 34%;
-    right: 17%;
+    border-top: 10px solid transparent;
+    border-left: 15px solid rgb(69, 70, 70);
+    border-bottom: 10px solid transparent;
+    top: 22%;
+    right: 19%;
 }
+
+.arrow-down-msg-del {
+    position: fixed;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-left: 15px solid rgb(69, 70, 70);
+    border-bottom: 10px solid transparent;
+    top: 27.10%;
+    right: 19%;
+}
+
+.arrow-down-msg-set {
+    position: fixed;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-left: 15px solid rgb(69, 70, 70);
+    border-bottom: 10px solid transparent;
+    top: 32.80%;
+    z-index: 1000;
+    right: 19%;
+}
+/* // Mensaje  */
+
 
 .add-campaign img {
     width: 30px;

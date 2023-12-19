@@ -58,6 +58,16 @@
                         <div class="arrow-down-msg"></div>
                     </div>
 
+                    <div class="message-delete" style="display: none;"">
+                        <p>Eliminar campaña</p>
+                        <div class="arrow-down-msg-del"></div>
+                    </div>
+
+                    <div class="message-setting" style="display: none;"">
+                        <p>Ajustes campaña</p>
+                        <div class="arrow-down-msg-set"></div>
+                    </div>
+
                     <table id="table-campaigns">
                         <thead>
                             <tr>
@@ -739,20 +749,40 @@
     <!-- Mostrar y esconder modal para ajustes -->
 
     <!-- Informacion de boton con icono + -->
-    <!-- <script>
-        const contentAddCampaign = document.querySelector('.add-campaign');
+    <script>
+        const backAdd = document.querySelector('.back-add');
+        const backDel = document.querySelector('.back-del');
+        const backSet = document.querySelector('.back-set');
         const contentMessageCampaign = document.querySelector('.message-campaign');
+        const contentMessageDelete = document.querySelector('.message-delete');
+        const contentMessageSetting = document.querySelector('.message-setting');
 
-        contentAddCampaign.addEventListener('mouseover', () => {
-            contentMessageCampaign.style.display = 'flex';
+        function showMessage(elementToShow, contentMessage) {
+            contentMessage.style.display = 'flex';
+            elementToShow.removeEventListener('mouseover', onMouseOver);
             setTimeout(() => {
-                contentMessageCampaign.style.display = 'none';
-            }, 2000);
-        })
-    </script> -->
+                contentMessage.style.display = 'none';
+                elementToShow.addEventListener('mouseover', onMouseOver);
+            }, 1000);
+        }
+
+        function onMouseOver(event) {
+            if (event.target === backAdd) {
+                showMessage(backAdd, contentMessageCampaign);
+            } else if (event.target === backDel) {
+                showMessage(backDel, contentMessageDelete);
+            } else if (event.target === backSet) {
+                showMessage(backSet, contentMessageSetting);
+            }
+        }
+
+        backAdd.addEventListener('mouseover', onMouseOver);
+        backDel.addEventListener('mouseover', onMouseOver);
+        backSet.addEventListener('mouseover', onMouseOver);
+    </script>
     <!-- Informacion de boton con icono + -->
 
-    <!-- Mostrar botones (Añadir, Eliminar, Ajustes) -->
+    <!-- Mostrar contenedor botones (Añadir, Eliminar, Ajustes) -->
     <script>
         const toggleButton = document.getElementById("toggle-buttons");
         const container = document.querySelector(".buttons-add-del-set");
@@ -760,7 +790,7 @@
 
         toggleButton.addEventListener("click", function () {
             if (container.style.display === "none" || container.style.display === "") {
-                container.style.animation = "buttons-add-del-set 0.9s";
+                container.style.animation = "buttons-add-del-set 1s";
                 container.style.transform = "translateY(0)";
                 container.style.display = "flex";
                 arrowIcon.style.transition = "transform 0.5s";
@@ -769,12 +799,12 @@
                 container.style.animation = "none";
                 container.style.transform = "translateY(190px)";
                 container.style.display = "none";
-                arrowIcon.style.transition = "transform 0.1s"
+                arrowIcon.style.transition = "transform 0.4s"
                 arrowIcon.style.transform = "rotate(0deg)";
             }
         });
     </script>
-    <!-- Mostrar botones (Añadir, Eliminar, Ajustes) -->
+    <!-- Mostrar contenedor botones (Añadir, Eliminar, Ajustes) -->
 
     <!-- Demas scripts -->
     <script src="./main.js" ></script>

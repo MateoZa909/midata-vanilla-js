@@ -213,9 +213,9 @@ body {
 
 .buttons-add-del-set {
     position: fixed;
-    top: 20.10%;
+    top: 20.0%;
     right: 17%;
-    background-color: rgba(236, 236, 236, 0.116);
+    background-color: rgba(236, 236, 236, 0.575);
     box-shadow: 0 4px 10px 2px rgba(172, 172, 172, 0.167);
     border-radius: 5px;
     width: 40px;
@@ -424,14 +424,14 @@ thead th {
 
 /* Color de fondo encabezado */
 .contain-table table th {
-    background-color: #adadadd7;
+    background-color: #c5c5c5d7;
 }
 /* Color de fondo encabezado */
 
 /* Color de fondo cuerpo */
 .contain-table table tbody td {
     border-bottom: 1px solid rgba(161, 161, 161, 0.4);
-    background-color: #cececed7;
+    background-color: #e0e0e0d7;
 }
 /* Color de fondo cuerpo */
 
@@ -492,8 +492,8 @@ thead th {
     box-shadow: 0 0 10px rgba(22, 22, 22, 0.189);
     max-height: 200px;
     overflow-y: auto;
-    top: 20%;
-    right: 20px;
+    top: 2%;
+    right: 80px;
     border-radius: 5px;
     animation: secondTable 0.3s;
     min-width: 200px;
@@ -588,8 +588,8 @@ thead th {
 /* CAMBIOS QUE AGREGAR AL INDEX.PHP */
 .msg-modal-delete {
     position: absolute;
-    right: 32%;
-    top: 30px;
+    right: 5%;
+    top: 45%;
     width: 270px;
     background-color: #3A3A3A;
     height: 30px;

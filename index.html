@@ -193,6 +193,10 @@
                         </tbody>
                     </table>
 
+                    <div class="msg-modal-delete" style="display: none;">
+                        <p>Selecciona una campaña para eliminar</p>
+                        <div class="arrow-delete"></div>
+                    </div>
 
                     <div class="buttons-add-del-set" style="display: none;">
                         <div class="back-add">
@@ -237,20 +241,7 @@
                                 <button id="update-now">Actualizar ahora</button>
                         </div>
         
-                        <!-- <div class="content-empty-icons">
-                            <div class="container-set-icon">
-                                <img id="btn-setting" class="btn-setting" src="./assets/setting.png" alt="setting icon">
-                            </div>
                             
-                            <div class="container-del-icon">
-                                <img class="btn-delete" src="./assets/delete.png" alt="delete icon">
-                            </div>
-
-                            <div class="msg-modal-delete" style="display: none;">
-                                <p>Selecciona una campaña para eliminar</p>
-                                <div class="arrow-delete"></div>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
                 <!-- second section | setting-section -->
@@ -405,63 +396,63 @@
     <!-- Eliminar campaña seleccionada, mensaje cuando se le da a eliminar sin haber seleccionado una campaña -->
     <script>
         // Variable para almacenar la fila seleccionada
-        let selectedRow = null;
-        let isRowSelected = false;
+        // let selectedRow = null;
+        // let isRowSelected = false;
 
         // Agregar un controlador de clic a las filas de la tabla
-        const tableRows = document.querySelectorAll("#table-campaigns tbody tr");
-        tableRows.forEach((row) => {
-            row.addEventListener("click", () => {
-                if (!isRowSelected) {
-                    selectedRow = row;
-                    row.classList.add("selected"); // Opcional: Puedes aplicar un estilo a la fila seleccionada
-                    isRowSelected = true;
-                } else if (row === selectedRow) {
-                    row.classList.remove("selected"); // Opcional: Quita el estilo de la fila seleccionada
-                    selectedRow = null;
-                    isRowSelected = false;
-                }
-            });
-        });
+        // const tableRows = document.querySelectorAll("#table-campaigns tbody tr");
+        // tableRows.forEach((row) => {
+        //     row.addEventListener("click", () => {
+        //         if (!isRowSelected) {
+        //             selectedRow = row;
+        //             row.classList.add("selected"); // Opcional: Puedes aplicar un estilo a la fila seleccionada
+        //             isRowSelected = true;
+        //         } else if (row === selectedRow) {
+        //             row.classList.remove("selected"); // Opcional: Quita el estilo de la fila seleccionada
+        //             selectedRow = null;
+        //             isRowSelected = false;
+        //         }
+        //     });
+        // });
 
         // Obtener el botón de eliminación
-        const deleteButton = document.querySelector(".btn-delete");
+        // const deleteButton = document.querySelector(".message-delete");
 
         // Controlador de clic para el botón "btn-delete"
-        deleteButton.addEventListener("click", () => {
-            if (isRowSelected) {
-                // Mostrar el fondo modal y la caja de confirmación
-                document.querySelector(".box-behind").style.display = "flex";
-            } else {
-                // No hay fila seleccionada, muestra el mensaje de selección
-                document.querySelector(".msg-modal-delete").style.display = "flex";
+        // deleteButton.addEventListener("click", () => {
+        //     if (isRowSelected) {
+        //         Mostrar el fondo modal y la caja de confirmación
+        //         document.querySelector(".box-behind").style.display = "flex";
+        //     } else {
+        //         No hay fila seleccionada, muestra el mensaje de selección
+        //         document.querySelector(".msg-modal-delete").style.display = "flex";
 
-                // Ocultar el mensaje de selección después de 2 segundos
-                setTimeout(() => {
-                    document.querySelector(".msg-modal-delete").style.display = "none";
-                }, 2000); // 2 segundos (2000 milisegundos)
-            }
-        });
+        //         Ocultar el mensaje de selección después de 2 segundos
+        //         setTimeout(() => {
+        //             document.querySelector(".msg-modal-delete").style.display = "none";
+        //         }, 2000); // 2 segundos (2000 milisegundos)
+        //     }
+        // });
 
         // Controlador de clic para el botón "Si" en la caja de confirmación
-        document.getElementById("confirm-button").addEventListener("click", () => {
-            if (isRowSelected) {
-                // Eliminar la fila seleccionada
-                selectedRow.remove();
-                selectedRow = null;
-                isRowSelected = false;
-                // Ocultar el fondo modal y la caja de confirmación después de eliminar
-                document.querySelector(".box-behind").style.display = "none";
-            }
-        });
+        // document.getElementById("confirm-button").addEventListener("click", () => {
+        //     if (isRowSelected) {
+        //         Eliminar la fila seleccionada
+        //         selectedRow.remove();
+        //         selectedRow = null;
+        //         isRowSelected = false;
+        //         Ocultar el fondo modal y la caja de confirmación después de eliminar
+        //         document.querySelector(".box-behind").style.display = "none";
+        //     }
+        // });
 
         // Controlador de clic para el botón "Cancelar" en la caja de confirmación
-        document.getElementById("cancel-button").addEventListener("click", () => {
-            if (isRowSelected) {
-                // Ocultar el fondo modal y la caja de confirmación al hacer clic en "Cancelar"
-                document.querySelector(".box-behind").style.display = "none";
-            }
-        });
+        // document.getElementById("cancel-button").addEventListener("click", () => {
+        //     if (isRowSelected) {
+        //         Ocultar el fondo modal y la caja de confirmación al hacer clic en "Cancelar"
+        //         document.querySelector(".box-behind").style.display = "none";
+        //     }
+        // });
     </script> 
     <!-- Eliminar campaña seleccionada, mensaje cuando se le da a eliminar sin haber seleccionado una campaña -->
 
@@ -612,76 +603,137 @@
     </script>
     <!-- Función para actualizar el contador de la próxima actualización -->
 
-    <!-- Mostrar segunda tabla y fila seleccionada -->
+    <!-- (Mostrar segunda tabla) y (fila seleccionada), (Mostrar opciones Añadir, Eliminar, Ajutes), (Elimina filas de la tabla) -->
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const rows = document.querySelectorAll('#table-campaigns tbody tr');
-        const secondaryTable = document.getElementById('second-table');
-        let selectedRow = null;
+            document.addEventListener('DOMContentLoaded', () => {
+    const rows = document.querySelectorAll('#table-campaigns tbody tr');
+    const secondaryTable = document.getElementById('second-table');
+    const addCampaignContainer = document.querySelector('.add-campaign');
+    const deleteButtonContainer = document.querySelector('.back-del');
+    const boxBehindContainer = document.querySelector('.box-behind');
+    const confirmButton = document.getElementById('confirm-button');
+    const cancelButton = document.getElementById('cancel-button');
+    const msgModalDelete = document.querySelector('.msg-modal-delete'); // Contenedor de mensaje
+    let selectedRow = null;
 
-        // Agregar un controlador de clic a las filas de la tabla principal
-        rows.forEach((row) => {
-            row.addEventListener('click', () => {
-                const isSelected = row.classList.contains('selected');
+    // Mostrar contenedor botones (Añadir, Eliminar, Ajustes)
+    const toggleButton = document.getElementById("toggle-buttons");
+    const container = document.querySelector(".buttons-add-del-set");
+    const arrowIcon = toggleButton.querySelector(".ar-up");
+    // Mostrar contenedor botones (Añadir, Eliminar, Ajustes)
 
-                rows.forEach((otherRow) => {
-                    otherRow.classList.remove('selected');
-                });
+    // Agregar un controlador de clic a las filas de la tabla principal
+    rows.forEach((row) => {
+        row.addEventListener('click', () => {
+            const isSelected = row.classList.contains('selected');
 
-                if (!isSelected) {
-                    row.classList.add('selected');
-                    showSecondaryTable(row);
-                } else {
-                    hideSecondaryTable();
-                }
+            rows.forEach((otherRow) => {
+                otherRow.classList.remove('selected');
             });
-        });
 
-        // Controlador de clic para ocultar la segunda tabla y deseleccionar fila
-        document.addEventListener('click', (event) => {
-            if (!event.target.closest('#table-campaigns') && !event.target.closest('#second-table')) {
+            if (!isSelected) {
+                row.classList.add('selected');
+                selectedRow = row;
+                showSecondaryTable(row);
+            } else {
                 hideSecondaryTable();
-                rows.forEach((otherRow) => {
-                    otherRow.classList.remove('selected');
-                });
+                selectedRow = null;
             }
         });
+    });
 
-        // Controlador de clic para ocultar la segunda tabla al hacer clic en la imagen x-icon
-        document.addEventListener('click', (event) => {
-            if (event.target.classList.contains('x-icon')) {
-                hideSecondaryTable();
-                // Desmarca la fila seleccionada
-                rows.forEach((otherRow) => {
-                    otherRow.classList.remove('selected');
-                });
-            }
-        });
-
-        // Función para ocultar la segunda tabla
-        function hideSecondaryTable() {
-            secondaryTable.style.display = 'none';
-        }
-
-        // Función para mostrar la segunda tabla con contenido personalizado
-        function showSecondaryTable(clickedRow) {
-            const tables = [
-                { name: 'Tabla 1', icon: 'ojo.png' },
-                { name: 'Tabla 2', icon: 'ojo.png' }
-            ];
-
-            const content = `
-                <table>
-                    <tr><th>Tablas relacionadas</th><th><img class="x-icon" src="./assets/delete.svg" alt=""></th></tr>
-                    ${tables.map(table => `<tr><td>${table.name}</td><td><img class="eye-icon" src="./assets/${table.icon}" alt=""></td></tr>`).join('')}
-                </table>`;
-
-            secondaryTable.innerHTML = content;
-            secondaryTable.style.display = 'block';
+    // Controlador de clic para ocultar la segunda tabla y deseleccionar fila
+    document.addEventListener('click', (event) => {
+        if (!event.target.closest('#table-campaigns') && !event.target.closest('#second-table')) {
+            hideSecondaryTable();
+            rows.forEach((otherRow) => {
+                otherRow.classList.remove('selected');
+            });
         }
     });
+
+    // Controlador de clic para ocultar la segunda tabla al hacer clic en la imagen x-icon
+    document.addEventListener('click', (event) => {
+        if (event.target.classList.contains('x-icon')) {
+            hideSecondaryTable();
+            rows.forEach((otherRow) => {
+                otherRow.classList.remove('selected');
+            });
+        }
+    });
+
+    // Función para ocultar la segunda tabla
+    function hideSecondaryTable() {
+        secondaryTable.style.display = 'none';
+    }
+
+    // Función para mostrar la segunda tabla con contenido personalizado
+    function showSecondaryTable(clickedRow) {
+        const tables = [
+            { name: 'Tabla 1', icon: 'ojo.png' },
+            { name: 'Tabla 2', icon: 'ojo.png' }
+        ];
+
+        const content = `
+            <table>
+                <tr><th>Tablas relacionadas</th><th><img class="x-icon" src="./assets/delete.svg" alt=""></th></tr>
+                ${tables.map(table => `<tr><td>${table.name}</td><td><img class="eye-icon" src="./assets/${table.icon}" alt=""></td></tr>`).join('')}
+            </table>`;
+
+        secondaryTable.innerHTML = content;
+        secondaryTable.style.display = 'block';
+    }
+
+    // Controlador de clic para mostrar el contenedor box-behind al hacer clic en back-del
+    deleteButtonContainer.addEventListener('click', () => {
+        if (!selectedRow) {
+            // Mostrar el contenedor de mensaje si no hay una fila seleccionada
+            msgModalDelete.style.display = 'flex';
+            setTimeout(() => {
+                msgModalDelete.style.display = 'none';
+            }, 1000);
+            return;
+        }
+        boxBehindContainer.style.display = 'flex';
+    });
+
+    // Controlador de clic para eliminar la fila seleccionada al hacer clic en el botón "Confirmar"
+    confirmButton.addEventListener('click', () => {
+        if (selectedRow) {
+            selectedRow.remove();
+            hideSecondaryTable();
+            selectedRow = null;
+            boxBehindContainer.style.display = 'none'; // Ocultar box-behind
+        }
+    });
+
+    // Controlador de clic para cerrar el modal al hacer clic en el botón "Cancelar"
+    cancelButton.addEventListener('click', () => {
+        hideSecondaryTable();
+        selectedRow = null;
+        boxBehindContainer.style.display = 'none'; // Ocultar box-behind
+    });
+
+    // Mostrar y ocultar el contenedor de botones (Añadir, Eliminar, Ajustes)
+    toggleButton.addEventListener("click", function () {
+        if (container.style.display === "none" || container.style.display === "") {
+            container.style.animation = "buttons-add-del-set 1s";
+            container.style.transform = "translateY(0)";
+            container.style.display = "flex";
+            arrowIcon.style.transition = "transform 0.5s";
+            arrowIcon.style.transform = "rotate(180deg)";
+        } else {
+            container.style.animation = "none";
+            container.style.transform = "translateY(190px)";
+            container.style.display = "none";
+            arrowIcon.style.transition = "transform 0.4s"
+            arrowIcon.style.transform = "rotate(0deg)";
+        }
+    });
+});
+
     </script> 
-    <!-- Mostrar segunda tabla y fila seleccionada -->
+    <!-- (Mostrar segunda tabla) y (fila seleccionada), (Mostrar opciones Añadir, Eliminar, Ajutes), (Elimina filas de la tabla) -->
 
     <!-- Editar periodicidad de Campañas -->
     <script>
@@ -748,66 +800,41 @@
     </script> 
     <!-- Mostrar y esconder modal para ajustes -->
 
-    <!-- Informacion de boton con icono + -->
+    <!-- Informacion de boton con icono flecha abajo -->
     <script>
         const backAdd = document.querySelector('.back-add');
-const backDel = document.querySelector('.back-del');
-const backSet = document.querySelector('.back-set');
-const contentMessageCampaign = document.querySelector('.message-campaign');
-const contentMessageDelete = document.querySelector('.message-delete');
-const contentMessageSetting = document.querySelector('.message-setting');
+        const backDel = document.querySelector('.back-del');
+        const backSet = document.querySelector('.back-set');
+        const contentMessageCampaign = document.querySelector('.message-campaign');
+        const contentMessageDelete = document.querySelector('.message-delete');
+        const contentMessageSetting = document.querySelector('.message-setting');
 
-function showMessage(elementToShow, contentMessage) {
-    contentMessage.style.display = 'flex';
-    setTimeout(() => {
-        contentMessage.style.display = 'none';
-    }, 1000);
-}
-
-function executeMouseOverOnce(element, contentMessage) {
-    let mouseOverExecuted = false;
-
-    function onMouseOver() {
-        if (!mouseOverExecuted) {
-            showMessage(element, contentMessage);
-            mouseOverExecuted = true;
+        function showMessage(elementToShow, contentMessage) {
+            contentMessage.style.display = 'flex';
+            setTimeout(() => {
+                contentMessage.style.display = 'none';
+            }, 1000);
         }
-    }
 
-    element.addEventListener('mouseover', onMouseOver);
-}
+        function executeMouseOverOnce(element, contentMessage) {
+            let mouseOverExecuted = false;
 
-executeMouseOverOnce(backAdd, contentMessageCampaign);
-executeMouseOverOnce(backDel, contentMessageDelete);
-executeMouseOverOnce(backSet, contentMessageSetting);
-
-    </script>
-    <!-- Informacion de boton con icono + -->
-
-    <!-- Mostrar contenedor botones (Añadir, Eliminar, Ajustes) -->
-    <script>
-        const toggleButton = document.getElementById("toggle-buttons");
-        const container = document.querySelector(".buttons-add-del-set");
-        const arrowIcon = toggleButton.querySelector(".ar-up");
-
-        toggleButton.addEventListener("click", function () {
-            if (container.style.display === "none" || container.style.display === "") {
-                container.style.animation = "buttons-add-del-set 1s";
-                container.style.transform = "translateY(0)";
-                container.style.display = "flex";
-                arrowIcon.style.transition = "transform 0.5s";
-                arrowIcon.style.transform = "rotate(180deg)";
-            } else {
-                container.style.animation = "none";
-                container.style.transform = "translateY(190px)";
-                container.style.display = "none";
-                arrowIcon.style.transition = "transform 0.4s"
-                arrowIcon.style.transform = "rotate(0deg)";
+            function onMouseOver() {
+                if (!mouseOverExecuted) {
+                    showMessage(element, contentMessage);
+                    mouseOverExecuted = true;
+                }
             }
-        });
-    </script>
-    <!-- Mostrar contenedor botones (Añadir, Eliminar, Ajustes) -->
 
+            element.addEventListener('mouseover', onMouseOver);
+        }
+
+        executeMouseOverOnce(backAdd, contentMessageCampaign);
+        executeMouseOverOnce(backDel, contentMessageDelete);
+        executeMouseOverOnce(backSet, contentMessageSetting);
+    </script>
+    <!-- Informacion de boton con icono flecha abaj -->
+    
     <!-- Demas scripts -->
     <script src="./main.js" ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js" integrity="sha256-JG6hsuMjFnQ2spWq0UiaDRJBaarzhFbUxiUTxQDA9Lk=" crossorigin="anonymous"></script>

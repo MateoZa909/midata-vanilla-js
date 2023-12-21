@@ -27,7 +27,7 @@ body {
     overflow-x: hidden;
 }
 
-/* .view { 
+/* .view {
     width: 100vw;
     height: 100vh;
 } */
@@ -211,6 +211,135 @@ body {
     transform: scale(.98);
 }
 
+/* NEW CONTENT */
+.back-form-campaign {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Color de fondo oscuro con transparencia */
+    z-index: 2000; /* Asegura que esté por encima de todo lo demás */
+}
+
+.back-form-campaign .add-campaign-table {
+    width: 400px;
+    height: 230px;
+    border-radius: 5px;
+    background-color: #e6e5e5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+.back-form-campaign .add-campaign-table .title-and-icon {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 5px 0;
+    /* background-color: lightcoral; */
+}
+
+.back-form-campaign .add-campaign-table .title-and-icon {
+    display: flex;
+    justify-content: space-between; /* Coloca los elementos al principio y al final del contenedor */
+    align-items: center; /* Centra verticalmente el contenido */
+    width: 100%; /* Asegura que los elementos ocupen todo el ancho disponible */
+}
+
+.back-form-campaign .add-campaign-table .title-campaign {
+    flex: 1; /* Hace que el contenedor title-campaign ocupe todo el espacio disponible */
+    display: flex;
+    justify-content: center; /* Centra horizontalmente el contenido del contenedor title-campaign */
+    align-items: center; /* Centra verticalmente el contenido del contenedor title-campaign */
+}
+
+.back-form-campaign .add-campaign-table .title-campaign h1 {
+    font-family: var(--font-family-archivo);
+    margin-left: 10px;
+}
+
+.back-form-campaign .add-campaign-table .close-campaign {
+    width: 25px;
+    height: 25px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.back-form-campaign .add-campaign-table .form-add-campaign {
+    display: flex;
+    /* background-color: lightcoral; */
+    height: 100%;
+    width: 90%;
+    flex-direction: column;
+    gap: 25%;
+}
+
+.back-form-campaign .add-campaign-table .form-add-campaign .lab-inp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    /* background-color: lightgreen; */
+    gap: 40px;
+}
+
+.back-form-campaign .add-campaign-table .form-add-campaign .lab-inp .labels {
+    display: flex;
+    gap: 23px;
+    flex-direction: column;
+    font-family: var(--font-family-almarai);
+}
+
+.back-form-campaign .add-campaign-table .form-add-campaign .lab-inp .labels label {
+    font-size: 14px;
+}
+
+.back-form-campaign .add-campaign-table .form-add-campaign .lab-inp .inputs {
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+}
+
+.back-form-campaign .add-campaign-table .form-add-campaign .lab-inp .inputs input {
+    border: none;
+    height: 25px;
+    border-radius: 7px;
+    outline: none;
+}
+
+.back-form-campaign .add-campaign-table .form-add-campaign .lab-inp .inputs input::placeholder {
+    font-size: 13px
+}
+
+.back-form-campaign .add-campaign-table .form-add-campaign .btn-campaign {
+    display: flex;
+    /* background-color: lightcyan; */
+    justify-content: center;
+}
+
+.back-form-campaign .add-campaign-table .form-add-campaign .btn-campaign button {
+    height: 30px;
+    padding: 5px 5px;
+    width: 110px;
+    border: none;
+    background-color: #b4b4b4;
+    cursor: pointer;
+}
+
+.back-form-campaign .add-campaign-table .form-add-campaign .btn-campaign button:active {
+    transform: scale(.99);
+}
+/* NEW CONTENT */
+
 .buttons-add-del-set {
     position: fixed;
     top: 20.0%;
@@ -247,13 +376,13 @@ body {
     cursor: pointer;
     background-color: #e4e4e42a;
 }
-/* 
+/*
 #toggle-buttons {
     transform: rotate(180deg);
 } */
 
-.buttons-add-del-set .back-add, 
-.back-del, 
+.buttons-add-del-set .back-add,
+.back-del,
 .back-set {
     cursor: pointer;
     display: flex;
@@ -265,14 +394,14 @@ body {
     height: 100%;
 }
 
-.buttons-add-del-set .back-add img, 
-.back-del img, 
+.buttons-add-del-set .back-add img,
+.back-del img,
 .back-set img {
     width: 22px;
 }
 
-.buttons-add-del-set .back-add:active, 
-.back-del:active, 
+.buttons-add-del-set .back-add:active,
+.back-del:active,
 .back-set:active {
     background-color: rgba(211, 211, 211, 0.603);
 }
@@ -334,7 +463,7 @@ body {
 }
 
 .message-campaign,
-.message-delete, 
+.message-delete,
 .message-setting p {
     color: #ffff;
 }
@@ -680,7 +809,7 @@ thead th {
     gap: 5px;
 } */
 
-/* .container-del-icon, 
+/* .container-del-icon,
 .container-set-icon {
     width: 30px;
     display: flex;
@@ -688,7 +817,7 @@ thead th {
     align-items: center;
 }
 
-.container-del-icon:active, 
+.container-del-icon:active,
 .container-set-icon:active {
     background-color: rgb(211, 211, 211);
 } */
@@ -798,7 +927,7 @@ canvas {
 .section-table-db::-webkit-scrollbar {
     width: 8px;
     height: 8px;
-}  
+}
 
 .section-table-db::-webkit-scrollbar:vertical {
     background-color: #414141;

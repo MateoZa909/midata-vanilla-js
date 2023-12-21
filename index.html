@@ -52,6 +52,36 @@
         <div class="nextOne-section" >
             <div class="table-section">
 
+                <div class="back-form-campaign" style="display: none;">
+                    <div class="add-campaign-table">
+                        <div class="title-and-icon">
+                            <div class="title-campaign">
+                                <h1>Nueva campaña</h1>
+                            </div>
+                            <div class="close-campaign">
+                                <img src="./assets/Xicon.svg" alt="cerrar modal">
+                            </div>
+                        </div>
+    
+                        <form class="form-add-campaign" action="">
+                            <div class="lab-inp">
+                                <div class="labels">
+                                    <label for="nombre-campaign">Nombre</label>
+                                    <label for="time-campaign">Hora a Actualizar</label>
+                                </div>
+                                <div class="inputs">
+                                    <input placeholder="Campaña 1" type="text" id="name-campaign">
+                                    <input type="datetime-local" id="time-campaign">
+                                </div>
+                            </div>
+                            <div class="btn-campaign">
+                                <button>Agregar</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
                 <div class="contain-table">
                     <div class="message-campaign" style="display: none;">
                         <p>Añadir campaña</p>
@@ -605,133 +635,145 @@
 
     <!-- (Mostrar segunda tabla) y (fila seleccionada), (Mostrar opciones Añadir, Eliminar, Ajutes), (Elimina filas de la tabla) -->
     <script>
-            document.addEventListener('DOMContentLoaded', () => {
-    const rows = document.querySelectorAll('#table-campaigns tbody tr');
-    const secondaryTable = document.getElementById('second-table');
-    const addCampaignContainer = document.querySelector('.add-campaign');
-    const deleteButtonContainer = document.querySelector('.back-del');
-    const boxBehindContainer = document.querySelector('.box-behind');
-    const confirmButton = document.getElementById('confirm-button');
-    const cancelButton = document.getElementById('cancel-button');
-    const msgModalDelete = document.querySelector('.msg-modal-delete'); // Contenedor de mensaje
-    let selectedRow = null;
+        document.addEventListener('DOMContentLoaded', () => {
+            const rows = document.querySelectorAll('#table-campaigns tbody tr');
+            const secondaryTable = document.getElementById('second-table');
+            const addCampaignContainer = document.querySelector('.add-campaign');
+            const deleteButtonContainer = document.querySelector('.back-del');
+            const boxBehindContainer = document.querySelector('.box-behind');
+            const confirmButton = document.getElementById('confirm-button');
+            const cancelButton = document.getElementById('cancel-button');
+            const msgModalDelete = document.querySelector('.msg-modal-delete'); // Contenedor de mensaje
+            const backFormCampaign = document.querySelector('.back-form-campaign'); // Contenedor del formulario de nueva campaña
+            const closeCampaign = document.querySelector('.close-campaign'); // Botón para cerrar el formulario
+            const backAdd = document.querySelector('.back-add'); // Contenedor para abrir el formulario
+            let selectedRow = null;
 
-    // Mostrar contenedor botones (Añadir, Eliminar, Ajustes)
-    const toggleButton = document.getElementById("toggle-buttons");
-    const container = document.querySelector(".buttons-add-del-set");
-    const arrowIcon = toggleButton.querySelector(".ar-up");
-    // Mostrar contenedor botones (Añadir, Eliminar, Ajustes)
+            // Mostrar contenedor botones (Añadir, Eliminar, Ajustes)
+            const toggleButton = document.getElementById("toggle-buttons");
+            const container = document.querySelector(".buttons-add-del-set");
+            const arrowIcon = toggleButton.querySelector(".ar-up");
+            // Mostrar contenedor botones (Añadir, Eliminar, Ajustes)
 
-    // Agregar un controlador de clic a las filas de la tabla principal
-    rows.forEach((row) => {
-        row.addEventListener('click', () => {
-            const isSelected = row.classList.contains('selected');
+            // Agregar un controlador de clic a las filas de la tabla principal
+            rows.forEach((row) => {
+                row.addEventListener('click', () => {
+                    const isSelected = row.classList.contains('selected');
 
-            rows.forEach((otherRow) => {
-                otherRow.classList.remove('selected');
+                    rows.forEach((otherRow) => {
+                        otherRow.classList.remove('selected');
+                    });
+
+                    if (!isSelected) {
+                        row.classList.add('selected');
+                        selectedRow = row;
+                        showSecondaryTable(row);
+                    } else {
+                        hideSecondaryTable();
+                        selectedRow = null;
+                    }
+                });
             });
 
-            if (!isSelected) {
-                row.classList.add('selected');
-                selectedRow = row;
-                showSecondaryTable(row);
-            } else {
+            // Controlador de clic para ocultar la segunda tabla y deseleccionar fila
+            document.addEventListener('click', (event) => {
+                if (!event.target.closest('#table-campaigns') && !event.target.closest('#second-table')) {
+                    hideSecondaryTable();
+                    rows.forEach((otherRow) => {
+                        otherRow.classList.remove('selected');
+                    });
+                }
+            });
+
+            // Controlador de clic para ocultar la segunda tabla al hacer clic en la imagen x-icon
+            document.addEventListener('click', (event) => {
+                if (event.target.classList.contains('x-icon')) {
+                    hideSecondaryTable();
+                    rows.forEach((otherRow) => {
+                        otherRow.classList.remove('selected');
+                    });
+                }
+            });
+
+            // Función para ocultar la segunda tabla
+            function hideSecondaryTable() {
+                secondaryTable.style.display = 'none';
+            }
+
+            // Función para mostrar la segunda tabla con contenido personalizado
+            function showSecondaryTable(clickedRow) {
+                const tables = [
+                    { name: 'Tabla 1', icon: 'ojo.png' },
+                    { name: 'Tabla 2', icon: 'ojo.png' }
+                ];
+
+                const content = `
+                    <table>
+                        <tr><th>Tablas relacionadas</th><th><img class="x-icon" src="./assets/delete.svg" alt=""></th></tr>
+                        ${tables.map(table => `<tr><td>${table.name}</td><td><img class="eye-icon" src="./assets/${table.icon}" alt=""></td></tr>`).join('')}
+                    </table>`;
+
+                secondaryTable.innerHTML = content;
+                secondaryTable.style.display = 'block';
+            }
+
+            // Controlador de clic para mostrar el contenedor box-behind al hacer clic en back-del
+            deleteButtonContainer.addEventListener('click', () => {
+                if (!selectedRow) {
+                    // Mostrar el contenedor de mensaje si no hay una fila seleccionada
+                    msgModalDelete.style.display = 'flex';
+                    setTimeout(() => {
+                        msgModalDelete.style.display = 'none';
+                    }, 2000);
+                    return;
+                }
+                boxBehindContainer.style.display = 'flex';
+            });
+
+            // Controlador de clic para eliminar la fila seleccionada al hacer clic en el botón "Confirmar"
+            confirmButton.addEventListener('click', () => {
+                if (selectedRow) {
+                    selectedRow.remove();
+                    hideSecondaryTable();
+                    selectedRow = null;
+                    boxBehindContainer.style.display = 'none'; // Ocultar box-behind
+                }
+            });
+
+            // Controlador de clic para cerrar el modal al hacer clic en el botón "Cancelar"
+            cancelButton.addEventListener('click', () => {
                 hideSecondaryTable();
                 selectedRow = null;
-            }
+                boxBehindContainer.style.display = 'none'; // Ocultar box-behind
+            });
+
+            // Controlador de clic para mostrar el formulario de nueva campaña desde back-add
+            backAdd.addEventListener('click', () => {
+                backFormCampaign.style.display = 'flex';
+            });
+
+            // Controlador de clic para cerrar el formulario de nueva campaña
+            closeCampaign.addEventListener('click', () => {
+                backFormCampaign.style.display = 'none';
+            });
+
+            // Mostrar y ocultar el contenedor de botones (Añadir, Eliminar, Ajustes)
+            toggleButton.addEventListener("click", function () {
+                if (container.style.display === "none" || container.style.display === "") {
+                    container.style.animation = "buttons-add-del-set 1s";
+                    container.style.transform = "translateY(0)";
+                    container.style.display = "flex";
+                    arrowIcon.style.transition = "transform 0.5s";
+                    arrowIcon.style.transform = "rotate(180deg)";
+                } else {
+                    container.style.animation = "none";
+                    container.style.transform = "translateY(190px)";
+                    container.style.display = "none";
+                    arrowIcon.style.transition = "transform 0.4s"
+                    arrowIcon.style.transform = "rotate(0deg)";
+                }
+            });
         });
-    });
-
-    // Controlador de clic para ocultar la segunda tabla y deseleccionar fila
-    document.addEventListener('click', (event) => {
-        if (!event.target.closest('#table-campaigns') && !event.target.closest('#second-table')) {
-            hideSecondaryTable();
-            rows.forEach((otherRow) => {
-                otherRow.classList.remove('selected');
-            });
-        }
-    });
-
-    // Controlador de clic para ocultar la segunda tabla al hacer clic en la imagen x-icon
-    document.addEventListener('click', (event) => {
-        if (event.target.classList.contains('x-icon')) {
-            hideSecondaryTable();
-            rows.forEach((otherRow) => {
-                otherRow.classList.remove('selected');
-            });
-        }
-    });
-
-    // Función para ocultar la segunda tabla
-    function hideSecondaryTable() {
-        secondaryTable.style.display = 'none';
-    }
-
-    // Función para mostrar la segunda tabla con contenido personalizado
-    function showSecondaryTable(clickedRow) {
-        const tables = [
-            { name: 'Tabla 1', icon: 'ojo.png' },
-            { name: 'Tabla 2', icon: 'ojo.png' }
-        ];
-
-        const content = `
-            <table>
-                <tr><th>Tablas relacionadas</th><th><img class="x-icon" src="./assets/delete.svg" alt=""></th></tr>
-                ${tables.map(table => `<tr><td>${table.name}</td><td><img class="eye-icon" src="./assets/${table.icon}" alt=""></td></tr>`).join('')}
-            </table>`;
-
-        secondaryTable.innerHTML = content;
-        secondaryTable.style.display = 'block';
-    }
-
-    // Controlador de clic para mostrar el contenedor box-behind al hacer clic en back-del
-    deleteButtonContainer.addEventListener('click', () => {
-        if (!selectedRow) {
-            // Mostrar el contenedor de mensaje si no hay una fila seleccionada
-            msgModalDelete.style.display = 'flex';
-            setTimeout(() => {
-                msgModalDelete.style.display = 'none';
-            }, 1000);
-            return;
-        }
-        boxBehindContainer.style.display = 'flex';
-    });
-
-    // Controlador de clic para eliminar la fila seleccionada al hacer clic en el botón "Confirmar"
-    confirmButton.addEventListener('click', () => {
-        if (selectedRow) {
-            selectedRow.remove();
-            hideSecondaryTable();
-            selectedRow = null;
-            boxBehindContainer.style.display = 'none'; // Ocultar box-behind
-        }
-    });
-
-    // Controlador de clic para cerrar el modal al hacer clic en el botón "Cancelar"
-    cancelButton.addEventListener('click', () => {
-        hideSecondaryTable();
-        selectedRow = null;
-        boxBehindContainer.style.display = 'none'; // Ocultar box-behind
-    });
-
-    // Mostrar y ocultar el contenedor de botones (Añadir, Eliminar, Ajustes)
-    toggleButton.addEventListener("click", function () {
-        if (container.style.display === "none" || container.style.display === "") {
-            container.style.animation = "buttons-add-del-set 1s";
-            container.style.transform = "translateY(0)";
-            container.style.display = "flex";
-            arrowIcon.style.transition = "transform 0.5s";
-            arrowIcon.style.transform = "rotate(180deg)";
-        } else {
-            container.style.animation = "none";
-            container.style.transform = "translateY(190px)";
-            container.style.display = "none";
-            arrowIcon.style.transition = "transform 0.4s"
-            arrowIcon.style.transform = "rotate(0deg)";
-        }
-    });
-});
-
     </script> 
     <!-- (Mostrar segunda tabla) y (fila seleccionada), (Mostrar opciones Añadir, Eliminar, Ajutes), (Elimina filas de la tabla) -->
 

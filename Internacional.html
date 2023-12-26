@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Data</title>
-    <link rel="stylesheet" href="../Styles/style.css">
+    <title>Mi Data | Internacional</title>
+    <link rel="stylesheet" href="/Styles/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="shortcut icon" href="./assets/MD.png" type="image/x-icon">
@@ -15,8 +15,8 @@
         <div class="up-section">
             <div class="contain-logo">
                 <div class="logomd">
-                    <img src="../assets/MD.png" alt="logo">
-                    <img class="arrow-down" src="../assets/arrow-down.png" alt="arrow back">
+                    <img src="./assets/MD.png" alt="logo">
+                    <img class="arrow-down" src="./assets/arrow-down.png" alt="arrow back">
                 </div>
     
                 <div class="tools" style="display: none;">
@@ -37,11 +37,11 @@
     
             <div class="contain-buttons">
                 <div class="contain-buttons">
-                    <button>
+                    <button id="nacionales">
                         <i class="fa-solid fa-house" style="color: #dedede;"></i>
                         Nacionales
                     </button>
-                    <button>
+                    <button id="internacionales">
                         <i class="fa-solid fa-earth-americas" style="color: #dedede;"></i>
                         Internacionales
                     </button>
@@ -242,7 +242,7 @@
 
                     <div class="add-campaign">
                         <button id="toggle-buttons">
-                            <img class="ar-up" src="../assets/arrow-up.svg" alt="Añadir campaña">
+                            <img class="ar-up" src="./assets/arrow-up.svg" alt="Añadir campaña">
                         </button>
                     </div>
 
@@ -280,7 +280,7 @@
                     </div>
     
                     <div class="container-req-btns">
-                        <button id="btn-twenty-five">25 últimos</button>
+                        <button id="btn-fifty">50 últimos</button>
                         <button class="get-five">5 últimos</button>
                         <button class="get-ten">10 últimos</button>
                     </div>
@@ -291,9 +291,7 @@
     
         <div class="chart-and-table">
             <div class="section-chart" style="position: relative; height: 50vh; width: 50vw;">
-                <canvas id="myGraphic">
-                    
-                </canvas>
+                <canvas id="myGraphic"></canvas>
             </div>
     
             <div class="section-table-db">
@@ -415,69 +413,6 @@
     </script>
     <!-- Contenedor validar eliminar campaña -->
 
-    <!-- Eliminar campaña seleccionada, mensaje cuando se le da a eliminar sin haber seleccionado una campaña -->
-    <script>
-        // Variable para almacenar la fila seleccionada
-        // let selectedRow = null;
-        // let isRowSelected = false;
-
-        // Agregar un controlador de clic a las filas de la tabla
-        // const tableRows = document.querySelectorAll("#table-campaigns tbody tr");
-        // tableRows.forEach((row) => {
-        //     row.addEventListener("click", () => {
-        //         if (!isRowSelected) {
-        //             selectedRow = row;
-        //             row.classList.add("selected"); // Opcional: Puedes aplicar un estilo a la fila seleccionada
-        //             isRowSelected = true;
-        //         } else if (row === selectedRow) {
-        //             row.classList.remove("selected"); // Opcional: Quita el estilo de la fila seleccionada
-        //             selectedRow = null;
-        //             isRowSelected = false;
-        //         }
-        //     });
-        // });
-
-        // Obtener el botón de eliminación
-        // const deleteButton = document.querySelector(".message-delete");
-
-        // Controlador de clic para el botón "btn-delete"
-        // deleteButton.addEventListener("click", () => {
-        //     if (isRowSelected) {
-        //         Mostrar el fondo modal y la caja de confirmación
-        //         document.querySelector(".box-behind").style.display = "flex";
-        //     } else {
-        //         No hay fila seleccionada, muestra el mensaje de selección
-        //         document.querySelector(".msg-modal-delete").style.display = "flex";
-
-        //         Ocultar el mensaje de selección después de 2 segundos
-        //         setTimeout(() => {
-        //             document.querySelector(".msg-modal-delete").style.display = "none";
-        //         }, 2000); // 2 segundos (2000 milisegundos)
-        //     }
-        // });
-
-        // Controlador de clic para el botón "Si" en la caja de confirmación
-        // document.getElementById("confirm-button").addEventListener("click", () => {
-        //     if (isRowSelected) {
-        //         Eliminar la fila seleccionada
-        //         selectedRow.remove();
-        //         selectedRow = null;
-        //         isRowSelected = false;
-        //         Ocultar el fondo modal y la caja de confirmación después de eliminar
-        //         document.querySelector(".box-behind").style.display = "none";
-        //     }
-        // });
-
-        // Controlador de clic para el botón "Cancelar" en la caja de confirmación
-        // document.getElementById("cancel-button").addEventListener("click", () => {
-        //     if (isRowSelected) {
-        //         Ocultar el fondo modal y la caja de confirmación al hacer clic en "Cancelar"
-        //         document.querySelector(".box-behind").style.display = "none";
-        //     }
-        // });
-    </script> 
-    <!-- Eliminar campaña seleccionada, mensaje cuando se le da a eliminar sin haber seleccionado una campaña -->
-
     <!-- Script Chart.js -->
     <!-- <script>
         var ctx = 'myGraphic';
@@ -555,40 +490,40 @@
 
     <!-- Función para actualizar el contador de la próxima actualización -->
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      // Obtener todas las celdas con la clase 'countdown'
-      var countdownElements = document.querySelectorAll('.countdown');
+        document.addEventListener('DOMContentLoaded', function () {
+        // Obtener todas las celdas con la clase 'countdown'
+        var countdownElements = document.querySelectorAll('.countdown');
 
-      // Función para actualizar el contador regresivo
-      const actualizarContadorRegresivo = (element) => {
-        var tiempoFinal = element.dataset.time;
-        var fechaFinal = new Date('2023-12-15T' + tiempoFinal + ':00');
-        
-        const actualizar = () => {
-          var ahora = new Date();
-          var diferencia = Math.floor((fechaFinal - ahora) / 1000);
+        // Función para actualizar el contador regresivo
+        const actualizarContadorRegresivo = (element) => {
+            var tiempoFinal = element.dataset.time;
+            var fechaFinal = new Date('2023-12-15T' + tiempoFinal + ':00');
+            
+            const actualizar = () => {
+            var ahora = new Date();
+            var diferencia = Math.floor((fechaFinal - ahora) / 1000);
 
-          if (diferencia <= 0) {
-            element.textContent = '¡Tiempo terminado!';
-            return;
-          }
+            if (diferencia <= 0) {
+                element.textContent = '¡Tiempo terminado!';
+                return;
+            }
 
-          var horas = Math.floor(diferencia / 3600);
-          var minutos = Math.floor((diferencia % 3600) / 60);
-          var segundos = diferencia % 60;
+            var horas = Math.floor(diferencia / 3600);
+            var minutos = Math.floor((diferencia % 3600) / 60);
+            var segundos = diferencia % 60;
 
-          element.textContent = horas + 'h ' + minutos + 'm ' + segundos + 's';
+            element.textContent = horas + 'h ' + minutos + 'm ' + segundos + 's';
 
-          setTimeout(actualizar, 1000);
+            setTimeout(actualizar, 1000);
+            }
+
+            actualizar();
         }
 
-        actualizar();
-      }
-
-      countdownElements.forEach(function (element) {
-        actualizarContadorRegresivo(element);
-      });
-    });
+        countdownElements.forEach(function (element) {
+            actualizarContadorRegresivo(element);
+        });
+        });
     </script>
     <!-- Función para actualizar el contador de la próxima actualización -->
 
@@ -835,6 +770,64 @@
         executeMouseOverOnce(backSet, contentMessageSetting);
     </script>
     <!-- Informacion de boton con icono flecha abajo -->
+
+    <!-- Script para traer registros base de datos -->
+    <script>
+        const btnFive = document.querySelector('.get-five');
+        const btnFifty = document.querySelector('#btn-fifty');
+        const btnTen = document.querySelector('.get-ten');
+        const tbody = document.getElementById('tbody_datos');
+
+        function cargarDatos(cantidad) {
+            fetch(`/${cantidad}-registros`, {
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Limpiar el contenido actual de tbody
+                tbody.innerHTML = '';
+
+                // Iterar sobre los datos recibidos
+                data.forEach(item => {
+                    // Crear una fila (tr) para cada registro
+                    const row = document.createElement('tr');
+
+                    // Crear celdas (td) para cada columna y asignarles los valores correspondientes
+                    const columnas = [
+                        'CAL_ID', 'CAL_CONTACT', 'CAL_AGENT_FN', 'CAL_AGENT_LN', 'CAL_PHONE',
+                        'CAL_CALL_START', 'CAL_CALL_FINISH', 'CAL_CAMPAIGN', 'CAL_QUEUE',
+                        'CAL_TIME_LENGTH', 'CAL_TIME_QUEUE', 'CAL_TIME_SPEAKE', 'CAL_TIME_WRAP',
+                        'CAL_HANGUP', 'CAL_TYPEDOC', 'CAL_DOCUMENTO', 'CAL_MOTIVO'
+                    ];
+
+                    columnas.forEach(columna => {
+                        const cell = document.createElement('td');
+                        cell.textContent = item[columna]; // Asignar el valor de la columna correspondiente
+                        row.appendChild(cell); // Agregar la celda a la fila
+                    });
+
+                    // Agregar la fila al tbody
+                    tbody.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.error('Error al obtener los datos:', error);
+            });
+        }
+
+        btnAll.addEventListener('click', () => {
+            cargarDatos(50);
+        });
+
+        btnFive.addEventListener('click', () => {
+            cargarDatos(5);
+        });
+
+        btnTen.addEventListener('click', () => {
+            cargarDatos(10);
+        });
+    </script>
+    <!-- Script para traer registros base de datos -->
 
     <!-- Demas scripts -->
     <script src="./main.js" ></script>

@@ -688,30 +688,35 @@ thead th {
     /* background-color: #bebebe; */
 }
 
-.settings-section .content-updateAll {
-    background-color: #e0e0e0c4;
+.settings-section .btns-updateAll-updateNow {
+    /* background-color: lightcoral; */
     width: 100%;
+    height: 90px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    height: 57px;
-    border-radius: 10px;
-    box-shadow: var(--box-shadow-main);
+    gap: 12px;
     align-items: center;
+    background-color: #ffffff5b;
+    border: 1px solid #ffffff;
+    border-radius: 8px;
+    padding: 0 5px;
+    box-shadow: 0 5px 70px 2px rgba(0, 0, 0, 0.185);
 }
 
-.settings-section .content-updateAll button {
+.settings-section .btns-updateAll-updateNow .back-updateAll {
+    margin-bottom: 1px solid black;
+}
+
+.settings-section .btns-updateAll-updateNow button {
     background-color: #414141;
-    width: 143px;
-    height: 22px;
+    width: 110px;
+    height: 25px;
     border-radius: 25px;
     color: #f3f3f3;
     font-family: var(--font-family-almarai);
-    font-weight: bold;
     cursor: pointer;
-}
-
-.settings-section .content-updateAll button:active {
-    transform: var(--scale-button);
+    font-size: 12px;
 }
 
 /* CAMBIOS QUE AGREGAR AL INDEX.PHP */
@@ -726,6 +731,7 @@ thead th {
     justify-content: center;
     align-items: center;
     border-radius: 8px;
+    z-index: 1200;
 }
 
 .arrow-delete {
@@ -823,31 +829,36 @@ thead th {
 } */
 
 .settings-section .content-request-btns {
-    height: 155px;
+    height: 190px;
     width: 100%;
     display: flex;
     justify-content: center;
     border-radius: 10px;
     box-shadow: var(--box-shadow-main);
     align-items: center;
-    background-color: #e0e0e0c4;
+    background-color: #ffffff5b;
+    border: 2px solid #ffffff;
     box-shadow: 0 4px 10px 2px rgba(0, 0, 0, 0.317);
     padding: 5px 5px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .settings-section .content-request-btns .container-title {
-    background-color: #797979;
+    background-color: #ffffff;
     width: 100%;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-top-right-radius: 7px;
     border-top-left-radius: 7px;
-    text-align: center;
+    margin-top: -10px;
 }
 
 .settings-section .content-request-btns .container-title p {
-    color: #ffff;
+    color: #000000;
     font-family: var(--font-family-almarai);
     font-weight: bold;
 }
@@ -860,7 +871,8 @@ thead th {
     font-family: var(--font-family-almarai);
     color: #171717;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 15px;
+    margin-left: 5px;
 }
 
 .settings-section .content-request-btns .container-req-btns {
@@ -868,6 +880,7 @@ thead th {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 3px;
+    gap: 7px;
 }
 
 .settings-section .content-request-btns .container-req-btns button {

@@ -259,24 +259,17 @@
     
             <div class="settings-section">
                 <!-- first section | setting-section -->
-                <div class="content-updateAll">
-                        <button id="btn-updateAll">Actualizar todo</button>
+                <div class="btns-updateAll-updateNow">
+                        <div id="back-updateAll">
+                            <button>Actualizar <strong>Todo</strong></button>
+                        </div>
+                        <div class="back-updateNow">
+                            <button id="update-now">Actualizar <strong>Ahora</strong></button>
+                        </div>
                 </div>
                 <!-- first section | setting-section -->
     
                 <!-- second section | setting-section -->
-                <div class="content-back-set-del">
-                    <div class="between-divs">
-                        <div class="content-empty-btn">
-                                <button id="update-now">Actualizar ahora</button>
-                        </div>
-        
-                            
-                    </div>
-                </div>
-                <!-- second section | setting-section -->
-    
-                <!-- third section | setting-section -->
                 <div class="content-request-btns">
                     <div class="container-title">
                         <p>Registros base de datos</p>
@@ -287,12 +280,12 @@
                     </div>
     
                     <div class="container-req-btns">
-                        <button id="btn-all">50 últimos</button>
+                        <button id="btn-fifty">50 últimos</button>
                         <button class="get-five">5 últimos</button>
                         <button class="get-ten">10 últimos</button>
                     </div>
                 </div>
-                <!-- third section | setting-section -->
+                <!-- second section | setting-section -->
             </div>
         </div>
     
@@ -391,12 +384,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Link Font Awesome -->
 
-     <!-- CDN Chart.JS -->
-     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-     <!-- CDN Chart.JS -->
-
-     <!-- <script src="./Chart.js"></script>
-     <script src="/Chart.js"></script> -->
+    <!-- CDN Chart.JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- CDN Chart.JS -->
 
     <!-- Contenedor validar eliminar campaña -->
     <script>
@@ -485,39 +475,6 @@
         // });
     </script> 
     <!-- Eliminar campaña seleccionada, mensaje cuando se le da a eliminar sin haber seleccionado una campaña -->
-
-    <!-- Script para traer registros dependiendo de que boton se use -->
-    <!-- <script>
-        document.addEventListener("DOMContentLoaded", function () {
-         // Obtener referencia a los botones y el <tbody>
-         const buttons = document.querySelectorAll(".get-five, .get-ten");
-         const tbody = document.getElementById("tbody_datos");
- 
-         // Agregar evento de clic a los botones
-         buttons.forEach(function (button) {
-             button.addEventListener("click", function () {
-                 // Ocultar el <tbody> antes de la solicitud AJAX
-                 tbody.style.display = "none";
- 
-                 const script = button.getAttribute("data-script");
-                 const registros = button.getAttribute("data-registros");
- 
-                 // Realizar una solicitud AJAX para ejecutar el script PHP correspondiente
-                 const xhr = new XMLHttpRequest();
-                 xhr.open("GET", script + "?registros=" + registros, true);
-                 xhr.onreadystatechange = function () {
-                     if (xhr.readyState === 4 && xhr.status === 200) {
-                         console.log(xhr.responseText); // Muestra la respuesta del servidor en la consola
-                         tbody.innerHTML = xhr.responseText;
-                         tbody.style.display = "table-row-group";
-                     }
-                 };
-                 xhr.send();
-             });
-         });
-     });
-    </script> -->
-    <!-- Script para traer registros dependiendo de que boton se use -->
 
     <!-- Script Chart.js -->
     <!-- <script>
@@ -875,8 +832,66 @@
         executeMouseOverOnce(backDel, contentMessageDelete);
         executeMouseOverOnce(backSet, contentMessageSetting);
     </script>
-    <!-- Informacion de boton con icono flecha abaj -->
-    
+    <!-- Informacion de boton con icono flecha abajo -->
+
+    <!-- Script para traer registros base de datos -->
+    <script>
+        const btnFive = document.querySelector('.get-five');
+        const btnFifty = document.querySelector('#btn-fifty');
+        const btnTen = document.querySelector('.get-ten');
+        const tbody = document.getElementById('tbody_datos');
+
+        function cargarDatos(cantidad) {
+            fetch(`/${cantidad}-registros`, {
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Limpiar el contenido actual de tbody
+                tbody.innerHTML = '';
+
+                // Iterar sobre los datos recibidos
+                data.forEach(item => {
+                    // Crear una fila (tr) para cada registro
+                    const row = document.createElement('tr');
+
+                    // Crear celdas (td) para cada columna y asignarles los valores correspondientes
+                    const columnas = [
+                        'CAL_ID', 'CAL_CONTACT', 'CAL_AGENT_FN', 'CAL_AGENT_LN', 'CAL_PHONE',
+                        'CAL_CALL_START', 'CAL_CALL_FINISH', 'CAL_CAMPAIGN', 'CAL_QUEUE',
+                        'CAL_TIME_LENGTH', 'CAL_TIME_QUEUE', 'CAL_TIME_SPEAKE', 'CAL_TIME_WRAP',
+                        'CAL_HANGUP', 'CAL_TYPEDOC', 'CAL_DOCUMENTO', 'CAL_MOTIVO'
+                    ];
+
+                    columnas.forEach(columna => {
+                        const cell = document.createElement('td');
+                        cell.textContent = item[columna]; // Asignar el valor de la columna correspondiente
+                        row.appendChild(cell); // Agregar la celda a la fila
+                    });
+
+                    // Agregar la fila al tbody
+                    tbody.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.error('Error al obtener los datos:', error);
+            });
+        }
+
+        btnAll.addEventListener('click', () => {
+            cargarDatos(50);
+        });
+
+        btnFive.addEventListener('click', () => {
+            cargarDatos(5);
+        });
+
+        btnTen.addEventListener('click', () => {
+            cargarDatos(10);
+        });
+    </script>
+    <!-- Script para traer registros base de datos -->
+
     <!-- Demas scripts -->
     <script src="./main.js" ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js" integrity="sha256-JG6hsuMjFnQ2spWq0UiaDRJBaarzhFbUxiUTxQDA9Lk=" crossorigin="anonymous"></script>

@@ -48,11 +48,11 @@ db.connect(err => {
 });
 
 // Endpoint 5 registros
-app.get('/5-regis', (req, res) => {
-  res.sendFile(__dirname + '/5Registros.html');
-});
+// app.get('/5-regis', (req, res) => {
+//   res.sendFile(__dirname + '/5Registros.html');
+// });
 
-app.post('/5-registros', (req, res) => {
+app.get('/5-registros', (req, res) => {
   const query = 'SELECT * FROM CGN_LLAMADAS_INBOUND LIMIT 5'; 
   
   db.query(query, (err, results) => {
@@ -70,13 +70,12 @@ app.post('/5-registros', (req, res) => {
 });
 // Endpoint 5 registros
 
-
 // Endpoint 10 registros
-app.get('/10-regis', (req, res) => {
-  res.sendFile(__dirname + '/10Registros.html');
-});
+// app.get('/10-regis', (req, res) => {
+//   res.sendFile(__dirname + '/10Registros.html');
+// });
 
-app.post('/10-registros', (req, res) => {
+app.get('/10-registros', (req, res) => {
   const query = 'SELECT * FROM CGN_LLAMADAS_INBOUND LIMIT 10'; 
 
   db.query(query, (err, results) => {
@@ -93,11 +92,11 @@ app.post('/10-registros', (req, res) => {
 // Endpoint 10 registros
 
 // Endpoint 25 registros
-app.get('/25-regis', (req, res) => {
-  res.sendFile(__dirname + '/10Registros.html');
-});
+// app.get('/25-regis', (req, res) => {
+//   res.sendFile(__dirname + '/10Registros.html');
+// });
 
-app.post('/25-registros', (req, res) => {
+app.get('/25-registros', (req, res) => {
   const query = 'SELECT * FROM CGN_LLAMADAS_INBOUND LIMIT 25'; 
 
   db.query(query, (err, results) => {
@@ -112,7 +111,6 @@ app.post('/25-registros', (req, res) => {
   });
 });
 // Endpoint 25 registros
-
 
 app.get('/nacionales', (req, res) => {
   res.sendFile(__dirname + '/Nacional.html');

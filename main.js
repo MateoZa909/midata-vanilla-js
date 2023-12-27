@@ -1,41 +1,123 @@
 // Solicitud Ajax 5 regisrors
-document.querySelector('.get-five').addEventListener('click', function () {
-    fetch('/5-registros')
-      .then(response => response.json())
-      .then(data => {
-        // Manejar los datos recibidos, por ejemplo, actualizar la vista
-        console.log(data);
-      })
-      .catch(error => {
-        console.error('Error al obtener los últimos 5 registros:', error);
-      });
+$('.get-five').click(function() {
+  $.ajax({
+      url: '/5-registros',
+      type: 'GET',
+      dataType: 'json',
+      success: function(data) {
+          console.log('Datos recibidos del servidor:', data);
+          // Limpiar el contenido actual del tbody
+          $('#tbody_datos').empty();
+
+          // Iterar a través de los datos y agregar filas a la tabla
+          $.each(data, function(index, registro) {
+              var fila = $('<tr>');
+              fila.append($('<td>').text(registro.CAL_ID));
+              fila.append($('<td>').text(registro.CAL_CONTACT));
+              fila.append($('<td>').text(registro.CAL_AGENT_FN));
+              fila.append($('<td>').text(registro.CAL_AGENT_LN));
+              fila.append($('<td>').text(registro.CAL_PHONE));
+              fila.append($('<td>').text(registro.CAL_CALL_START));
+              fila.append($('<td>').text(registro.CAL_CALL_FINISH));
+              fila.append($('<td>').text(registro.CAL_CAMPAIGN));
+              fila.append($('<td>').text(registro.CAL_QUEUE));
+              fila.append($('<td>').text(registro.CAL_TIME_LENGTH));
+              fila.append($('<td>').text(registro.CAL_TIME_QUEUE));
+              fila.append($('<td>').text(registro.CAL_TIME_SPEAKE));
+              fila.append($('<td>').text(registro.CAL_TIME_WRAP));
+              fila.append($('<td>').text(registro.CAL_HANGUP));
+              fila.append($('<td>').text(registro.CAL_TYPEDOC));
+              fila.append($('<td>').text(registro.CAL_DOCUMENTO));
+              fila.append($('<td>').text(registro.CAL_MOTIVO));
+              $('#tbody_datos').append(fila);
+          });
+      },
+      error: function(error) {
+          console.error('Error al obtener los últimos 25 registros:', error);
+      }
+  });
 });
 
 // Solicitud Ajax 10 regisrors
-document.querySelector('.get-ten').addEventListener('click', function () {
-fetch('/10-registros')  // Debes definir '/10-registros' como una ruta en tu aplicación
-    .then(response => response.json())
-    .then(data => {
-    // Manejar los datos recibidos, por ejemplo, actualizar la vista
-    console.log(data);
-    })
-    .catch(error => {
-    console.error('Error al obtener los últimos 10 registros:', error);
-    });
+$('.get-ten').click(function() {
+  $.ajax({
+      url: '/10-registros',
+      type: 'GET',
+      dataType: 'json',
+      success: function(data) {
+          console.log('Datos recibidos del servidor:', data);
+          // Limpiar el contenido actual del tbody
+          $('#tbody_datos').empty();
+
+          // Iterar a través de los datos y agregar filas a la tabla
+          $.each(data, function(index, registro) {
+              var fila = $('<tr>');
+              fila.append($('<td>').text(registro.CAL_ID));
+              fila.append($('<td>').text(registro.CAL_CONTACT));
+              fila.append($('<td>').text(registro.CAL_AGENT_FN));
+              fila.append($('<td>').text(registro.CAL_AGENT_LN));
+              fila.append($('<td>').text(registro.CAL_PHONE));
+              fila.append($('<td>').text(registro.CAL_CALL_START));
+              fila.append($('<td>').text(registro.CAL_CALL_FINISH));
+              fila.append($('<td>').text(registro.CAL_CAMPAIGN));
+              fila.append($('<td>').text(registro.CAL_QUEUE));
+              fila.append($('<td>').text(registro.CAL_TIME_LENGTH));
+              fila.append($('<td>').text(registro.CAL_TIME_QUEUE));
+              fila.append($('<td>').text(registro.CAL_TIME_SPEAKE));
+              fila.append($('<td>').text(registro.CAL_TIME_WRAP));
+              fila.append($('<td>').text(registro.CAL_HANGUP));
+              fila.append($('<td>').text(registro.CAL_TYPEDOC));
+              fila.append($('<td>').text(registro.CAL_DOCUMENTO));
+              fila.append($('<td>').text(registro.CAL_MOTIVO));
+              $('#tbody_datos').append(fila);
+          });
+      },
+      error: function(error) {
+          console.error('Error al obtener los últimos 25 registros:', error);
+      }
+  });
 });
 
 // Solicitud Ajax 25 regisrors
-document.querySelector('#btn-twenty-five').addEventListener('click', function () {
-    fetch('/25-registros')  // Debes definir '/25-registros' como una ruta en tu aplicación
-      .then(response => response.json())
-      .then(data => {
-        // Manejar los datos recibidos, por ejemplo, actualizar la vista
-        console.log(data);
-      })
-      .catch(error => {
-        console.error('Error al obtener los últimos 25 registros:', error);
-      });
+$('#btn-twenty-five').click(function() {
+  $.ajax({
+      url: '/25-registros',
+      type: 'GET',
+      dataType: 'json',
+      success: function(data) {
+          console.log('Datos recibidos del servidor:', data);
+          // Limpiar el contenido actual del tbody
+          $('#tbody_datos').empty();
+
+          // Iterar a través de los datos y agregar filas a la tabla
+          $.each(data, function(index, registro) {
+              var fila = $('<tr>');
+              fila.append($('<td>').text(registro.CAL_ID));
+              fila.append($('<td>').text(registro.CAL_CONTACT));
+              fila.append($('<td>').text(registro.CAL_AGENT_FN));
+              fila.append($('<td>').text(registro.CAL_AGENT_LN));
+              fila.append($('<td>').text(registro.CAL_PHONE));
+              fila.append($('<td>').text(registro.CAL_CALL_START));
+              fila.append($('<td>').text(registro.CAL_CALL_FINISH));
+              fila.append($('<td>').text(registro.CAL_CAMPAIGN));
+              fila.append($('<td>').text(registro.CAL_QUEUE));
+              fila.append($('<td>').text(registro.CAL_TIME_LENGTH));
+              fila.append($('<td>').text(registro.CAL_TIME_QUEUE));
+              fila.append($('<td>').text(registro.CAL_TIME_SPEAKE));
+              fila.append($('<td>').text(registro.CAL_TIME_WRAP));
+              fila.append($('<td>').text(registro.CAL_HANGUP));
+              fila.append($('<td>').text(registro.CAL_TYPEDOC));
+              fila.append($('<td>').text(registro.CAL_DOCUMENTO));
+              fila.append($('<td>').text(registro.CAL_MOTIVO));
+              $('#tbody_datos').append(fila);
+          });
+      },
+      error: function(error) {
+          console.error('Error al obtener los últimos 25 registros:', error);
+      }
+  });
 });
+
 
 // Función para cargar contenido de /nacionales
 $("#nacionales").click(function() {

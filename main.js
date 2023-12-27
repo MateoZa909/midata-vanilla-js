@@ -67,12 +67,12 @@ $("#internacionales").click(function() {
 
 // Funcion para agregar campaña 
 $(document).ready(function() {
-    $('#actualizarBoton').on('click', function() {
+    $('.back-add').on('click', function() {
       const nuevoContenido = 'Nuevo contenido para la campaña'; // El nuevo contenido que deseas establecer
 
       // Realiza una solicitud POST al nuevo endpoint
       $.ajax({
-        url: '/actualizar-message-campaign',
+        url: '/añadir-campaña',
         method: 'POST',
         data: { nuevoContenido: nuevoContenido },
         success: function(response) {
@@ -90,12 +90,12 @@ $(document).ready(function() {
 
 // Funcion para eliminar campaña
 $(document).ready(function() {
-    $('#mostrarActualizarBoton').on('click', function() {
+    $('.back-del').on('click', function() {
       const nuevoContenido = 'Nuevo contenido para eliminar campaña'; // El nuevo contenido que deseas establecer
 
       // Realiza una solicitud POST al nuevo endpoint
       $.ajax({
-        url: '/mostrar-y-actualizar-message-delete',
+        url: '/eliminar-campaña',
         method: 'POST',
         data: { nuevoContenido: nuevoContenido },
         success: function(response) {

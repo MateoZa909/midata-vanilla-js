@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Data | Configuracion</title>
+    <link rel="stylesheet" href="../Styles/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="shortcut icon" href="./assets/MD.png" type="image/x-icon">
+</head>
+<body>
+
+    <div class="template">
+        <div class="up-section">
+            <div class="contain-logo">
+                <div class="logomd">
+                    <img src="../assets/MD.png" alt="logo">
+                    <img class="arrow-down" src="../assets/arrow-down.png" alt="arrow back">
+                </div>
+    
+                <div class="tools" style="display: none;">
+                    <div class="arrow-up">
+                        <img src="./assets/arrow-down.png" alt="arrow up">
+                    </div>
+                    <div class="box-tools">
+                        <p>Option 1</p>
+                        <img src="./assets/shapes.svg" alt="shape-icon">
+                    </div>
+    
+                    <div class="box-tools">
+                        <p>Option 2</p>
+                        <img src="./assets/shape-polygong.svg" alt="shape-icon">
+                    </div>
+                </div>
+            </div>
+    
+            <div class="contain-buttons">
+                <div class="contain-buttons">
+                    <button>
+                        <i class="fa-solid fa-house" style="color: #dedede;"></i>
+                        Nacionales
+                    </button>
+                    <button>
+                        <i class="fa-solid fa-earth-americas" style="color: #dedede;"></i>
+                        Internacionales
+                    </button>
+                </div>
+            </div>
+        </div>
+    
+        <div class="nextOne-section" >
+            <div class="table-section">
+
+                <div class="back-form-campaign" style="display: none;">
+                    <div class="add-campaign-table">
+                        <div class="title-and-icon">
+                            <div class="title-campaign">
+                                <h1>Nueva campaña</h1>
+                            </div>
+                            <div class="close-campaign">
+                                <img src="./assets/Xicon.svg" alt="cerrar modal">
+                            </div>
+                        </div>
+    
+                        <form class="form-add-campaign" action="">
+                            <div class="lab-inp">
+                                <div class="labels">
+                                    <label for="nombre-campaign">Nombre</label>
+                                    <label for="time-campaign">Hora a Actualizar</label>
+                                </div>
+                                <div class="inputs">
+                                    <input placeholder="Campaña 1" type="text" id="name-campaign">
+                                    <input type="datetime-local" id="time-campaign">
+                                </div>
+                            </div>
+                            <div class="btn-campaign">
+                                <button>Agregar</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+                <div class="contain-table">
+                    <div class="message-campaign" style="display: none;">
+                        <p>Añadir campaña</p>
+                        <div class="arrow-down-msg"></div>
+                    </div>
+
+                    <div class="message-delete" style="display: none;"">
+                        <p>Eliminar campaña</p>
+                        <div class="arrow-down-msg-del"></div>
+                    </div>
+
+                    <div class="message-setting" style="display: none;"">
+                        <p>Ajustes campaña</p>
+                        <div class="arrow-down-msg-set"></div>
+                    </div>
+
+                    <table id="table-campaigns">
+                        <thead>
+                            <tr>
+                                <th>Campañas</th>
+                                <th>N° Regístros</th>
+                                <th>Regístros nuevos por día</th>
+                                <th>Última actualización</th>
+                                <th>Veces actualizadas (Día)</th>
+                                <th>Próxima actualización</th>
+                                <th class="empty"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Campaña 1</td>
+                                <td>1370</td>
+                                <td>50</td>
+                                <td>15:00</td>
+                                <td>4</td>
+                                <td class="countdown" data-time="10:00">10:00</td>
+                                <td></td>
+                            </tr>
+        
+                            <tr>
+                                <td>Campaña 2</td>
+                                <td>500</td>
+                                <td>50</td>
+                                <td>15:00</td>
+                                <td>3</td>
+                                <td class="countdown" data-time="10:00"> 10:00</td>
+                                <td></td>
+                            </tr>
+        
+                            <tr>
+                                <td>Campaña 3</td>
+                                <td>2000</td>
+                                <td>100</td>
+                                <td>15:00</td>
+                                <td>5</td>
+                                <td class="countdown" data-time="10:00"> 10:00</td>
+                                <td></td>
+                            </tr>
+        
+                            <tr>
+                                <td>Campaña 4</td>
+                                <td>800</td>
+                                <td>30</td>
+                                <td>15:00</td>
+                                <td>2</td>
+                                <td class="countdown" data-time="10:00"> 10:00</td>
+                                <td></td>
+                            </tr>
+        
+                            <tr>
+                                <td>Campaña 5</td>
+                                <td>500</td>
+                                <td>20</td>
+                                <td>15:00</td>
+                                <td>3</td>
+                                <td class="countdown" data-time="10:00"> 10:00</td>
+                                <td></td>
+                            </tr>
+        
+                            <tr>
+                                <td>Campaña 6</td>
+                                <td>2000</td>
+                                <td>100</td>
+                                <td>15:00</td>
+                                <td>5</td>
+                                <td class="countdown" data-time="10:00"> 10:00</td>
+                                <td></td>
+                            </tr>
+        
+                            <tr>
+                                <td>Campaña 7</td>
+                                <td>800</td>
+                                <td>30</td>
+                                <td>15:00</td>
+                                <td>2</td>
+                                <td class="countdown" data-time="10:00"> 10:00</td>
+                                <td></td>
+                            </tr>
+        
+                            <tr>
+                                <td>Campaña 8</td>
+                                <td>2000</td>
+                                <td>100</td>
+                                <td>15:00</td>
+                                <td>5</td>
+                                <td class="countdown" data-time="10:00"> 10:00</td>
+                                <td></td>
+                            </tr>
+    
+                            <tr>
+                                <td>Campaña 9</td>
+                                <td>2000</td>
+                                <td>100</td>
+                                <td>15:00</td>
+                                <td>5</td>
+                                <td class="countdown" data-time="10:00"> 10:00</td>
+                                <td></td>
+                            </tr>
+    
+                            <tr>
+                                <td>Campaña 10</td>
+                                <td>2000</td>
+                                <td>100</td>
+                                <td>15:00</td>
+                                <td>5</td>
+                                <td class="countdown" data-time="10:00"> 10:00</td>
+                                <td></td>
+                            </tr>
+    
+                            <tr>
+                                <td>Campaña 11</td>
+                                <td>2000</td>
+                                <td>100</td>
+                                <td>15:00</td>
+                                <td>5</td>
+                                <td class="countdown" data-time="10:00">10:00</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="msg-modal-delete" style="display: none;">
+                        <p>Selecciona una campaña para eliminar</p>
+                        <div class="arrow-delete"></div>
+                    </div>
+
+                    <div class="buttons-add-del-set" style="display: none;">
+                        <div class="back-add">
+                            <img src="./assets/plu.svg" alt="Añadir campaña">
+                        </div>
+                        <div class="back-del">
+                            <img src="./assets/delete.png" alt="Eliminar campaña">
+                        </div>
+                        <div class="back-set">
+                            <img src="./assets/setting.svg" alt="Ajustes">
+                        </div>
+                    </div>
+
+                    <div class="add-campaign">
+                        <button id="toggle-buttons">
+                            <img class="ar-up" src="../assets/arrow-up.svg" alt="Añadir campaña">
+                        </button>
+                    </div>
+
+                    <table id="second-table" style="display: none;">
+                        <thead>
+
+                        </thead>
+                        <tbody>
+   
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    
+            <div class="settings-section">
+                <!-- first section | setting-section -->
+                <div class="btns-updateAll-updateNow">
+                        <div id="back-updateAll">
+                            <button>Actualizar <strong>Todo</strong></button>
+                        </div>
+                        <div class="back-updateNow">
+                            <button id="update-now">Actualizar <strong>Ahora</strong></button>
+                        </div>
+                </div>
+                <!-- first section | setting-section -->
+    
+                <!-- second section | setting-section -->
+                <div class="content-request-btns">
+                    <div class="container-title">
+                        <p>Registros base de datos</p>
+                    </div>
+    
+                    <div class="container-bring-register">
+                        <p>Traer registros</p>
+                    </div>
+    
+                    <div class="container-req-btns">
+                        <button id="btn-twenty-five">25 últimos</button>
+                        <button class="get-five">5 últimos</button>
+                        <button class="get-ten">10 últimos</button>
+                    </div>
+                </div>
+                <!-- second section | setting-section -->
+            </div>
+        </div>
+    
+        <div class="chart-and-table">
+            <div class="section-chart" style="position: relative; height: 50vh; width: 50vw;">
+                <canvas id="myGraphic">
+                    
+                </canvas>
+            </div>
+    
+            <div class="section-table-db">
+                <table id="database-table">
+                    <thead>
+                        <th>CAL_ID</th>
+                        <th>CAL_CONTACT</th>
+                        <th>CAL_AGENT_FN</th>
+                        <th>CAL_AGENT_LN</th>
+                        <th>CAL_PHONE</th>
+                        <th>CAL_CALL_START</th>
+                        <th>CAL_CALL_FINISH</th>
+                        <th>CAL_CAMPAIGN</th>
+                        <th>CAL_QUEUE</th>
+                        <th>CAL_TIME_LENGTH</th>
+                        <th>CAL_TIME_QUEUE</th>
+                        <th>CAL_TIME_SPEAKE</th>
+                        <th>CAL_TIME_WRAP</th>
+                        <th>CAL_HANGUP</th>
+                        <th>CAL_TYPEDOC</th>
+                        <th>CAL_DOCUMENTO</th>
+                        <th>CAL_MOTIVO</th>
+                    </thead>
+                    <tbody id="tbody_datos">
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Modal periodicidad -->
+        <div class="container-modal" style="display: none;">
+            <div class="title-and-form">
+                <div class="title-h1">
+                    <h1>Periodicidad</h1>
+                </div>
+
+                <form id="timeoutForm">
+                    <div class="labels-and-inputs">
+                        <div class="labels">
+                            <label for="days">Días:</label>
+                            <label for="hours">Horas:</label>
+                            <label for="minutes">Minutos:</label>
+                        </div>
+    
+                        <div class="inputs">
+                            <input type="number" id="days" name="days" placeholder="0" required>
+                            <input type="number" id="hours" name="hours" placeholder="0" required>
+                            <input type="number" id="minutes" name="minutes" placeholder="0" required>
+                        </div>
+                    </div>
+                    
+                    <div class="btn-apply-content">
+                        <button id="btn-apply" type="button" onclick="startCustomTimeout()">Aplicar</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="name-and-inactive">
+                <div class="name-campaign">
+                    <h1>Campaña 1</h1>
+                    <div class="changeName-and-img">
+                        <label for="icon-edit">Cambiar nombre</label>
+                        <img id="icon-edit" src="./assets/edit.svg" alt="editar nombre">
+                    </div>
+                </div>
+
+                <div class="content-btn">
+                    <button id="inactive-campaign">Desactivar campaña</button>
+                </div>
+            </div>
+        </div>
+        <!-- Modal periodicidad -->
+
+        <!-- Modal validacion eliminar campaña -->
+        <div class="box-behind" style="display: none;">
+            <div class="delete-campaign">
+                <h2>¿Desea eliminar la campaña?</h2>
+                <div class="box-delete-campaings">
+                    <button id="confirm-button">Si</button>
+                    <button id="cancel-button">Cancelar</button>
+                </div>
+            </div>
+        </div>
+        <!-- Modal validacion eliminar campaña -->
+        
+    </div>
+    
+    <!-- Link Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Link Font Awesome -->
+
+    <!-- CDN Chart.JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- CDN Chart.JS -->
+
+    <!-- Contenedor validar eliminar campaña -->
+    <script>
+        // JavaScript para manejar la interactividad de la caja de diálogo
+        const confirmButton = document.getElementById('confirm-button');
+        const cancelButton = document.getElementById('cancel-button');
+        const boxBehind = document.querySelector('.box-behind');
+
+        // Función para cerrar la caja de diálogo
+        function closeDialog() {
+            boxBehind.style.display = 'none';
+        }
+
+        // Agregar manejadores de eventos a los botones
+        confirmButton.addEventListener('click', () => {
+            // Aquí puedes agregar lógica para eliminar la campaña
+            // ...
+            closeDialog();
+        });
+
+        cancelButton.addEventListener('click', () => {
+            closeDialog();
+        });
+    </script>
+    <!-- Contenedor validar eliminar campaña -->
+
+    <!-- Eliminar campaña seleccionada, mensaje cuando se le da a eliminar sin haber seleccionado una campaña -->
+    <script>
+        // Variable para almacenar la fila seleccionada
+        // let selectedRow = null;
+        // let isRowSelected = false;
+
+        // Agregar un controlador de clic a las filas de la tabla
+        // const tableRows = document.querySelectorAll("#table-campaigns tbody tr");
+        // tableRows.forEach((row) => {
+        //     row.addEventListener("click", () => {
+        //         if (!isRowSelected) {
+        //             selectedRow = row;
+        //             row.classList.add("selected"); // Opcional: Puedes aplicar un estilo a la fila seleccionada
+        //             isRowSelected = true;
+        //         } else if (row === selectedRow) {
+        //             row.classList.remove("selected"); // Opcional: Quita el estilo de la fila seleccionada
+        //             selectedRow = null;
+        //             isRowSelected = false;
+        //         }
+        //     });
+        // });
+
+        // Obtener el botón de eliminación
+        // const deleteButton = document.querySelector(".message-delete");
+
+        // Controlador de clic para el botón "btn-delete"
+        // deleteButton.addEventListener("click", () => {
+        //     if (isRowSelected) {
+        //         Mostrar el fondo modal y la caja de confirmación
+        //         document.querySelector(".box-behind").style.display = "flex";
+        //     } else {
+        //         No hay fila seleccionada, muestra el mensaje de selección
+        //         document.querySelector(".msg-modal-delete").style.display = "flex";
+
+        //         Ocultar el mensaje de selección después de 2 segundos
+        //         setTimeout(() => {
+        //             document.querySelector(".msg-modal-delete").style.display = "none";
+        //         }, 2000); // 2 segundos (2000 milisegundos)
+        //     }
+        // });
+
+        // Controlador de clic para el botón "Si" en la caja de confirmación
+        // document.getElementById("confirm-button").addEventListener("click", () => {
+        //     if (isRowSelected) {
+        //         Eliminar la fila seleccionada
+        //         selectedRow.remove();
+        //         selectedRow = null;
+        //         isRowSelected = false;
+        //         Ocultar el fondo modal y la caja de confirmación después de eliminar
+        //         document.querySelector(".box-behind").style.display = "none";
+        //     }
+        // });
+
+        // Controlador de clic para el botón "Cancelar" en la caja de confirmación
+        // document.getElementById("cancel-button").addEventListener("click", () => {
+        //     if (isRowSelected) {
+        //         Ocultar el fondo modal y la caja de confirmación al hacer clic en "Cancelar"
+        //         document.querySelector(".box-behind").style.display = "none";
+        //     }
+        // });
+    </script> 
+    <!-- Eliminar campaña seleccionada, mensaje cuando se le da a eliminar sin haber seleccionado una campaña -->
+
+    <!-- Script Chart.js -->
+    <!-- <script>
+        var ctx = 'myGraphic';
+
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [], // Inicializamos las etiquetas vacías
+                datasets: [{
+                    label: 'Mes',
+                    backgroundColor: 'rgb(250, 103, 8)',
+                    data: [] // Inicializamos los datos vacíos
+                }, {
+                    label: 'Año',
+                    backgroundColor: 'rgb(5, 89, 166)',
+                    data: [] // Inicializamos los datos vacíos
+                }],
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        labels: {
+                            color: 'rgb(0, 0, 0)'
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Crecimiento de la base de datos',
+                        color: 'rgb(0, 0, 0)',
+                        font: {
+                            size: 20,
+                            family: 'Almarai'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Url del servidor 
+        let url = 'http://localhost/midata-vanilla-js/php/conexion_chart.php';
+
+        // Peticion
+        fetch(url)
+            .then(response => response.json())
+            .then(datos => mostrar(datos))
+            .catch(err => console.log(err));
+
+        const mostrar = (data) => {
+             // Limpiar los datos actuales en el gráfico
+            myChart.data.labels = [];
+            myChart.data.datasets[0].data = [];
+            myChart.data.datasets[1].data = [];
+            
+            // Recorrer los nuevos datos y agregarlos al gráfico
+            data.valores.forEach(element => {
+                myChart.data.labels.push(element.año); 
+                myChart.data.datasets[0].data.push(element.valor_mes); 
+                myChart.data.datasets[1].data.push(element.valor_año); 
+            });
+
+            // Actualizar el gráfico
+            myChart.update();
+        };
+
+        console.log('Mostrando datos');
+
+    </script>    Script Chart.js -->
+    <!-- Script Chart.js -->
+
+    <!-- Función para actualizar el contador de la próxima actualización -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Obtener todas las celdas con la clase 'countdown'
+      var countdownElements = document.querySelectorAll('.countdown');
+
+      // Función para actualizar el contador regresivo
+      const actualizarContadorRegresivo = (element) => {
+        var tiempoFinal = element.dataset.time;
+        var fechaFinal = new Date('2023-12-15T' + tiempoFinal + ':00');
+        
+        const actualizar = () => {
+          var ahora = new Date();
+          var diferencia = Math.floor((fechaFinal - ahora) / 1000);
+
+          if (diferencia <= 0) {
+            element.textContent = '¡Tiempo terminado!';
+            return;
+          }
+
+          var horas = Math.floor(diferencia / 3600);
+          var minutos = Math.floor((diferencia % 3600) / 60);
+          var segundos = diferencia % 60;
+
+          element.textContent = horas + 'h ' + minutos + 'm ' + segundos + 's';
+
+          setTimeout(actualizar, 1000);
+        }
+
+        actualizar();
+      }
+
+      countdownElements.forEach(function (element) {
+        actualizarContadorRegresivo(element);
+      });
+    });
+    </script>
+    <!-- Función para actualizar el contador de la próxima actualización -->
+
+    <!-- (Mostrar segunda tabla) y (fila seleccionada), (Mostrar opciones Añadir, Eliminar, Ajutes), (Elimina filas de la tabla) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const rows = document.querySelectorAll('#table-campaigns tbody tr');
+            const secondaryTable = document.getElementById('second-table');
+            const addCampaignContainer = document.querySelector('.add-campaign');
+            const deleteButtonContainer = document.querySelector('.back-del');
+            const boxBehindContainer = document.querySelector('.box-behind');
+            const confirmButton = document.getElementById('confirm-button');
+            const cancelButton = document.getElementById('cancel-button');
+            const msgModalDelete = document.querySelector('.msg-modal-delete'); // Contenedor de mensaje
+            const backFormCampaign = document.querySelector('.back-form-campaign'); // Contenedor del formulario de nueva campaña
+            const closeCampaign = document.querySelector('.close-campaign'); // Botón para cerrar el formulario
+            const backAdd = document.querySelector('.back-add'); // Contenedor para abrir el formulario
+            let selectedRow = null;
+
+            // Mostrar contenedor botones (Añadir, Eliminar, Ajustes)
+            const toggleButton = document.getElementById("toggle-buttons");
+            const container = document.querySelector(".buttons-add-del-set");
+            const arrowIcon = toggleButton.querySelector(".ar-up");
+            // Mostrar contenedor botones (Añadir, Eliminar, Ajustes)
+
+            // Agregar un controlador de clic a las filas de la tabla principal
+            rows.forEach((row) => {
+                row.addEventListener('click', () => {
+                    const isSelected = row.classList.contains('selected');
+
+                    rows.forEach((otherRow) => {
+                        otherRow.classList.remove('selected');
+                    });
+
+                    if (!isSelected) {
+                        row.classList.add('selected');
+                        selectedRow = row;
+                        showSecondaryTable(row);
+                    } else {
+                        hideSecondaryTable();
+                        selectedRow = null;
+                    }
+                });
+            });
+
+            // Controlador de clic para ocultar la segunda tabla y deseleccionar fila
+            document.addEventListener('click', (event) => {
+                if (!event.target.closest('#table-campaigns') && !event.target.closest('#second-table')) {
+                    hideSecondaryTable();
+                    rows.forEach((otherRow) => {
+                        otherRow.classList.remove('selected');
+                    });
+                }
+            });
+
+            // Controlador de clic para ocultar la segunda tabla al hacer clic en la imagen x-icon
+            document.addEventListener('click', (event) => {
+                if (event.target.classList.contains('x-icon')) {
+                    hideSecondaryTable();
+                    rows.forEach((otherRow) => {
+                        otherRow.classList.remove('selected');
+                    });
+                }
+            });
+
+            // Función para ocultar la segunda tabla
+            function hideSecondaryTable() {
+                secondaryTable.style.display = 'none';
+            }
+
+            // Función para mostrar la segunda tabla con contenido personalizado
+            function showSecondaryTable(clickedRow) {
+                const tables = [
+                    { name: 'Tabla 1', icon: 'ojo.png' },
+                    { name: 'Tabla 2', icon: 'ojo.png' }
+                ];
+
+                const content = `
+                    <table>
+                        <tr><th>Tablas relacionadas</th><th><img class="x-icon" src="./assets/delete.svg" alt=""></th></tr>
+                        ${tables.map(table => `<tr><td>${table.name}</td><td><img class="eye-icon" src="./assets/${table.icon}" alt=""></td></tr>`).join('')}
+                    </table>`;
+
+                secondaryTable.innerHTML = content;
+                secondaryTable.style.display = 'block';
+            }
+
+            // Controlador de clic para mostrar el contenedor box-behind al hacer clic en back-del
+            deleteButtonContainer.addEventListener('click', () => {
+                if (!selectedRow) {
+                    // Mostrar el contenedor de mensaje si no hay una fila seleccionada
+                    msgModalDelete.style.display = 'flex';
+                    setTimeout(() => {
+                        msgModalDelete.style.display = 'none';
+                    }, 2000);
+                    return;
+                }
+                boxBehindContainer.style.display = 'flex';
+            });
+
+            // Controlador de clic para eliminar la fila seleccionada al hacer clic en el botón "Confirmar"
+            confirmButton.addEventListener('click', () => {
+                if (selectedRow) {
+                    selectedRow.remove();
+                    hideSecondaryTable();
+                    selectedRow = null;
+                    boxBehindContainer.style.display = 'none'; // Ocultar box-behind
+                }
+            });
+
+            // Controlador de clic para cerrar el modal al hacer clic en el botón "Cancelar"
+            cancelButton.addEventListener('click', () => {
+                hideSecondaryTable();
+                selectedRow = null;
+                boxBehindContainer.style.display = 'none'; // Ocultar box-behind
+            });
+
+            // Controlador de clic para mostrar el formulario de nueva campaña desde back-add
+            backAdd.addEventListener('click', () => {
+                backFormCampaign.style.display = 'flex';
+            });
+
+            // Controlador de clic para cerrar el formulario de nueva campaña
+            closeCampaign.addEventListener('click', () => {
+                backFormCampaign.style.display = 'none';
+            });
+
+            // Mostrar y ocultar el contenedor de botones (Añadir, Eliminar, Ajustes)
+            toggleButton.addEventListener("click", function () {
+                if (container.style.display === "none" || container.style.display === "") {
+                    container.style.animation = "buttons-add-del-set 1s";
+                    container.style.transform = "translateY(0)";
+                    container.style.display = "flex";
+                    arrowIcon.style.transition = "transform 0.5s";
+                    arrowIcon.style.transform = "rotate(180deg)";
+                } else {
+                    container.style.animation = "none";
+                    container.style.transform = "translateY(190px)";
+                    container.style.display = "none";
+                    arrowIcon.style.transition = "transform 0.4s"
+                    arrowIcon.style.transform = "rotate(0deg)";
+                }
+            });
+        });
+    </script> 
+    <!-- (Mostrar segunda tabla) y (fila seleccionada), (Mostrar opciones Añadir, Eliminar, Ajutes), (Elimina filas de la tabla) -->
+
+    <!-- Editar periodicidad de Campañas -->
+    <script>
+        function startCustomTimeout() {
+            const days = parseInt(document.getElementById('days').value) || 0;
+            const hours = parseInt(document.getElementById('hours').value) || 0;
+            const minutes = parseInt(document.getElementById('minutes').value) || 0;
+
+            customTimeout(days, hours, minutes, function() {
+                console.log("¡El temporizador ha finalizado!");
+            });
+        }
+
+        function customTimeout(days, hours, minutes, callback) {
+            const totalMilliseconds = (days * 24 * 60 * 60 * 1000) + (hours * 60 * 60 * 1000) + (minutes * 60 * 1000);
+            setTimeout(callback, totalMilliseconds);
+        }
+    </script> 
+    <!-- Editar periodicidad de Campañas -->
+    
+    <!-- Mostrar y esconder modal para ajustes -->
+    <script>
+        var btnSetting = document.querySelector('.back-set img');
+        var containerModal = document.querySelector(".container-modal");
+        var modalTimer; // Variable para el temporizador
+        var modalVisible = false; // Variable para rastrear la visibilidad del modal
+
+        btnSetting.addEventListener("click", function() {
+            if (!modalVisible) {
+                // Mostrar el contenedor modal si no está visible
+                containerModal.style.display = "block";
+                
+                // Iniciar el temporizador de 4 segundos para ocultar el contenedor
+                modalTimer = setTimeout(function() {
+                    containerModal.style.display = "none"; // Ocultar el contenedor después de 4 segundos
+                }, 4000); // 4000 milisegundos = 4 segundos
+                
+                modalVisible = true; // El modal está visible
+            } else {
+                // Ocultar el contenedor modal si está visible y se hace clic nuevamente en el botón
+                containerModal.style.display = "none";
+                clearTimeout(modalTimer); // Cancelar el temporizador
+                modalVisible = false; // El modal está oculto
+            }
+        });
+
+        // Agregar un event listener para detectar clics dentro de containerModal
+        containerModal.addEventListener("click", function(event) {
+            // Cancelar el temporizador si se hizo clic en algún elemento dentro de containerModal
+            clearTimeout(modalTimer);
+        });
+
+        // Agregar event listeners para detectar cambios en los campos de entrada dentro de containerModal
+        var daysInput = document.getElementById("days");
+        var hoursInput = document.getElementById("hours");
+        var minutesInput = document.getElementById("minutes");
+
+        [daysInput, hoursInput, minutesInput].forEach(function(input) {
+            input.addEventListener("input", function() {
+                // Cancelar el temporizador si se ha tocado algún elemento dentro del modal
+                clearTimeout(modalTimer);
+            });
+        });
+    </script> 
+    <!-- Mostrar y esconder modal para ajustes -->
+
+    <!-- Informacion de boton con icono flecha abajo -->
+    <script>
+        const backAdd = document.querySelector('.back-add');
+        const backDel = document.querySelector('.back-del');
+        const backSet = document.querySelector('.back-set');
+        const contentMessageCampaign = document.querySelector('.message-campaign');
+        const contentMessageDelete = document.querySelector('.message-delete');
+        const contentMessageSetting = document.querySelector('.message-setting');
+
+        function showMessage(elementToShow, contentMessage) {
+            contentMessage.style.display = 'flex';
+            setTimeout(() => {
+                contentMessage.style.display = 'none';
+            }, 1000);
+        }
+
+        function executeMouseOverOnce(element, contentMessage) {
+            let mouseOverExecuted = false;
+
+            function onMouseOver() {
+                if (!mouseOverExecuted) {
+                    showMessage(element, contentMessage);
+                    mouseOverExecuted = true;
+                }
+            }
+
+            element.addEventListener('mouseover', onMouseOver);
+        }
+
+        executeMouseOverOnce(backAdd, contentMessageCampaign);
+        executeMouseOverOnce(backDel, contentMessageDelete);
+        executeMouseOverOnce(backSet, contentMessageSetting);
+    </script>
+    <!-- Informacion de boton con icono flecha abajo -->
+
+    <!-- Demas scripts -->
+    <script src="./main.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js" integrity="sha256-JG6hsuMjFnQ2spWq0UiaDRJBaarzhFbUxiUTxQDA9Lk=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js" integrity="sha256-XF29CBwU1MWLaGEnsELogU6Y6rcc5nCkhhx89nFMIDQ=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js" integrity="sha256-J2sc79NPV/osLcIpzL3K8uJyAD7T5gaEFKlLDM18oxY=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js" integrity="sha256-CfcERD4Ov4+lKbWbYqXD6aFM9M51gN4GUEtDhkWABMo=" crossorigin="anonymous"></script>
+    <!-- Demas scripts -->
+</body>
+</html>

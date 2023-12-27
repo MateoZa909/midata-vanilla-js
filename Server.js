@@ -52,7 +52,7 @@ db.connect(err => {
 //   res.sendFile(__dirname + '/5Registros.html');
 // });
 
-app.get('/5-registros', (req, res) => {
+app.get('/5/registros', (req, res) => {
   const query = 'SELECT * FROM CGN_LLAMADAS_INBOUND LIMIT 5'; 
   
   db.query(query, (err, results) => {
@@ -75,7 +75,7 @@ app.get('/5-registros', (req, res) => {
 //   res.sendFile(__dirname + '/10Registros.html');
 // });
 
-app.get('/10-registros', (req, res) => {
+app.get('/10/registros', (req, res) => {
   const query = 'SELECT * FROM CGN_LLAMADAS_INBOUND LIMIT 10'; 
 
   db.query(query, (err, results) => {
@@ -96,7 +96,7 @@ app.get('/10-registros', (req, res) => {
 //   res.sendFile(__dirname + '/10Registros.html');
 // });
 
-app.get('/25-registros', (req, res) => {
+app.get('/25/registros', (req, res) => {
   const query = 'SELECT * FROM CGN_LLAMADAS_INBOUND LIMIT 25'; 
 
   db.query(query, (err, results) => {

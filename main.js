@@ -1,7 +1,7 @@
 // Solicitud Ajax 5 regisrors
 $('.get-five').click(function() {
   $.ajax({
-      url: '/5-registros',
+      url: 'http://localhost:3000/5/registros',
       type: 'GET',
       dataType: 'json',
       success: function(data) {
@@ -41,7 +41,7 @@ $('.get-five').click(function() {
 // Solicitud Ajax 10 regisrors
 $('.get-ten').click(function() {
   $.ajax({
-      url: '/10-registros',
+      url: 'http://localhost:3000/10/registros',
       type: 'GET',
       dataType: 'json',
       success: function(data) {
@@ -81,9 +81,12 @@ $('.get-ten').click(function() {
 // Solicitud Ajax 25 regisrors
 $('#btn-twenty-five').click(function() {
   $.ajax({
-      url: '/25-registros',
+      url: 'http://localhost:3000/25/registros',
       type: 'GET',
       dataType: 'json',
+      beforeSend: function(){
+        console.log('hola');
+      },
       success: function(data) {
           console.log('Datos recibidos del servidor:', data);
           // Limpiar el contenido actual del tbody

@@ -110,3 +110,30 @@ $(document).ready(function() {
       });
     });
 });
+
+// Funcion para actualizar
+$(document).ready(function() {
+  $('.message-setting').click(function() {
+      // ID del registro que deseas actualizar
+      const idActualizar = 1; // Reemplaza esto con el ID real del registro que deseas actualizar
+
+      // Nuevos valores para las columnas
+      const nuevoValor1 = 'NuevoValor1'; // Reemplaza con el nuevo valor para columna1
+      const nuevoValor2 = 'NuevoValor2'; // Reemplaza con el nuevo valor para columna2
+      const nuevoValor3 = 'NuevoValor3'; // Reemplaza con el nuevo valor para columna3
+
+      // Datos a enviar en la solicitud POST
+      const datos = {
+          idActualizar: idActualizar,
+          nuevoValor1: nuevoValor1,
+          nuevoValor2: nuevoValor2,
+          nuevoValor3: nuevoValor3
+      };
+
+      // Realiza la solicitud POST para actualizar la configuración
+      $.post('/api/configuracion', datos, function(response) {
+          // Maneja la respuesta del servidor (por ejemplo, muestra un mensaje de éxito)
+          console.log(response.mensaje);
+      });
+  });
+});

@@ -160,6 +160,12 @@ body {
 }
 
 .up-section .contain-buttons button:active {
+    background-color: white;
+    color: black;
+    outline: 1px solid black;
+}
+
+.up-section .contain-buttons button:active {
     transform: scale(.98);
 }
 
@@ -205,6 +211,7 @@ body {
     border-radius: 4px;
     cursor: pointer;
     border-radius: 10px;
+    outline: 1px solid black;
 }
 
 .add-campaign:active {
@@ -549,6 +556,79 @@ thead th {
 #table-campaigns  tbody tr.selected {
     background-color: #000000;
 }
+
+#table-campaigns thead th {
+    outline: 1px solid rgb(179, 178, 178);
+}
+
+#table-campaigns tr td {
+    font-size: 16px;
+}
+
+/* COLORES NOMBRES DE CAMPAÑAS */
+/* COLORES NOMBRES DE CAMPAÑAS */
+/* COLORES NOMBRES DE CAMPAÑAS */
+/* COLORES NOMBRES DE CAMPAÑAS */
+/* COLORES NOMBRES DE CAMPAÑAS */
+#table-campaigns tr td .CGN {
+    font-weight: bold;
+    color: white;
+    background: rgb(212,41,70);
+    background: linear-gradient(90deg, rgba(212,41,70,1) 16%, rgba(107,201,162,1) 73%);
+    border-radius: 25px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3px 0;
+}
+
+#table-campaigns tr td .cira {
+    width: 100%;
+    height: 100%;
+    background: rgb(177,216,253);
+    background: linear-gradient(90deg, rgba(177,216,253,1) 16%, rgba(0,128,200,1) 73%);
+    font-weight: bold;
+    /* border-radius: 15px; */
+    padding: 3px 0;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#table-campaigns tr td .amavita {
+    width: 100%;
+    height: 100%;
+    background: rgb(119,194,110);
+    background: linear-gradient(90deg, rgba(119,194,110,1) 16%, rgba(107,195,216,1) 73%);
+    font-weight: bold;
+    /* border-radius: 15px; */
+    padding: 3px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+#table-campaigns tr td .dralex {
+    width: 100%;
+    height: 100%;
+    padding: 3px 0;
+    background: rgb(0,74,104);
+    background: linear-gradient(90deg, rgba(0,74,104,1) 0%, rgba(255,255,255,1) 18%, rgba(255,255,255,1) 81%, rgba(0,74,104,1) 100%);
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border-radius: 15px; */
+}
+/* COLORES NOMBRES DE CAMPAÑAS */
+/* COLORES NOMBRES DE CAMPAÑAS */
+/* COLORES NOMBRES DE CAMPAÑAS */
+/* COLORES NOMBRES DE CAMPAÑAS */
+/* COLORES NOMBRES DE CAMPAÑAS */
 /* Seleccion de fila */
 
 /* Color de fondo encabezado */
@@ -615,7 +695,7 @@ thead th {
 /* SEGUNDA TABLA */
 #second-table  {
     position: absolute;
-    z-index: 1000;
+    z-index: 10000;
     background-color: white;
     border: 1px solid #ddd;
     box-shadow: 0 0 10px rgba(22, 22, 22, 0.189);
@@ -657,6 +737,7 @@ thead th {
 .x-icon {
     width: 25px;
     margin: 0 5px;
+    cursor: pointer;
 }
 
 @keyframes secondTable {
@@ -923,28 +1004,21 @@ canvas {
 .section-table-db  {
     background-color: rgb(226, 226, 226);
     min-width: 750px;
+    max-height: 450px; /* Establece la altura máxima que deseas para la tabla */
+    overflow-y: auto; 
     border-radius: 10px;
-    overflow: auto;
     height: auto;
     box-shadow: 0 4px 10px 2px rgba(0, 0, 0, 0.167);
-    /* overflow-x: scroll;
-    overflow-y: scroll; */
-    overflow: scroll;
     animation: container-table 0.5s;
 }
 
-.section-table-db::-webkit-scrollbar-track {
+/* .section-table-db::-webkit-scrollbar-track {
     background-color: transparent;
-}
+} */
 
 .section-table-db::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}
-
-.section-table-db::-webkit-scrollbar:vertical {
-    background-color: #414141;
-    border-radius: 15px;
+    width: 5px;
+    height: 5px;
 }
 
 .section-table-db::-webkit-scrollbar-thumb {
@@ -971,7 +1045,7 @@ canvas {
 
 #database-table th {
     font-family: var(--font-family-almarai);
-    font-size: 11px;
+    font-size: 12px;
     padding: 10px 10px;
     color: #000000;
     font-weight: bold;
@@ -981,7 +1055,7 @@ canvas {
     padding: 5px;
     border-bottom: 1px solid rgba(177, 177, 177, 0.4);
     text-align: center;
-    font-size: 12px;
+    font-size: 13px;
     font-family: var(--font-family-archivo);
     font-weight: 100;
 }

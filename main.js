@@ -1,3 +1,4 @@
+
 // Solicitud Ajax 5 regisrors
 $('.get-five').click(function() {
   $.ajax({
@@ -33,7 +34,7 @@ $('.get-five').click(function() {
           });
       },
       error: function(error) {
-          console.error('Error al obtener los últimos 25 registros:', error);
+          console.error('Error al obtener los últimos 5 registros:', error);
       }
   });
 });
@@ -121,34 +122,51 @@ $('#btn-twenty-five').click(function() {
   });
 });
 
-
-// Función para cargar contenido de /nacionales
-$("#nacionales").click(function() {
-    $.ajax({
-        url: "/nacionales",
-        method: "GET",
-        success: function(data) {
-            $("#contenido").html(data);
-        },
-        error: function(error) {
-            console.error("Error al cargar /nacionales", error);
-        }
-    });
+// Función para cargar contenido de nacionales
+const nationalButton = document.querySelector('.nationals');
+nationalButton.addEventListener('click', () => {
+  // Realizar una solicitud GET al endpoint
+  fetch('http://localhost:3000/nacionales', {
+      method: 'GET'
+  })
+  .then(response => {
+      // Verificar si la solicitud fue exitosa (código de respuesta 200)
+      if (response.ok) {
+          // Puedes hacer algo en función de la respuesta aquí
+          // Por ejemplo, redirigir a otra página
+          window.location.href = 'Nacional.html';
+      } else {
+          console.error('La solicitud no fue exitosa');
+      }
+  })
+  .catch(error => {
+      console.error('Error en la solicitud:', error);
+  });
 });
+// Función para cargar contenido de nacionales
 
-// Función para cargar contenido de /internacionales
-$("#internacionales").click(function() {
-    $.ajax({
-        url: "/internacionales",
-        method: "GET",
-        success: function(data) {
-            $("#contenido").html(data);
-        },
-        error: function(error) {
-            console.error("Error al cargar /internacionales", error);
-        }
-    });
+// Función para cargar contenido de internacionales
+const internationalButton = document.querySelector('.international');
+internationalButton.addEventListener('click', () => {
+  // Realizar una solicitud GET al endpoint
+  fetch('http://localhost:3000/internacionales', {
+      method: 'GET'
+  })
+  .then(response => {
+      // Verificar si la solicitud fue exitosa (código de respuesta 200)
+      if (response.ok) {
+          // Puedes hacer algo en función de la respuesta aquí
+          // Por ejemplo, redirigir a otra página
+          window.location.href = 'Internacional.html';
+      } else {
+          console.error('La solicitud no fue exitosa');
+      }
+  })
+  .catch(error => {
+      console.error('Error en la solicitud:', error);
+  });
 });
+// Función para cargar contenido de internacionales
 
 // Funcion para agregar campaña 
 $(document).ready(function() {

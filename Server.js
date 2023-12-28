@@ -48,33 +48,23 @@ db.connect(err => {
 });
 
 // Endpoint 5 registros
-// app.get('/5-regis', (req, res) => {
-//   res.sendFile(__dirname + '/5Registros.html');
-// });
-
 app.get('/5/registros', (req, res) => {
   const query = 'SELECT * FROM CGN_LLAMADAS_INBOUND LIMIT 5'; 
-  
-  db.query(query, (err, results) => {
-    if (err) {
-      console.error('Error al ejecutar la consulta: ' + err.message);
-      res.status(500).json({ error: 'Error al obtener los registros' });
-    } else {
-      console.log('Registros obtenidos:');
-      console.log(results);
 
-      // Renderizar la vista y enviarla como respuesta
-      res.render('5-registros', { registros: results }); // '5-registros' es el nombre de la vista
-    }
+  db.query(query, (err, results) => {
+      if (err) {
+          console.error('Error al ejecutar la consulta: ' + err.message);
+          res.status(500).json({ error: 'Error al obtener los registros' }); // Enviar un objeto JSON de error
+      } else {
+          console.log('Registros obtenidos:');
+          console.log(results); // Imprime los registros en la consola del servidor
+          res.status(200).json(results); // Enviar los resultados como objeto JSON
+      }
   });
 });
 // Endpoint 5 registros
 
 // Endpoint 10 registros
-// app.get('/10-regis', (req, res) => {
-//   res.sendFile(__dirname + '/10Registros.html');
-// });
-
 app.get('/10/registros', (req, res) => {
   const query = 'SELECT * FROM CGN_LLAMADAS_INBOUND LIMIT 10'; 
 
@@ -92,10 +82,6 @@ app.get('/10/registros', (req, res) => {
 // Endpoint 10 registros
 
 // Endpoint 25 registros
-// app.get('/25-regis', (req, res) => {
-//   res.sendFile(__dirname + '/10Registros.html');
-// });
-
 app.get('/25/registros', (req, res) => {
   const query = 'SELECT * FROM CGN_LLAMADAS_INBOUND LIMIT 25'; 
 
@@ -112,13 +98,17 @@ app.get('/25/registros', (req, res) => {
 });
 // Endpoint 25 registros
 
+// Endpoint nacionales
 app.get('/nacionales', (req, res) => {
   res.sendFile(__dirname + '/Nacional.html');
 });
+// Endpoint nacionales
 
+// Endpoint internacionales
 app.get('/internacionales', (req, res) => {
   res.sendFile(__dirname + '/Internacional.html');
 });
+// Endpoint internacionales
 
 // Añadir
 app.post('/añadir-campaña', (req, res) => {

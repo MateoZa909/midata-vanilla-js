@@ -122,7 +122,7 @@ $.ajax({
 });
 
 // Función para cargar contenido de nacionales
-const nationalButton = document.querySelector('.nationals');
+const nationalButton = document.querySelector('#nacionales');
 nationalButton.addEventListener('click', () => {
 // Realizar una solicitud GET al endpoint
 fetch('http://localhost:3000/nacionales', {

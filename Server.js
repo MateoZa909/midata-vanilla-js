@@ -13,39 +13,38 @@ app.get('/styles/style.css', (req, res) => {
   res.sendFile(__dirname + '/styles/style.css');
 });
 
-// const dbCampañas = mysql.createConnection({
-//   host: '',
-//   port: '',
-//   user: '',
-//   password: '',
-//   database: ''
+const dbCampañas = mysql.createConnection({
+  host: '72.167.77.8',
+  port: 3306,
+  user: 'IT_USER',
+  password: '{Nd8=[So7Uk3',
+  database: 'MY_DATA'
+});
+
+dbCampañas.connect(err => {
+  if (err) {
+      console.error('Error al conectar a la base de datos:', err);
+      return;
+  }
+  console.log(`Conectado a la base de datos MySQL MY_DATA`);
+});
+// Configuración de la base de datos
+// const db = mysql.createConnection({
+//   host: '72.167.77.8',
+//   port: 3306,
+//   user: 'IT_USER',
+//   password: '{Nd8=[So7Uk3',
+//   database: 'DATA_NACIONAL'
 // });
 
-// dbCampañas.connect(err => {
+// // Conectar a la base de datos
+// db.connect(err => {
 //   if (err) {
 //       console.error('Error al conectar a la base de datos:', err);
 //       return;
 //   }
 //   console.log('Conectado a la base de datos MySQL');
 // });
-
-// Configuración de la base de datos
-const db = mysql.createConnection({
-  host: '72.167.77.8',
-  port: 3306,
-  user: 'IT_USER',
-  password: '{Nd8=[So7Uk3',
-  database: 'DATA_NACIONAL'
-});
-
-// Conectar a la base de datos
-db.connect(err => {
-  if (err) {
-      console.error('Error al conectar a la base de datos:', err);
-      return;
-  }
-  console.log('Conectado a la base de datos MySQL');
-});
 
 // Endpoint 5 registros
 app.get('/5/registros', (req, res) => {

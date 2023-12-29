@@ -3,6 +3,7 @@ const mysql = require('mysql');
 const cors = require('cors'); // Importar el paquete 'cors'
 const port = 3000;
 const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
 
 const app = express();
 
@@ -98,27 +99,59 @@ app.post('/registro', (req, res) => {
 //   console.log('Conectado a la base de datos MySQL');
 // });
 
-// Manejar la solicitud POST
-app.post('/registro', (req, res) => {
-// Obtener los datos enviados desde el cliente
-const { nombre, correo, usuario, clave } = req.body;
+app.post('/login', async (req, res) => {
+    // Obtener correo y contraseña del cuerpo de la solicitud
+    const { correo, clave } = req.body;
 
-// Realizar la inserción en la base de datos (debes incluir tu código para la inserción)            
+    try {
+      // Buscar el usuario por correo en la base de datos
+      const result = dbUsuarios.query('SELECT NOMBRE, CORREO, NOMBRE_USUARIO, CONTRASENA FROM USUARIOS_DATA WHERE CORREO = ?', [correo]);
+      const usuario = result[0];
 
-// Realizar la inserción en la base de datos
-dbUsuarios.query('INSERT INTO USUARIOS_DATA (NOMBRE, CORREO, NOMBRE_USUARIO, CONTRASEÑA) VALUES (?, ?, ?, ?)', 
-[nombre, correo, usuario, clave], (error, results) => {
-    if (error) {
-        // Error en la inserción
-        console.error(error);
-        res.status(500).json({ success: false, message: 'Error en la inserción' });
-    } else {
-        // Inserción exitosa
-        console.log('Registro exitoso');
-        res.status(200).json({ success: true, message: 'Registro exitoso' });
+      // Verificar si el usuario existe y la contraseña es correcta
+      if (usuario && await bcrypt.compare(clave, usuario.CONTRASENA)) {
+        // Inicio de sesión exitoso
+        res.status(200).json({ success: true, message: 'Inicio de sesión exitoso' });
+        // Aquí también podrías manejar la creación de sesiones o tokens
+      } else {
+        // Usuario no encontrado o contraseña incorrecta
+        res.status(401).json({ success: false, message: 'Correo o contraseña incorrectos' });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ success: false, message: 'Error en el servidor' });
     }
+  });
+
+// ENDPOINT REGISTRO DATOS
+app.post('/registro', async (req, res) => {
+  // Obtener los datos enviados desde el cliente
+  const { nombre, correo, usuario, clave } = req.body;
+
+  try {
+      // Hashear la contraseña antes de almacenarla
+      const saltRoundes = 10
+      const claveHash = await bcrypt.hash(clave, saltRoundes);
+
+      // Realizar la inserción en la base de datos
+      dbUsuarios.query('INSERT INTO USUARIOS_DATA (NOMBRE, CORREO, NOMBRE_USUARIO, CONTRASEÑA) VALUES (?, ?, ?, ?)', 
+      [nombre, correo, usuario, claveHash], (error, results) => {
+          if (error) {
+              // Error en la inserción
+              console.error(error);
+              res.status(500).json({ success: false, message: 'Error en la inserción' });
+          } else {
+              // Inserción exitosa
+              console.log('Registro exitoso');
+              res.status(200).json({ success: true, message: 'Registro exitoso' });
+          }
+      });
+  } catch (error) {
+      console.error('Error al hashear la contraseña:', error);
+      res.status(500).json({ success: false, message: 'Error interno del servidor' });
+  }
 });
-});
+  // ENDPOINT REGISTRO DATOS
 
 // Endpoint 5 registros
 app.get('/5/registros', (req, res) => {

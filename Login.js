@@ -167,43 +167,74 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-
-// Funcion peticion al endpoint de registro de datos
-$("#btn-register").on("click", function(event) {
+$('#btn-login').on('click', function(event) {
     event.preventDefault();
 
-    // Obtener los datos del formulario
-    var nombre = $("input[name='nombre']").val();
+    // Obtener los valores de los campos de correo electrónico y contraseña
     var correo = $("input[name='correo']").val();
-    var usuario = $("input[name='usuario']").val();
     var clave = $("input[name='clave']").val();
 
-    // Objeto con los datos del usuario
-    var userData = {
-      nombre: nombre,
-      correo: correo,
-      usuario: usuario,
-      clave: clave
+
+    // Crear el objeto con los datos del usuario
+    var loginData = {
+        correo: correo,
+        clave: clave
     };
 
     // Realizar la solicitud AJAX POST
     $.ajax({
-      type: "POST",
-      url: "http://localhost:3000/registro", // Ruta del endpoint de registro en tu servidor
-      data: userData,
-      dataType: "json", // Esperamos una respuesta en formato JSON
-      success: function(response) {
-        // Manejar la respuesta del servidor en caso de éxito
-        console.log("Registro exitoso");
-        $(".msg").html("<p>Registrado exitosamente!</p>");
-      },
-      error: function(error) {
-        // Manejar errores en la solicitud AJAX
-        console.error("Error en el registro:", error.responseText);
-        $(".msg").html("<p>Error en el registro.</p>");
-      }
+        type: "POST",
+        url: "/login", // Asegúrate de que esta ruta coincida con tu endpoint del servidor
+        data: JSON.stringify(loginData),
+        contentType: "application/json",
+        dataType: "json",
+        success: function(response) {
+            // Manejar la respuesta del servidor en caso de éxito
+            console.log("Inicio de sesión exitoso");
+            // Aquí puedes redirigir al usuario o mostrar un mensaje de éxito
+        },
+        error: function(error) {
+            // Manejar errores en la solicitud AJAX
+            console.error("Error en el inicio de sesión:", error.responseText);
+            // Aquí puedes mostrar un mensaje de error
+        }
     });
-  });
+});
+
+// Funcion peticion al endpoint de registro de datos
+document.addEventListener('DOMContentLoaded', () => {
+    $("#btn-register").on("click", function(event) {
+        event.preventDefault();
+    
+        var userData = {
+          nombre: $("input[name='nombre']").val(),
+          correo: $("input[name='correo']").val(),
+          usuario: $("input[name='usuario']").val(),
+          clave: $("input[name='clave']").val()
+        };
+    
+        $.ajax({
+          type: "POST",
+          url: "/registro",
+          data: userData,
+          dataType: "json"
+        })
+        .done(function(response) {
+            console.log("Registro exitoso");
+            $(".msg").html("<p>Registrado exitosamente!</p>").show();
+    
+            // Limpiar los campos del formulario
+            $("input[name='nombre'], input[name='correo'], input[name='usuario'], input[name='clave']").val('');
+        })
+        .fail(function(error) {
+            console.error("Error en el registro:", error.responseText);
+            $(".msg").html("<p>Error en el registro.</p>");
+        });
+    });
+})
+
+
+// Funcion peticion al endpoint de registro de datos
 
 // Realizar una solicitud AJAX para enviar los datos al servidor
 // var xhr = new XMLHttpRequest();

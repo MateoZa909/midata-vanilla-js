@@ -167,5 +167,64 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+
+// Funcion peticion al endpoint de registro de datos
+$("#btn-register").on("click", function(event) {
+    event.preventDefault();
+
+    // Obtener los datos del formulario
+    var nombre = $("input[name='nombre']").val();
+    var correo = $("input[name='correo']").val();
+    var usuario = $("input[name='usuario']").val();
+    var clave = $("input[name='clave']").val();
+
+    // Objeto con los datos del usuario
+    var userData = {
+      nombre: nombre,
+      correo: correo,
+      usuario: usuario,
+      clave: clave
+    };
+
+    // Realizar la solicitud AJAX POST
+    $.ajax({
+      type: "POST",
+      url: "http://localhost:3000/registro", // Ruta del endpoint de registro en tu servidor
+      data: userData,
+      dataType: "json", // Esperamos una respuesta en formato JSON
+      success: function(response) {
+        // Manejar la respuesta del servidor en caso de éxito
+        console.log("Registro exitoso");
+        $(".msg").html("<p>Registrado exitosamente!</p>");
+      },
+      error: function(error) {
+        // Manejar errores en la solicitud AJAX
+        console.error("Error en el registro:", error.responseText);
+        $(".msg").html("<p>Error en el registro.</p>");
+      }
+    });
+  });
+
+// Realizar una solicitud AJAX para enviar los datos al servidor
+// var xhr = new XMLHttpRequest();
+// xhr.open("POST", "http://localhost:3000/registro", true); // La URL coincide con la ruta en el servidor
+// xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+// xhr.onreadystatechange = function() {
+//     if (xhr.readyState === 4) {
+//         if (xhr.status === 200) {
+//             // Procesar la respuesta del servidor aquí
+//             console.log(xhr.responseText);
+//         } else {
+//             console.error("Error en la solicitud AJAX");
+//         }
+//     }
+// };
+
+// // Convertir el objeto de datos a una cadena JSON
+// var datosJson = JSON.stringify(datos);
+
+// // Enviar la solicitud con los datos en formato JSON
+// xhr.send(datosJson);
+
 btnRegister.addEventListener('click', Register);
 btnLogin.addEventListener('click', Login);

@@ -2,18 +2,29 @@ const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors'); // Importar el paquete 'cors'
 const port = 3000;
+const bodyParser = require('body-parser');
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-app.get('/styles/style.css', (req, res) => {
-  res.setHeader('Content-Type', 'text/css');
-  res.sendFile(__dirname + '/styles/style.css');
-});
+// Middleware para analizar datos JSON en las solicitudes
+app.use(bodyParser.json());
 
-const dbCampañas = mysql.createConnection({
+// Middleware para analizar datos de formularios en las solicitudes
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Configura Express para servir archivos estáticos desde un directorio específico
+app.use(express.static(__dirname + '/'));
+
+// app.get('/styles/style.css', (req, res) => {
+//   res.setHeader('Content-Type', 'text/css');
+//   res.sendFile(__dirname + '/styles/style.css');
+// });
+
+// TABLA USUARIOS_DATA
+const dbUsuarios = mysql.createConnection({
   host: '72.167.77.8',
   port: 3306,
   user: 'IT_USER',
@@ -21,13 +32,54 @@ const dbCampañas = mysql.createConnection({
   database: 'MY_DATA'
 });
 
-dbCampañas.connect(err => {
+dbUsuarios.connect(err => {
   if (err) {
       console.error('Error al conectar a la base de datos:', err);
       return;
   }
-  console.log(`Conectado a la base de datos MySQL MY_DATA`);
+  console.log(`Conectado a la base de datos MySQL USUARIOS_DATA`);
 });
+
+// ENDPOINT INICIO SESION O REGISTRO
+app.get('/login-signup', (req, res) => {
+  res.sendFile(__dirname + '/Login.html');
+});
+
+// Ruta para procesar el formulario de registro
+app.post('/registro', (req, res) => {
+  const { nombre, correo, usuario, clave } = req.body;
+  
+  // Inserta los datos del usuario en la base de datos
+  const sql = 'INSERT INTO USUARIOS_DATA (NOMBRE, CORREO, NOMBRE_USUARIO, CONTRASENA) VALUES (?, ?, ?, ?)';
+  dbUsuarios.query(sql, [nombre, correo, usuario, clave], (err, result) => {
+    if (err) {
+      console.error(err);
+      res.send('Error al registrar el usuario');
+    } else {
+      res.send('Usuario registrado exitosamente');
+    }
+  });
+});
+// ENDPOINT INICIO SESION O REGISTRO
+
+// BASE DE DATOS CAMPAÑA
+// const dbCampañas = mysql.createConnection({
+//   host: '72.167.77.8',
+//   port: 3306,
+//   user: 'IT_USER',
+//   password: '{Nd8=[So7Uk3',
+//   database: 'MY_DATA'
+// });
+
+// dbCampañas.connect(err => {
+//   if (err) {
+//       console.error('Error al conectar a la base de datos:', err);
+//       return;
+//   }
+//   console.log(`Conectado a la base de datos MySQL MY_DATA`);
+// });
+
+// BASE DE DATOS CGN_LLAMADAS_INBOUND
 // Configuración de la base de datos
 // const db = mysql.createConnection({
 //   host: '72.167.77.8',
@@ -45,6 +97,28 @@ dbCampañas.connect(err => {
 //   }
 //   console.log('Conectado a la base de datos MySQL');
 // });
+
+// Manejar la solicitud POST
+app.post('/registro', (req, res) => {
+// Obtener los datos enviados desde el cliente
+const { nombre, correo, usuario, clave } = req.body;
+
+// Realizar la inserción en la base de datos (debes incluir tu código para la inserción)            
+
+// Realizar la inserción en la base de datos
+dbUsuarios.query('INSERT INTO USUARIOS_DATA (NOMBRE, CORREO, NOMBRE_USUARIO, CONTRASEÑA) VALUES (?, ?, ?, ?)', 
+[nombre, correo, usuario, clave], (error, results) => {
+    if (error) {
+        // Error en la inserción
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Error en la inserción' });
+    } else {
+        // Inserción exitosa
+        console.log('Registro exitoso');
+        res.status(200).json({ success: true, message: 'Registro exitoso' });
+    }
+});
+});
 
 // Endpoint 5 registros
 app.get('/5/registros', (req, res) => {

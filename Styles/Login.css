@@ -154,11 +154,8 @@ main {
 
 .msg {
     position: absolute;
-<<<<<<< HEAD
     background-color: var(--color-blue);
-=======
     background-color: #ffffff;
->>>>>>> 83237936b0af0995cf7017a00934b7af17ed637a
     width: 210px;
     height: 50px;
     border-radius: 8px;
@@ -203,11 +200,7 @@ main {
         transform: translateY(0);
     }
 }
-<<<<<<< HEAD
-                                                                     
-=======
 
->>>>>>> 83237936b0af0995cf7017a00934b7af17ed637a
 /* Boton */
 /* #btn-register, 
 #btn-login {

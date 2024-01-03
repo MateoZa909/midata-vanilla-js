@@ -390,6 +390,93 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- CDN Chart.JS -->
 
+    <!-- Script ChartJS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            var ctx = document.getElementById('myGraphic').getContext('2d');
+
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [], // Inicializamos las etiquetas vacías
+                    datasets: [{
+                        label: 'Mes',
+                        backgroundColor: 'rgb(250, 103, 8)',
+                        data: [] // Inicializamos los datos vacíos
+                    }, {
+                        label: 'Año',
+                        backgroundColor: 'rgb(5, 89, 166)',
+                        data: [] // Inicializamos los datos vacíos
+                    }],
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            labels: {
+                                color: 'rgb(0, 0, 0)'
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Crecimiento de la base de datos',
+                            color: 'rgb(0, 0, 0)',
+                            font: {
+                                size: 20,
+                                family: 'Almarai'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Peticion
+            $.ajax({
+                url: 'http://localhost:3000/chart-data',
+                method: 'GET',
+                success: function(datos) {
+                    console.log('Datos recibidos:', datos);
+                    mostrar(datos, myChart)
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+            });
+
+            const mostrar = (data) => {
+                if (!Array.isArray(data)) {
+                    console.error('Datos no válidos o ausentes:', data);
+                    return;
+                }
+
+                console.log("Datos a agregar:", data);
+                myChart.data.labels = [];
+                myChart.data.datasets[0].data = [];
+                myChart.data.datasets[1].data = [];
+
+                // Recorrer los nuevos datos y agregarlos al gráfico
+                data.forEach(element => {
+                    // Comprueba si el elemento tiene todas las propiedades necesarias
+                    if (element.hasOwnProperty('ANO') && element.hasOwnProperty('NUM_ANO') && element.hasOwnProperty('NUM_MES')) {
+                        myChart.data.labels.push(element.ANO);
+                        myChart.data.datasets[0].data.push(element.NUM_MES);
+                        myChart.data.datasets[1].data.push(element.NUM_ANO);
+                    } else {
+                        console.error('Elemento faltante o con propiedades incorrectas:', element);
+                    }
+                });
+
+                myChart.update();
+            };
+        })
+    </script>
+    <!-- Script ChartJS -->
+
     <!-- Contenedor validar eliminar campaña -->
     <script>
         // JavaScript para manejar la interactividad de la caja de diálogo
@@ -479,79 +566,10 @@
     <!-- Eliminar campaña seleccionada, mensaje cuando se le da a eliminar sin haber seleccionado una campaña -->
 
     <!-- Script Chart.js -->
-    <!-- <script>
-        var ctx = 'myGraphic';
-
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: [], // Inicializamos las etiquetas vacías
-                datasets: [{
-                    label: 'Mes',
-                    backgroundColor: 'rgb(250, 103, 8)',
-                    data: [] // Inicializamos los datos vacíos
-                }, {
-                    label: 'Año',
-                    backgroundColor: 'rgb(5, 89, 166)',
-                    data: [] // Inicializamos los datos vacíos
-                }],
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: true,
-                        labels: {
-                            color: 'rgb(0, 0, 0)'
-                        }
-                    },
-                    title: {
-                        display: true,
-                        text: 'Crecimiento de la base de datos',
-                        color: 'rgb(0, 0, 0)',
-                        font: {
-                            size: 20,
-                            family: 'Almarai'
-                        }
-                    }
-                }
-            }
-        });
-
-        // Url del servidor 
-        let url = 'http://localhost/midata-vanilla-js/php/conexion_chart.php';
-
-        // Peticion
-        fetch(url)
-            .then(response => response.json())
-            .then(datos => mostrar(datos))
-            .catch(err => console.log(err));
-
-        const mostrar = (data) => {
-             // Limpiar los datos actuales en el gráfico
-            myChart.data.labels = [];
-            myChart.data.datasets[0].data = [];
-            myChart.data.datasets[1].data = [];
-            
-            // Recorrer los nuevos datos y agregarlos al gráfico
-            data.valores.forEach(element => {
-                myChart.data.labels.push(element.año); 
-                myChart.data.datasets[0].data.push(element.valor_mes); 
-                myChart.data.datasets[1].data.push(element.valor_año); 
-            });
-
-            // Actualizar el gráfico
-            myChart.update();
-        };
-
-        console.log('Mostrando datos');
-
-    </script>    Script Chart.js -->
-    <!-- Script Chart.js -->
+    <script>
+        
+    </script>
+    <!-- // Script Chart.js -->
 
     <!-- Función para actualizar el contador de la próxima actualización -->
     <script>

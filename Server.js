@@ -24,8 +24,7 @@ app.use(express.static(__dirname + '/'));
 //   res.sendFile(__dirname + '/styles/style.css');
 // });
 
-// TABLA USUARIOS_DATA
-const dbUsuarios = mysql.createConnection({
+const dbYearAndMonth = mysql.createConnection({
   host: '72.167.77.8',
   port: 3306,
   user: 'IT_USER',
@@ -33,18 +32,42 @@ const dbUsuarios = mysql.createConnection({
   database: 'MY_DATA'
 });
 
-dbUsuarios.connect(err => {
+dbYearAndMonth.connect(err => {
   if (err) {
       console.error('Error al conectar a la base de datos:', err);
       return;
   }
-  console.log(`Conectado a la base de datos MySQL USUARIOS_DATA`);
+  console.log(`Conectado a la base de datos MySQL USUARIOS_DATA con las tablas CRECIMIENTO_ANO Y CRECIMIENTO_MES`);
 });
+
+// TABLA USUARIOS_DATA
+// const dbUsuarios = mysql.createConnection({
+//   host: '72.167.77.8',
+//   port: 3306,
+//   user: 'IT_USER',
+//   password: '{Nd8=[So7Uk3',
+//   database: 'MY_DATA'
+// });
+
+// dbUsuarios.connect(err => {
+//   if (err) {
+//       console.error('Error al conectar a la base de datos:', err);
+//       return;
+//   }
+//   console.log(`Conectado a la base de datos MySQL USUARIOS_DATA`);
+// });
+
+// PAGINA PRINCIPAL
+app.get('/home', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
+});
+// PAGINA PRINCIPAL
 
 // ENDPOINT INICIO SESION O REGISTRO
 app.get('/login-signup', (req, res) => {
   res.sendFile(__dirname + '/Login.html');
 });
+// ENDPOINT INICIO SESION O REGISTRO
 
 // Ruta para procesar el formulario de registro
 app.post('/registro', (req, res) => {
@@ -61,43 +84,56 @@ app.post('/registro', (req, res) => {
     }
   });
 });
-// ENDPOINT INICIO SESION O REGISTRO
+// Ruta para procesar el formulario de registro
+
+// Definir el endpoint /chart-data
+app.get('/chart-data', (req, res) => {
+  // Consulta a la base de datos
+  let sql = 'SELECT ANO, NUM_ANO, NUM_MES FROM ANO_MES';
+  dbYearAndMonth.query(sql, (err, result) => {
+      if (err) throw err;
+
+      // Enviar los resultados como JSON
+      res.json(result);
+  });
+});
 
 // BASE DE DATOS CAMPAÑA
-// const dbCampañas = mysql.createConnection({
-//   host: '72.167.77.8',
-//   port: 3306,
-//   user: 'IT_USER',
-//   password: '{Nd8=[So7Uk3',
-//   database: 'MY_DATA'
-// });
+const dbCampañas = mysql.createConnection({
+  host: '72.167.77.8',
+  port: 3306,
+  user: 'IT_USER',
+  password: '{Nd8=[So7Uk3',
+  database: 'MY_DATA'
+});
 
-// dbCampañas.connect(err => {
-//   if (err) {
-//       console.error('Error al conectar a la base de datos:', err);
-//       return;
-//   }
-//   console.log(`Conectado a la base de datos MySQL MY_DATA`);
-// });
+dbCampañas.connect(err => {
+  if (err) {
+      console.error('Error al conectar a la base de datos:', err);
+      return;
+  }
+  console.log(`Conectado a la base de datos MySQL MY_DATA`);
+});
 
 // BASE DE DATOS CGN_LLAMADAS_INBOUND
 // Configuración de la base de datos
-// const db = mysql.createConnection({
-//   host: '72.167.77.8',
-//   port: 3306,
-//   user: 'IT_USER',
-//   password: '{Nd8=[So7Uk3',
-//   database: 'DATA_NACIONAL'
-// });
+const db = mysql.createConnection({
+  host: '72.167.77.8',
+  port: 3306,
+  user: 'IT_USER',
+  password: '{Nd8=[So7Uk3',
+  database: 'DATA_NACIONAL'
+});
 
-// // Conectar a la base de datos
-// db.connect(err => {
-//   if (err) {
-//       console.error('Error al conectar a la base de datos:', err);
-//       return;
-//   }
-//   console.log('Conectado a la base de datos MySQL');
-// });
+// Conectar a la base de datos
+db.connect(err => {
+  if (err) {
+      console.error('Error al conectar a la base de datos:', err);
+      return;
+  }
+  console.log('Conectado a la base de datos MySQL');
+});
+
 
 app.post('/login', async (req, res) => {
     // Obtener correo y contraseña del cuerpo de la solicitud
@@ -121,7 +157,7 @@ app.post('/login', async (req, res) => {
       console.error(error);
       res.status(500).json({ success: false, message: 'Error en el servidor' });
     }
-  });
+});
 
 // ENDPOINT REGISTRO DATOS
 app.post('/registro', async (req, res) => {

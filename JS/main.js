@@ -1,4 +1,3 @@
-
 // Solicitud Ajax 5 regisrors
 $('.get-five').click(function() {
   $.ajax({
@@ -240,3 +239,4 @@ $(document).ready(function() {
       });
   });
 });
+

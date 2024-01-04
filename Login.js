@@ -97,73 +97,52 @@ document.addEventListener("DOMContentLoaded", function() {
     })
 
     form.addEventListener("submit", function(event) {
-        event.preventDefault();
-
-        // Validar que los campos no estén vacíos
-        const inputs = form.querySelectorAll("input");
+        // Iniciar la validación de los campos
         let camposVacios = false;
-
-        inputs.forEach(function(input) {
-            if (input.value.trim() === "") {
-                camposVacios = true;
-            }
-        });
-
+    
+        // Validar campo nombre
         if (nameInput.value.trim() === "") {
             if (!nameMessage) {
-                const pElement = document.createElement("p");
-                pElement.classList.add("name-warning");
-                pElement.textContent = "Debe escribir el nombre";
-                form.insertBefore(pElement, emailInput);
+                // Código para mostrar mensaje de error para el nombre
                 nameMessage = true;
             }
             camposVacios = true;
         }
-
-        if (nameInput.value.trim() === "") {
+    
+        // Validar campo correo
+        if (emailInput.value.trim() === "") {
             if (!emailMessage) {
-                const pElement = document.createElement("p");
-                pElement.classList.add("correo-warning");
-                pElement.textContent = "Debe escribir el correo";
-                form.insertBefore(pElement, userInput);
+                // Código para mostrar mensaje de error para el correo
                 emailMessage = true;
             }
             camposVacios = true;
         }
-
+    
+        // Validar campo usuario
         if (userInput.value.trim() === "") {
             if (!userMessage) {
-                 const pElement = document.createElement("p");
-                pElement.classList.add("user-warning");
-                pElement.textContent = "Debe escribir el nombre de usuario";
-                form.insertBefore(pElement, passwordInput);
+                // Código para mostrar mensaje de error para el usuario
                 userMessage = true;
             }
             camposVacios = true;
         }
-
+    
+        // Validar campo contraseña
         if (passwordInput.value.trim() === "") {
             if (!passwordMessage) {
-                const pElement = document.createElement("p");
-                pElement.classList.add("password-warning");
-                pElement.textContent = "Debe escribir la contraseña";
-                form.insertBefore(pElement, btnRegisterForm);
+                // Código para mostrar mensaje de error para la contraseña
                 passwordMessage = true;
             }
             camposVacios = true;
         }
-
+    
+        // Si hay campos vacíos, prevenir el envío del formulario
         if (camposVacios) {
-            return; // Detener el proceso si hay campos vacíos
+            event.preventDefault();
+            return;
         }
-
-        msgContainer.style.display = "block";
-
-        setTimeout(() => {
-            msgContainer.style.display = "none";
-        }, 3000);
-
-        limpiarCampos();
+    
+        // Código para manejar el envío exitoso del formulario
     });
 });
 
@@ -202,60 +181,40 @@ $('#btn-login').on('click', function(event) {
 });
 
 // Funcion peticion al endpoint de registro de datos
-document.addEventListener('DOMContentLoaded', () => {
-    $("#btn-register").on("click", function(event) {
-        event.preventDefault();
+$("#btn-register").on("click", function(event) {
+    event.preventDefault();
+
+    var userData = {
+        nombre: $("input[name='nombre']").val(),
+        correo: $("input[name='correo']").val(),
+        usuario: $("input[name='usuario']").val(),
+        clave: $("input[name='clave']").val()
+    };
+
+    $.ajax({
+        type: "POST",
+        url: "/registro",
+        data: userData,
+        dataType: "json"
+    })
+    .done(function(response) {
+        console.log("Registro exitoso");
+        $(".msg").html("<p>Registrado exitosamente!</p>")
+                .css("display", "flex")
+                .show();
+        
+        setTimeout(function() { $(".msg").hide(); }, 3000);
     
-        var userData = {
-          nombre: $("input[name='nombre']").val(),
-          correo: $("input[name='correo']").val(),
-          usuario: $("input[name='usuario']").val(),
-          clave: $("input[name='clave']").val()
-        };
+    })
+    .fail(function(error) {
+        console.log("Error en el registro:", error.responseText);
+        $(".msg").html("<p>Error en el registro</p>")
+                .css("display", "flex")
+                .show();
     
-        $.ajax({
-          type: "POST",
-          url: "/registro",
-          data: userData,
-          dataType: "json"
-        })
-        .done(function(response) {
-            console.log("Registro exitoso");
-            $(".msg").html("<p>Registrado exitosamente!</p>").show();
-    
-            // Limpiar los campos del formulario
-            $("input[name='nombre'], input[name='correo'], input[name='usuario'], input[name='clave']").val('');
-        })
-        .fail(function(error) {
-            console.error("Error en el registro:", error.responseText);
-            $(".msg").html("<p>Error en el registro.</p>");
-        });
+        setTimeout(function() { $(".msg").hide(); }, 3000);
     });
-})
-
-
-// Funcion peticion al endpoint de registro de datos
-
-// Realizar una solicitud AJAX para enviar los datos al servidor
-// var xhr = new XMLHttpRequest();
-// xhr.open("POST", "http://localhost:3000/registro", true); // La URL coincide con la ruta en el servidor
-// xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-// xhr.onreadystatechange = function() {
-//     if (xhr.readyState === 4) {
-//         if (xhr.status === 200) {
-//             // Procesar la respuesta del servidor aquí
-//             console.log(xhr.responseText);
-//         } else {
-//             console.error("Error en la solicitud AJAX");
-//         }
-//     }
-// };
-
-// // Convertir el objeto de datos a una cadena JSON
-// var datosJson = JSON.stringify(datos);
-
-// // Enviar la solicitud con los datos en formato JSON
-// xhr.send(datosJson);
+});
 
 btnRegister.addEventListener('click', Register);
 btnLogin.addEventListener('click', Login);

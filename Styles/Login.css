@@ -16,7 +16,8 @@
 }
 
 body {
-    background-color: rgb(225, 225, 225);
+    background-image: url(/assets/back.jpg);
+    object-fit: cover;
 }
 
 main {
@@ -164,7 +165,6 @@ main {
     left: 43%;
     box-shadow: var(--box-shadow-main);
     animation: modalMsg 0.5s;
-    display: none;
     justify-content: center;
 }
 

@@ -1,11 +1,14 @@
 const express = require('express');
-const mysql = require('mysql');
-const cors = require('cors'); // Importar el paquete 'cors'
-const port = 3000;
+// const { engine } = require('express-handlebars');
+// const myConnection = require('express-myconnection');
+// const session = require('express-session');
 const bodyParser = require('body-parser');
-const bcrypt = require('bcrypt');
 
 const app = express();
+const port = 3000;
+
+const mysql = require('mysql');
+const cors = require('cors'); // Importar el paquete 'cors'
 
 app.use(cors());
 app.use(express.json());
@@ -14,15 +17,24 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 // Middleware para analizar datos de formularios en las solicitudes
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));  
 
 // Configura Express para servir archivos estáticos desde un directorio específico
 app.use(express.static(__dirname + '/'));
 
-// app.get('/styles/style.css', (req, res) => {
-//   res.setHeader('Content-Type', 'text/css');
-//   res.sendFile(__dirname + '/styles/style.css');
-// });
+// Motor de plantilla
+app.set('view engine', 'ejs');
+
+// bcrypt
+const bcryptjs = require('bcryptjs');
+
+// Var de session
+const session = require('express-session');
+app.use(session({
+  secret: 'secret',
+  resave: true,
+  saveUninitialized: true
+}));
 
 const dbYearAndMonth = mysql.createConnection({
   host: '72.167.77.8',
@@ -41,27 +53,21 @@ dbYearAndMonth.connect(err => {
 });
 
 // TABLA USUARIOS_DATA
-// const dbUsuarios = mysql.createConnection({
-//   host: '72.167.77.8',
-//   port: 3306,
-//   user: 'IT_USER',
-//   password: '{Nd8=[So7Uk3',
-//   database: 'MY_DATA'
-// });
-
-// dbUsuarios.connect(err => {
-//   if (err) {
-//       console.error('Error al conectar a la base de datos:', err);
-//       return;
-//   }
-//   console.log(`Conectado a la base de datos MySQL USUARIOS_DATA`);
-// });
-
-// PAGINA PRINCIPAL
-app.get('/home', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+const dbUsuarios = mysql.createConnection({
+  host: '72.167.77.8',
+  port: 3306,
+  user: 'IT_USER',
+  password: '{Nd8=[So7Uk3',
+  database: 'MY_DATA'
 });
-// PAGINA PRINCIPAL
+
+dbUsuarios.connect(err => {
+  if (err) {
+      console.error('Error al conectar a la base de datos:', err);
+      return;
+  }
+  console.log(`Conectado a la base de datos MySQL USUARIOS_DATA`);
+});
 
 // ENDPOINT INICIO SESION O REGISTRO
 app.get('/login-signup', (req, res) => {
@@ -70,23 +76,33 @@ app.get('/login-signup', (req, res) => {
 // ENDPOINT INICIO SESION O REGISTRO
 
 // Ruta para procesar el formulario de registro
-app.post('/registro', (req, res) => {
+app.post('/registro', async (req, res) => {
   const { nombre, correo, usuario, clave } = req.body;
-  
-  // Inserta los datos del usuario en la base de datos
-  const sql = 'INSERT INTO USUARIOS_DATA (NOMBRE, CORREO, NOMBRE_USUARIO, CONTRASENA) VALUES (?, ?, ?, ?)';
-  dbUsuarios.query(sql, [nombre, correo, usuario, clave], (err, result) => {
-    if (err) {
-      console.error(err);
-      res.send('Error al registrar el usuario');
-    } else {
-      res.send('Usuario registrado exitosamente');
-    }
-  });
+
+  try {
+      let passwordHash = await bcryptjs.hash(clave, 8);
+
+      dbUsuarios.query('INSERT INTO USUARIOS_DATA (NOMBRE, CORREO, NOMBRE_USUARIO, CONTRASENA) VALUES (?, ?, ?, ?)', 
+      [nombre, correo, usuario, passwordHash], (error, results) => {
+          if (error) {
+              // Error en la inserción
+              console.error(error);
+              res.status(500).json({ success: false, message: 'Error en la inserción' });
+          } else {
+              // Inserción exitosa
+              console.log('Registro exitoso');
+              res.status(200).json({ success: true, message: 'Registro exitoso' });
+          }
+      });
+  } catch (error) {
+      console.error('Error al hashear la contraseña:', error);
+      res.status(500).json({ success: false, message: 'Error interno del servidor' });
+  }
 });
+
 // Ruta para procesar el formulario de registro
 
-// Definir el endpoint /chart-data
+// ENDPOINT DEL GRÁFICO
 app.get('/chart-data', (req, res) => {
   // Consulta a la base de datos
   let sql = 'SELECT ANO, NUM_ANO, NUM_MES FROM ANO_MES';
@@ -97,6 +113,7 @@ app.get('/chart-data', (req, res) => {
       res.json(result);
   });
 });
+// ENDPOINT DEL GRÁFICO
 
 // BASE DE DATOS CAMPAÑA
 const dbCampañas = mysql.createConnection({
@@ -134,7 +151,6 @@ db.connect(err => {
   console.log('Conectado a la base de datos MySQL');
 });
 
-
 app.post('/login', async (req, res) => {
     // Obtener correo y contraseña del cuerpo de la solicitud
     const { correo, clave } = req.body;
@@ -161,23 +177,17 @@ app.post('/login', async (req, res) => {
 
 // ENDPOINT REGISTRO DATOS
 app.post('/registro', async (req, res) => {
-  // Obtener los datos enviados desde el cliente
   const { nombre, correo, usuario, clave } = req.body;
 
   try {
-      // Hashear la contraseña antes de almacenarla
-      const saltRoundes = 10
-      const claveHash = await bcrypt.hash(clave, saltRoundes);
+      let passwordHash = await bcryptjs.hash(clave, 8); // Asegúrate de que bcryptjs está correctamente importado
 
-      // Realizar la inserción en la base de datos
-      dbUsuarios.query('INSERT INTO USUARIOS_DATA (NOMBRE, CORREO, NOMBRE_USUARIO, CONTRASEÑA) VALUES (?, ?, ?, ?)', 
-      [nombre, correo, usuario, claveHash], (error, results) => {
+      dbUsuarios.query('INSERT INTO USUARIOS_DATA SET ?', { nombre: nombre, correo: correo, usuario: usuario, contrasena: passwordHash }, 
+      (error, results) => {
           if (error) {
-              // Error en la inserción
               console.error(error);
               res.status(500).json({ success: false, message: 'Error en la inserción' });
           } else {
-              // Inserción exitosa
               console.log('Registro exitoso');
               res.status(200).json({ success: true, message: 'Registro exitoso' });
           }
@@ -187,7 +197,8 @@ app.post('/registro', async (req, res) => {
       res.status(500).json({ success: false, message: 'Error interno del servidor' });
   }
 });
-  // ENDPOINT REGISTRO DATOS
+
+// ENDPOINT REGISTRO DATOS
 
 // Endpoint 5 registros
 app.get('/5/registros', (req, res) => {
@@ -242,13 +253,13 @@ app.get('/25/registros', (req, res) => {
 
 // Endpoint nacionales
 app.get('/nacionales', (req, res) => {
-  res.sendFile(__dirname + '/Nacional.html');
+  res.render('nacional')
 });
 // Endpoint nacionales
 
 // Endpoint internacionales
 app.get('/internacionales', (req, res) => {
-  res.sendFile(__dirname + '/Internacional.html');
+  res.render('internacional');
 });
 // Endpoint internacionales
 

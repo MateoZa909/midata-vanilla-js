@@ -75,6 +75,31 @@ app.get('/login-signup', (req, res) => {
 });
 // ENDPOINT INICIO SESION O REGISTRO
 
+app.post('/login', async (req, res) => {
+  const { correo, clave } = req.body;
+
+  try {
+      // Buscar al usuario por correo electrónico
+      dbUsuarios.query('SELECT * FROM USUARIOS_DATA WHERE CORREO = ?', [correo], async (error, results) => {
+          if (error) {
+              return res.status(500).json({ success: false, message: 'Error en la base de datos' });
+          }
+
+          // Si no se encuentra el usuario o la contraseña no coincide
+          if (!results.length || !(await bcryptjs.compare(clave, results[0].CONTRASENA))) {
+              return res.status(401).json({ success: false, message: 'Correo o contraseña incorrectos' });
+          }
+
+          // Usuario autenticado con éxito
+          console.log('Login exitoso');
+          res.status(200).json({ success: true, message: 'Login exitoso' });
+      });
+  } catch (error) {
+      console.error('Error en el login:', error);
+      res.status(500).json({ success: false, message: 'Error interno del servidor' });
+  }
+});
+
 // Ruta para procesar el formulario de registro
 app.post('/registro', async (req, res) => {
   const { nombre, correo, usuario, clave } = req.body;
@@ -99,7 +124,6 @@ app.post('/registro', async (req, res) => {
       res.status(500).json({ success: false, message: 'Error interno del servidor' });
   }
 });
-
 // Ruta para procesar el formulario de registro
 
 // ENDPOINT DEL GRÁFICO
@@ -151,29 +175,7 @@ db.connect(err => {
   console.log('Conectado a la base de datos MySQL');
 });
 
-app.post('/login', async (req, res) => {
-    // Obtener correo y contraseña del cuerpo de la solicitud
-    const { correo, clave } = req.body;
 
-    try {
-      // Buscar el usuario por correo en la base de datos
-      const result = dbUsuarios.query('SELECT NOMBRE, CORREO, NOMBRE_USUARIO, CONTRASENA FROM USUARIOS_DATA WHERE CORREO = ?', [correo]);
-      const usuario = result[0];
-
-      // Verificar si el usuario existe y la contraseña es correcta
-      if (usuario && await bcrypt.compare(clave, usuario.CONTRASENA)) {
-        // Inicio de sesión exitoso
-        res.status(200).json({ success: true, message: 'Inicio de sesión exitoso' });
-        // Aquí también podrías manejar la creación de sesiones o tokens
-      } else {
-        // Usuario no encontrado o contraseña incorrecta
-        res.status(401).json({ success: false, message: 'Correo o contraseña incorrectos' });
-      }
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ success: false, message: 'Error en el servidor' });
-    }
-});
 
 // ENDPOINT REGISTRO DATOS
 app.post('/registro', async (req, res) => {

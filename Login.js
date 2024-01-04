@@ -150,9 +150,8 @@ $('#btn-login').on('click', function(event) {
     event.preventDefault();
 
     // Obtener los valores de los campos de correo electrónico y contraseña
-    var correo = $("input[name='correo']").val();
-    var clave = $("input[name='clave']").val();
-
+    var correo = $("input[name='correo-login']").val();
+    var clave = $("input[name='pasw-login']").val();
 
     // Crear el objeto con los datos del usuario
     var loginData = {

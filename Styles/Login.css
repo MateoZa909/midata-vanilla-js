@@ -176,8 +176,8 @@ main {
     text-align: center;
 }
 
-.msg .empty-inputs {
-    margin-top: 12px;
+.msg .mensaje-error {
+    margin-top: 10px;
 }
 
 .name-warning, 

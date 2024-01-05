@@ -75,29 +75,34 @@ app.get('/login-signup', (req, res) => {
 });
 // ENDPOINT INICIO SESION O REGISTRO
 
-app.post('/login', async (req, res) => {
+// Ruta para procesar el formulario de inicio de sesion
+app.get('/login', async (req, res) => {
   const { correo, clave } = req.body;
 
   try {
-      // Buscar al usuario por correo electrónico
-      dbUsuarios.query('SELECT * FROM USUARIOS_DATA WHERE CORREO = ?', [correo], async (error, results) => {
-          if (error) {
-              return res.status(500).json({ success: false, message: 'Error en la base de datos' });
-          }
+        // Buscar al usuario por correo electrónico
+        dbUsuarios.query('SELECT * FROM USUARIOS_DATA WHERE CORREO = ?', [correo], async (error, results) => {
+            if (error) {
+                // Error en la consulta de la base de datos
+                console.error(error);
+                return res.status(500).json({ success: false, message: 'Error en la base de datos' });
+            }
 
-          // Si no se encuentra el usuario o la contraseña no coincide
-          if (!results.length || !(await bcryptjs.compare(clave, results[0].CONTRASENA))) {
-              return res.status(401).json({ success: false, message: 'Correo o contraseña incorrectos' });
-          }
-
-          // Usuario autenticado con éxito
-          console.log('Login exitoso');
-          res.status(200).json({ success: true, message: 'Login exitoso' });
-      });
-  } catch (error) {
-      console.error('Error en el login:', error);
-      res.status(500).json({ success: false, message: 'Error interno del servidor' });
-  }
+            // Verificar si se encontró el usuario y si la contraseña coincide
+            if (results.length > 0 && await bcryptjs.compare(clave, results[0].CONTRASENA)) {
+                // Usuario autenticado con éxito
+                console.log('Login exitoso');
+                res.status(200).json({ success: true, message: 'Login exitoso' });
+            } else {
+                // Usuario no encontrado o contraseña incorrecta
+                res.status(401).json({ success: false, message: 'Correo o contraseña incorrectos' });
+            }
+        });
+    } catch (error) {
+        // Error en la ejecución del servidor
+        console.error('Error en el login:', error);
+        res.status(500).json({ success: false, message: 'Error interno del servidor' });
+    }
 });
 
 // Ruta para procesar el formulario de registro

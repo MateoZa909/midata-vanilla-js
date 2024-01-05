@@ -146,7 +146,8 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-$('#btn-login').on('click', function(event) {
+// Funcion peticion al endpoint de inicio de sesion
+$('.form-login').on('submit', (event) => {
     event.preventDefault();
 
     // Obtener los valores de los campos de correo electrónico y contraseña
@@ -161,18 +162,16 @@ $('#btn-login').on('click', function(event) {
 
     // Realizar la solicitud AJAX POST
     $.ajax({
-        type: "POST",
-        url: "/login", // Asegúrate de que esta ruta coincida con tu endpoint del servidor
+        type: "GET",
+        url: "/login",
         data: JSON.stringify(loginData),
         contentType: "application/json",
         dataType: "json",
         success: function(response) {
-            // Manejar la respuesta del servidor en caso de éxito
             console.log("Inicio de sesión exitoso");
             // Aquí puedes redirigir al usuario o mostrar un mensaje de éxito
         },
         error: function(error) {
-            // Manejar errores en la solicitud AJAX
             console.error("Error en el inicio de sesión:", error.responseText);
             // Aquí puedes mostrar un mensaje de error
         }
@@ -180,7 +179,7 @@ $('#btn-login').on('click', function(event) {
 });
 
 // Funcion peticion al endpoint de registro de datos
-$(".form-register").on("submit", function(event) {
+$(".form-register").on("submit", (event) => {
     event.preventDefault();
 
     // Validación de los campos
@@ -188,12 +187,26 @@ $(".form-register").on("submit", function(event) {
     var correo = $("input[name='correo']").val().trim();
     var usuario = $("input[name='usuario']").val().trim();
     var clave = $("input[name='clave']").val().trim();
-
+    
     if (!nombre || !correo || !usuario || !clave) {
+        if (!nombre) {
+            $("input[name='nombre']").css('outline', '2px solid red');
+        }
+        if (!correo) {
+            $("input[name='correo']").css('outline', '2px solid red');
+        }
+        if (!usuario) {
+            $("input[name='usuario']").css('outline', '2px solid red');
+        }
+        if (!clave) {
+            $("input[name='clave']").css('outline', '2px solid red');
+        }
+
         $(".msg").html("<p class='mensaje-error'>Por favor, completa todos los campos.</p>")
-                .css("display", "flex")
-                .show();
-        setTimeout(function() { $(".msg").hide(); }, 3000);
+                 .css("display", "flex")
+                 .show();
+        setTimeout(() => { $(".msg").hide(); }, 3000);
+        
         return; // Detiene la ejecución si algún campo está vacío
     }
 
@@ -213,8 +226,8 @@ $(".form-register").on("submit", function(event) {
     .done(function(response) {
         console.log("Registro exitoso");
         $(".msg").html("<p>Registrado exitosamente!</p>")
-                .css("display", "flex")
-                .show();
+                 .css("display", "flex")
+                 .show();
         
         setTimeout(function() { $(".msg").hide(); }, 3000);
 
@@ -234,7 +247,10 @@ $(".form-register").on("submit", function(event) {
     });
 });
 
-
+// Evento eliminar outline de inputs
+$("input[name='nombre'], input[name='correo'], input[name='usuario'], input[name='clave']").on('input', function() {
+    $(this).css('outline', 'none');
+});
 
 btnRegister.addEventListener('click', Register);
 btnLogin.addEventListener('click', Login);

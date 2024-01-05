@@ -180,14 +180,28 @@ $('#btn-login').on('click', function(event) {
 });
 
 // Funcion peticion al endpoint de registro de datos
-$("#btn-register").on("click", function(event) {
+$(".form-register").on("submit", function(event) {
     event.preventDefault();
 
+    // Validación de los campos
+    var nombre = $("input[name='nombre']").val().trim();
+    var correo = $("input[name='correo']").val().trim();
+    var usuario = $("input[name='usuario']").val().trim();
+    var clave = $("input[name='clave']").val().trim();
+
+    if (!nombre || !correo || !usuario || !clave) {
+        $(".msg").html("<p class='mensaje-error'>Por favor, completa todos los campos.</p>")
+                .css("display", "flex")
+                .show();
+        setTimeout(function() { $(".msg").hide(); }, 3000);
+        return; // Detiene la ejecución si algún campo está vacío
+    }
+
     var userData = {
-        nombre: $("input[name='nombre']").val(),
-        correo: $("input[name='correo']").val(),
-        usuario: $("input[name='usuario']").val(),
-        clave: $("input[name='clave']").val()
+        nombre: nombre,
+        correo: correo,
+        usuario: usuario,
+        clave: clave
     };
 
     $.ajax({
@@ -203,7 +217,12 @@ $("#btn-register").on("click", function(event) {
                 .show();
         
         setTimeout(function() { $(".msg").hide(); }, 3000);
-    
+
+        // Limpiar los campos del formulario
+        $("input[name='nombre']").val('');
+        $("input[name='correo']").val('');
+        $("input[name='usuario']").val('');
+        $("input[name='clave']").val('');
     })
     .fail(function(error) {
         console.log("Error en el registro:", error.responseText);
@@ -214,6 +233,8 @@ $("#btn-register").on("click", function(event) {
         setTimeout(function() { $(".msg").hide(); }, 3000);
     });
 });
+
+
 
 btnRegister.addEventListener('click', Register);
 btnLogin.addEventListener('click', Login);

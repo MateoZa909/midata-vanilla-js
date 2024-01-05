@@ -176,6 +176,10 @@ main {
     text-align: center;
 }
 
+.msg .empty-inputs {
+    margin-top: 12px;
+}
+
 .name-warning, 
 .correo-warning, 
 .user-warning, 

@@ -146,7 +146,9 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-// Funcion peticion al endpoint de inicio de sesion
+// ************************************************
+// ***        (FALTA POR COMPLETAR)             ***
+// PETICION AL ENDPOINT DE LOGIN
 $('.form-login').on('submit', (event) => {
     event.preventDefault();
 
@@ -177,8 +179,13 @@ $('.form-login').on('submit', (event) => {
         }
     });
 });
+// PETICION AL ENDPOINT DE LOGIN
+/* ************************************************ 
+   ********************************************* */
 
-// Funcion peticion al endpoint de registro de datos
+// ******************************************
+// **            (FUNCIONA)                **
+// PETICION AL ENDPOINT DE REGISTRO
 $(".form-register").on("submit", (event) => {
     event.preventDefault();
 
@@ -246,11 +253,15 @@ $(".form-register").on("submit", (event) => {
         setTimeout(function() { $(".msg").hide(); }, 3000);
     });
 });
+// PETICION AL ENDPOINT DE REGISTRO
+// ++++++++++++++++++++++++++++++++++++++++++
 
-// Evento eliminar outline de inputs
-$("input[name='nombre'], input[name='correo'], input[name='usuario'], input[name='clave']").on('input', function() {
+// EVENTO ELIMINAR OUTLINE 
+$("input[name='nombre'], input[name='correo'], input[name='usuario'], input[name='clave']").on('input', () => {
     $(this).css('outline', 'none');
 });
+/* ************************************** 
+   ************************************** */
 
 btnRegister.addEventListener('click', Register);
 btnLogin.addEventListener('click', Login);

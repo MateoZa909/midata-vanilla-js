@@ -325,35 +325,5 @@ $("#togglePassword").on("click", function() {
 /* ************************************** 
    ************************************** */
 
-
-$("input[name='correo']").on('blur', function() {
-    var email = $(this).val().trim();
-  
-    if (email) { // Verificar que el email no esté vacío
-      $.ajax({
-        type: "POST",
-        url: "/check-email",
-        data: { email: email },
-        dataType: "json"
-      })
-      .done(function(response) {
-        if (response.isAvailable) {
-          // El correo electrónico está disponible
-          // Aquí puedes realizar acciones como habilitar un botón de envío
-        } else {
-            $(".msg").html("<p>Correo en uso</p>")
-            .css("display", "flex")
-            .show();
-        }
-      })
-      .fail(function(error) {
-        console.log("Error al verificar el correo electrónico:", error.responseText);
-        // Manejar el error aquí
-      });
-    }
-  });
-  
-
-
 btnRegister.addEventListener('click', Register);
 btnLogin.addEventListener('click', Login);

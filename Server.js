@@ -100,7 +100,7 @@ app.get('/login-signup', (req, res) => {
 
 
 // ***************************************************
-// ***          (FALTA POR COMPLETAR)              ***
+// ***              (FUNCIONA)                     ***
 // Ruta para procesar el formulario de inicio de sesion 
 app.post('/login', async (req, res) => {
   const { 'correo-login': correo, 'pasw-login': clave } = req.body;
@@ -296,6 +296,25 @@ app.get('/internacionales', (req, res) => {
   res.render('internacional');
 });
 // ENDPOINT INTERNACIONALES
+/* ************************************** 
+   ************************************** */
+
+
+// **************************************
+// **          (FUNCIONA)              **
+// ENDPOINT CERRAR SESIÓN
+app.post('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.log('Error al cerrar sesión:', err);
+      res.status(500).json({ success: false, message: 'Error al cerrar sesión' });
+    } else {
+      // Enviar una respuesta al cliente indicando que la sesión se cerró con éxito
+      res.status(200).json({ success: true, message: 'Sesión cerrada con éxito' });
+    }
+  });
+});
+// ENDPOINT CERRAR SESIÓN
 /* ************************************** 
    ************************************** */
 

@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function() {
 // ************************************************
 // ***        (FALTA POR COMPLETAR)             ***
 // PETICION AL ENDPOINT DE LOGIN
-$(".form-login").on("submit", (event) => {
+$('.form-login').on('submit', (event) => {
     event.preventDefault();
 
     // Obtener los valores de los campos del formulario
@@ -190,13 +190,16 @@ $(".form-login").on("submit", (event) => {
     })
     .fail(function(error) {
         console.log("Error en el inicio de sesión:", error.responseText);
-        $(".msg").html("<p>Error en el inicio de sesión</p>")
+        $(".msg").html("<p>Correo o contraseña no validos</p>")
                 .css("display", "flex")
                 .show();
     
         setTimeout(function() { $(".msg").hide(); }, 3000);
     });
 });
+// PETICION AL ENDPOINT DE LOGIN
+/* ************************************************ 
+   ********************************************* */
 
 // PETICION AL ENDPOINT DE LOGIN
 /* ************************************************ 
@@ -281,6 +284,24 @@ $("input[name='nombre'], input[name='correo'], input[name='usuario'], input[name
 });
 /* ************************************** 
    ************************************** */
+
+// 
+$("#togglePassword").on("click", function() {
+    // Obtener el input de contraseña
+    var passwordInput = $("input[name='pasw-login']")
+    var eyeIcon = $("#eyeIcon")
+
+    // Verificar si el tipo es password o text
+    if (passwordInput.attr("type") === "password") {
+        passwordInput.attr("type", "text");
+        eyeIcon.attr("src", "./assets/ver.png");
+
+    } else {
+        passwordInput.attr("type", "password");
+        eyeIcon.attr("src", "./assets/ojo-cerrado.png");
+    }
+});
+
 
 btnRegister.addEventListener('click', Register);
 btnLogin.addEventListener('click', Login);

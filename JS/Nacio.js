@@ -121,23 +121,18 @@ $.ajax({
 });
 });
 
-const internationalButton = document.querySelector('#internacionales');
-internationalButton.addEventListener('click', () => {
-  // Realizar una solicitud GET al endpoint
-  fetch('http://localhost:3000/internacionales', {
-      method: 'GET'
-  })
-  .then(response => {
-      // Verificar si la solicitud fue exitosa (código de respuesta 200)
-      if (response.ok) {
-          // Puedes hacer algo en función de la respuesta aquí
-          // Por ejemplo, redirigir a otra página
-          window.location.href = 'Internacional.html';
-      } else {
-          console.error('La solicitud no fue exitosa');
-      }
-  })
-  .catch(error => {
-      console.error('Error en la solicitud:', error);
-  });
+$("#btn-logout").on("click", function() {
+    $.ajax({
+        type: "POST",
+        url: "/logout",
+        dataType: "json"
+    })
+    .done(function(response) {
+        // Redirigir al usuario a la página de inicio de sesión
+        window.location.href = '/login-signup';
+    })
+    .fail(function(error) {
+        console.log("Error al cerrar sesión:", error.responseText);
+        // Manejar el error aquí
+    });
 });

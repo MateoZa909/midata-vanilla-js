@@ -751,11 +751,33 @@ thead th {
 /********************************************++ */
 
 /* up-section 3 column empty */
-.up-section .contain-empty {
-    opacity: 0;
+.up-section .back-btn-log-out {
+    /* background-color: lightblue; */
+    display: flex;
+    justify-content: end;
+}
+
+.up-section .back-btn-log-out button {
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    margin-top: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-top-left-radius: 8px;
+    border: none;
+}
+
+.up-section .back-btn-log-out button:active {
+    transform: scale(.97);
+}
+
+.up-section .back-btn-log-out button img {
+    width: 35px;
 }
 /* up-section 3 column empty */
-
 
 /* settings section */
 .settings-section {

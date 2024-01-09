@@ -146,25 +146,39 @@ app.post('/registro', async (req, res) => {
   const { nombre, correo, usuario, clave } = req.body;
 
   try {
-      let passwordHash = await bcryptjs.hash(clave, 8);
-
-      dbMyData.query('INSERT INTO USUARIOS_DATA (NOMBRE, CORREO, NOMBRE_USUARIO, CONTRASENA) VALUES (?, ?, ?, ?)', 
-      [nombre, correo, usuario, passwordHash], (error, results) => {
+      // Primero, verifica si ya existe un usuario con ese correo electrónico
+      dbMyData.query('SELECT * FROM USUARIOS_DATA WHERE CORREO = ?', [correo], async (error, results) => {
           if (error) {
-              // Error en la inserción
-              console.error(error);
-              res.status(500).json({ success: false, message: 'Error en la inserción' });
-          } else {
-              // Inserción exitosa
-              console.log('Registro exitoso');
-              res.status(200).json({ success: true, message: 'Registro exitoso' });
+              console.error('Error al buscar el usuario:', error);
+              return res.status(500).json({ success: false, message: 'Error al buscar el usuario' });
           }
+          
+          if (results.length > 0) {
+              // Si se encuentra un usuario con ese correo, no se procede con el registro
+              return res.status(409).json({ success: false, message: 'El correo ya está registrado' });
+          }
+
+          // Si no se encuentra el correo, procede con el hash de la contraseña y el registro
+          let passwordHash = await bcryptjs.hash(clave, 8);
+          dbMyData.query('INSERT INTO USUARIOS_DATA (NOMBRE, CORREO, NOMBRE_USUARIO, CONTRASENA) VALUES (?, ?, ?, ?)', 
+          [nombre, correo, usuario, passwordHash], (error, results) => {
+              if (error) {
+                  // Error en la inserción
+                  console.error(error);
+                  res.status(500).json({ success: false, message: 'Error en la inserción' });
+              } else {
+                  // Inserción exitosa
+                  console.log('Registro exitoso');
+                  res.status(200).json({ success: true, message: 'Registro exitoso' });
+              }
+          });
       });
   } catch (error) {
-      console.error('Error al hashear la contraseña:', error);
+      console.error('Error al procesar el registro:', error);
       res.status(500).json({ success: false, message: 'Error interno del servidor' });
   }
 });
+
 // RUTA PARA PROCESAR EL FORMULARIO DE REGISTROS
 /* ************************************** ****** 
    ****************************************** */
@@ -317,6 +331,39 @@ app.post('/logout', (req, res) => {
 // ENDPOINT CERRAR SESIÓN
 /* ************************************** 
    ************************************** */
+
+// **************************************
+// **          (FUNCIONA)              **
+// ENDPOINT VALIDAR CORREO
+// app.post('/check-email', async (req, res) => {
+//   const { email } = req.body;
+
+//   try {
+//     const userExists = await db.query('SELECT * FROM USUARIOS_DATA WHERE CORREO = ?', [email]);
+
+//     if (userExists.length > 0) {
+//       // Si ya existe un usuario con ese correo electrónico
+//       res.json({ isAvailable: false });
+//     } else {
+//       // Si no existe un usuario con ese correo electrónico
+//       res.json({ isAvailable: true });
+//     }
+//   } catch (error) {
+//     console.error('Error al verificar el correo electrónico:', error);
+//     res.status(500).send('Error interno del servidor');
+//   }
+// });
+
+// ENDPOINT VALIDAR CORREO
+/* ************************************** 
+   ************************************** */
+
+
+
+
+
+
+
 
 // **************************************
 // ***   (FALTA POR COMPLETAR)        ***

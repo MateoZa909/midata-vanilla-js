@@ -253,26 +253,44 @@ $(".form-register").on("submit", (event) => {
         dataType: "json"
     })
     .done(function(response) {
-        console.log("Registro exitoso");
-        $(".msg").html("<p>Registrado exitosamente!</p>")
-                 .css("display", "flex")
-                 .show();
-        
-        setTimeout(function() { $(".msg").hide(); }, 3000);
+        if (response.success) {
+            // Registro exitoso
+            console.log("Registro exitoso");
+            $(".msg").html("<p>Registrado exitosamente!</p>")
+                     .css("display", "flex")
+                     .show();
 
-        // Limpiar los campos del formulario
-        $("input[name='nombre']").val('');
-        $("input[name='correo']").val('');
-        $("input[name='usuario']").val('');
-        $("input[name='clave']").val('');
+            // Limpiar los campos del formulario
+            $("input[name='nombre']").val('');
+            $("input[name='correo']").val('');
+            $("input[name='usuario']").val('');
+            $("input[name='clave']").val('');
+
+            // Redireccionar o actualizar la UI según sea necesario aquí
+
+        } else {
+            // El servidor respondió que el correo ya está en uso u otro error de validación
+            console.log(response.message);
+            $(".msg").html(`<p class='mensaje-error'>${response.message}</p>`)
+                     .css("display", "flex")
+                     .show();
+        }
+        setTimeout(() => { $(".msg").hide(); }, 3000);
     })
-    .fail(function(error) {
-        console.log("Error en el registro:", error.responseText);
-        $(".msg").html("<p>Error en el registro</p>")
-                .css("display", "flex")
-                .show();
-    
-        setTimeout(function() { $(".msg").hide(); }, 3000);
+    .fail(function(jqXHR, textStatus, errorThrown) {
+        // Maneja diferentes tipos de errores
+        if(jqXHR.status === 409) {
+            // Conflict error code
+            $(".msg").html("<p class='mensaje-error'>Este correo electrónico ya está registrado.</p>")
+                    .css("display", "flex")
+                    .show();
+        } else {
+            // Otros códigos de error
+            $(".msg").html("<p class='mensaje-error'>Error en el registro: " + textStatus + "</p>")
+                    .css("display", "flex")
+                    .show();
+        }
+        setTimeout(() => { $(".msg").hide(); }, 3000);
     });
 });
 // PETICION AL ENDPOINT DE REGISTRO
@@ -306,6 +324,35 @@ $("#togglePassword").on("click", function() {
 // VER CONTRASEÑA
 /* ************************************** 
    ************************************** */
+
+
+$("input[name='correo']").on('blur', function() {
+    var email = $(this).val().trim();
+  
+    if (email) { // Verificar que el email no esté vacío
+      $.ajax({
+        type: "POST",
+        url: "/check-email",
+        data: { email: email },
+        dataType: "json"
+      })
+      .done(function(response) {
+        if (response.isAvailable) {
+          // El correo electrónico está disponible
+          // Aquí puedes realizar acciones como habilitar un botón de envío
+        } else {
+            $(".msg").html("<p>Correo en uso</p>")
+            .css("display", "flex")
+            .show();
+        }
+      })
+      .fail(function(error) {
+        console.log("Error al verificar el correo electrónico:", error.responseText);
+        // Manejar el error aquí
+      });
+    }
+  });
+  
 
 
 btnRegister.addEventListener('click', Register);

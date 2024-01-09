@@ -285,7 +285,9 @@ $("input[name='nombre'], input[name='correo'], input[name='usuario'], input[name
 /* ************************************** 
    ************************************** */
 
-// 
+/* ************************************** 
+   ************************************** */
+// VER CONTRASEÑA
 $("#togglePassword").on("click", function() {
     // Obtener el input de contraseña
     var passwordInput = $("input[name='pasw-login']")
@@ -301,6 +303,9 @@ $("#togglePassword").on("click", function() {
         eyeIcon.attr("src", "./assets/ojo-cerrado.png");
     }
 });
+// VER CONTRASEÑA
+/* ************************************** 
+   ************************************** */
 
 
 btnRegister.addEventListener('click', Register);

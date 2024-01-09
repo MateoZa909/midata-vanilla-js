@@ -121,6 +121,7 @@ $.ajax({
 });
 });
 
+// Solicitud Ajax cerrar sesión
 $("#btn-logout").on("click", function() {
     $.ajax({
         type: "POST",

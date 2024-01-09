@@ -146,39 +146,65 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-// Funcion peticion al endpoint de inicio de sesion
-$('.form-login').on('submit', (event) => {
+// ************************************************
+// ***        (FALTA POR COMPLETAR)             ***
+// PETICION AL ENDPOINT DE LOGIN
+$(".form-login").on("submit", (event) => {
     event.preventDefault();
 
-    // Obtener los valores de los campos de correo electrónico y contraseña
-    var correo = $("input[name='correo-login']").val();
-    var clave = $("input[name='pasw-login']").val();
+    // Obtener los valores de los campos del formulario
+    var correo = $("input[name='correo-login']").val().trim();
+    var clave = $("input[name='pasw-login']").val().trim();
+    
+    // Validar si los campos están vacíos
+    if (!correo || !clave) {
+        if (!correo) {
+            $("input[name='correo-login']").css('outline', '2px solid red');
+        }
+        if (!clave) {
+            $("input[name='pasw-login']").css('outline', '2px solid red');
+        }
 
-    // Crear el objeto con los datos del usuario
+        $(".msg").html("<p class='mensaje-error'>Por favor, completa todos los campos.</p>")
+                 .css("display", "flex")
+                 .show();
+        setTimeout(() => { $(".msg").hide(); }, 3000);
+        
+        return; // Detiene la ejecución si algún campo está vacío
+    }
+
     var loginData = {
-        correo: correo,
-        clave: clave
+        'correo-login': correo,
+        'pasw-login': clave
     };
 
-    // Realizar la solicitud AJAX POST
     $.ajax({
-        type: "GET",
+        type: "POST",
         url: "/login",
-        data: JSON.stringify(loginData),
-        contentType: "application/json",
-        dataType: "json",
-        success: function(response) {
-            console.log("Inicio de sesión exitoso");
-            // Aquí puedes redirigir al usuario o mostrar un mensaje de éxito
-        },
-        error: function(error) {
-            console.error("Error en el inicio de sesión:", error.responseText);
-            // Aquí puedes mostrar un mensaje de error
-        }
+        data: loginData,
+        dataType: "json"
+    })
+    .done(function(response) {
+        console.log("Inicio de sesión exitoso");
+        window.location.href = '/nacionales';
+    })
+    .fail(function(error) {
+        console.log("Error en el inicio de sesión:", error.responseText);
+        $(".msg").html("<p>Error en el inicio de sesión</p>")
+                .css("display", "flex")
+                .show();
+    
+        setTimeout(function() { $(".msg").hide(); }, 3000);
     });
 });
 
-// Funcion peticion al endpoint de registro de datos
+// PETICION AL ENDPOINT DE LOGIN
+/* ************************************************ 
+   ********************************************* */
+
+// ******************************************
+// **            (FUNCIONA)                **
+// PETICION AL ENDPOINT DE REGISTRO
 $(".form-register").on("submit", (event) => {
     event.preventDefault();
 
@@ -246,11 +272,15 @@ $(".form-register").on("submit", (event) => {
         setTimeout(function() { $(".msg").hide(); }, 3000);
     });
 });
+// PETICION AL ENDPOINT DE REGISTRO
+// ++++++++++++++++++++++++++++++++++++++++++
 
-// Evento eliminar outline de inputs
+// EVENTO ELIMINAR OUTLINE 
 $("input[name='nombre'], input[name='correo'], input[name='usuario'], input[name='clave']").on('input', function() {
     $(this).css('outline', 'none');
 });
+/* ************************************** 
+   ************************************** */
 
 btnRegister.addEventListener('click', Register);
 btnLogin.addEventListener('click', Login);

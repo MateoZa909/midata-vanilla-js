@@ -36,7 +36,10 @@ app.use(session({
   saveUninitialized: true
 }));
 
-const dbYearAndMonth = mysql.createConnection({
+/* **********************************
+    Conexiones a las bases de datos
+************************************* */
+const dbMyData = mysql.createConnection({
   host: '72.167.77.8',
   port: 3306,
   user: 'IT_USER',
@@ -44,7 +47,7 @@ const dbYearAndMonth = mysql.createConnection({
   database: 'MY_DATA'
 });
 
-dbYearAndMonth.connect(err => {
+dbMyData.connect(err => {
   if (err) {
       console.error('Error al conectar a la base de datos:', err);
       return;
@@ -52,117 +55,8 @@ dbYearAndMonth.connect(err => {
   console.log(`Conectado a la base de datos MySQL USUARIOS_DATA con las tablas CRECIMIENTO_ANO Y CRECIMIENTO_MES`);
 });
 
-// TABLA USUARIOS_DATA
-const dbUsuarios = mysql.createConnection({
-  host: '72.167.77.8',
-  port: 3306,
-  user: 'IT_USER',
-  password: '{Nd8=[So7Uk3',
-  database: 'MY_DATA'
-});
-
-dbUsuarios.connect(err => {
-  if (err) {
-      console.error('Error al conectar a la base de datos:', err);
-      return;
-  }
-  console.log(`Conectado a la base de datos MySQL USUARIOS_DATA`);
-});
-
-// ENDPOINT INICIO SESION O REGISTRO
-app.get('/login-signup', (req, res) => {
-  res.sendFile(__dirname + '/Login.html');
-});
-// ENDPOINT INICIO SESION O REGISTRO
-
-// Ruta para procesar el formulario de inicio de sesion
-app.get('/login', async (req, res) => {
-  const { correo, clave } = req.body;
-
-  try {
-        // Buscar al usuario por correo electrónico
-        dbUsuarios.query('SELECT * FROM USUARIOS_DATA WHERE CORREO = ?', [correo], async (error, results) => {
-            if (error) {
-                // Error en la consulta de la base de datos
-                console.error(error);
-                return res.status(500).json({ success: false, message: 'Error en la base de datos' });
-            }
-
-            // Verificar si se encontró el usuario y si la contraseña coincide
-            if (results.length > 0 && await bcryptjs.compare(clave, results[0].CONTRASENA)) {
-                // Usuario autenticado con éxito
-                console.log('Login exitoso');
-                res.status(200).json({ success: true, message: 'Login exitoso' });
-            } else {
-                // Usuario no encontrado o contraseña incorrecta
-                res.status(401).json({ success: false, message: 'Correo o contraseña incorrectos' });
-            }
-        });
-    } catch (error) {
-        // Error en la ejecución del servidor
-        console.error('Error en el login:', error);
-        res.status(500).json({ success: false, message: 'Error interno del servidor' });
-    }
-});
-
-// Ruta para procesar el formulario de registro
-app.post('/registro', async (req, res) => {
-  const { nombre, correo, usuario, clave } = req.body;
-
-  try {
-      let passwordHash = await bcryptjs.hash(clave, 8);
-
-      dbUsuarios.query('INSERT INTO USUARIOS_DATA (NOMBRE, CORREO, NOMBRE_USUARIO, CONTRASENA) VALUES (?, ?, ?, ?)', 
-      [nombre, correo, usuario, passwordHash], (error, results) => {
-          if (error) {
-              // Error en la inserción
-              console.error(error);
-              res.status(500).json({ success: false, message: 'Error en la inserción' });
-          } else {
-              // Inserción exitosa
-              console.log('Registro exitoso');
-              res.status(200).json({ success: true, message: 'Registro exitoso' });
-          }
-      });
-  } catch (error) {
-      console.error('Error al hashear la contraseña:', error);
-      res.status(500).json({ success: false, message: 'Error interno del servidor' });
-  }
-});
-// Ruta para procesar el formulario de registro
-
-// ENDPOINT DEL GRÁFICO
-app.get('/chart-data', (req, res) => {
-  // Consulta a la base de datos
-  let sql = 'SELECT ANO, NUM_ANO, NUM_MES FROM ANO_MES';
-  dbYearAndMonth.query(sql, (err, result) => {
-      if (err) throw err;
-
-      // Enviar los resultados como JSON
-      res.json(result);
-  });
-});
-// ENDPOINT DEL GRÁFICO
-
-// BASE DE DATOS CAMPAÑA
-const dbCampañas = mysql.createConnection({
-  host: '72.167.77.8',
-  port: 3306,
-  user: 'IT_USER',
-  password: '{Nd8=[So7Uk3',
-  database: 'MY_DATA'
-});
-
-dbCampañas.connect(err => {
-  if (err) {
-      console.error('Error al conectar a la base de datos:', err);
-      return;
-  }
-  console.log(`Conectado a la base de datos MySQL MY_DATA`);
-});
-
 // BASE DE DATOS CGN_LLAMADAS_INBOUND
-// Configuración de la base de datos
+// CONFIGURACION BASE DE DATOS 
 const db = mysql.createConnection({
   host: '72.167.77.8',
   port: 3306,
@@ -179,9 +73,122 @@ db.connect(err => {
   }
   console.log('Conectado a la base de datos MySQL');
 });
+/* **********************************
+*************************************
+    Conexiones a las bases de datos
+************************************* 
+************************************ */
 
 
+/* **********************************
+*************************************
+             ENDPOINTS
+************************************* 
+************************************ */
 
+
+// **************************************
+// **          (FUNCIONA)              **
+// **************************************
+// ENDPOINT INICIO SESION O REGISTRO
+app.get('/login-signup', (req, res) => {
+  res.render('login');
+});
+// ENDPOINT INICIO SESION O REGISTRO
+/* ************************************** 
+   ************************************** */
+
+
+// ***************************************************
+// ***          (FALTA POR COMPLETAR)              ***
+// Ruta para procesar el formulario de inicio de sesion 
+app.post('/login', async (req, res) => {
+  const { 'correo-login': correo, 'pasw-login': clave } = req.body;
+
+  try {
+      // Buscar el usuario por correo electrónico
+      dbMyData.query('SELECT * FROM USUARIOS_DATA WHERE CORREO = ?', [correo], async (error, results) => {
+          if (error) {
+              console.error(error);
+              return res.status(500).json({ success: false, message: 'Error al buscar el usuario' });
+          }
+
+          if (results.length === 0) {
+              return res.status(401).json({ success: false, message: 'Usuario no encontrado' });
+          }
+
+          // Comprobar si la contraseña es correcta
+          const esValido = await bcryptjs.compare(clave, results[0].CONTRASENA);
+
+          if (esValido) {
+              // Iniciar sesión exitosa
+              console.log('Inicio de sesión exitoso');
+              res.status(200).json({ success: true, message: 'Inicio de sesión exitoso' });
+          } else {
+              // Contraseña incorrecta
+              res.status(401).json({ success: false, message: 'Contraseña incorrecta' });
+          }
+      });
+  } catch (error) {
+      console.error('Error en el inicio de sesión:', error);
+      res.status(500).json({ success: false, message: 'Error interno del servidor' });
+  }
+});
+
+/* **************************************************** 
+   **************************************************  */
+
+
+// *********************************************
+// **               (FUNCIONA)                **
+// RUTA PARA PROCESAR EL FORMULARIO DE REGISTROS
+app.post('/registro', async (req, res) => {
+  const { nombre, correo, usuario, clave } = req.body;
+
+  try {
+      let passwordHash = await bcryptjs.hash(clave, 8);
+
+      dbMyData.query('INSERT INTO USUARIOS_DATA (NOMBRE, CORREO, NOMBRE_USUARIO, CONTRASENA) VALUES (?, ?, ?, ?)', 
+      [nombre, correo, usuario, passwordHash], (error, results) => {
+          if (error) {
+              // Error en la inserción
+              console.error(error);
+              res.status(500).json({ success: false, message: 'Error en la inserción' });
+          } else {
+              // Inserción exitosa
+              console.log('Registro exitoso');
+              res.status(200).json({ success: true, message: 'Registro exitoso' });
+          }
+      });
+  } catch (error) {
+      console.error('Error al hashear la contraseña:', error);
+      res.status(500).json({ success: false, message: 'Error interno del servidor' });
+  }
+});
+// RUTA PARA PROCESAR EL FORMULARIO DE REGISTROS
+/* ************************************** ****** 
+   ****************************************** */
+
+
+// **************************************
+// **          (FUNCIONA)              **
+// ENDPOINT DEL GRÁFICO
+app.get('/chart-data', (req, res) => {
+  // Consulta a la base de datos
+  let sql = 'SELECT ANO, NUM_ANO, NUM_MES FROM ANO_MES';
+  dbMyData.query(sql, (err, result) => {
+      if (err) throw err;
+
+      // Enviar los resultados como JSON
+      res.json(result);
+  });
+});
+// ENDPOINT DEL GRÁFICO
+/* ************************************** 
+   ************************************** */
+
+// **************************************
+// **          (FUNCIONA)              **
 // ENDPOINT REGISTRO DATOS
 app.post('/registro', async (req, res) => {
   const { nombre, correo, usuario, clave } = req.body;
@@ -189,7 +196,7 @@ app.post('/registro', async (req, res) => {
   try {
       let passwordHash = await bcryptjs.hash(clave, 8); // Asegúrate de que bcryptjs está correctamente importado
 
-      dbUsuarios.query('INSERT INTO USUARIOS_DATA SET ?', { nombre: nombre, correo: correo, usuario: usuario, contrasena: passwordHash }, 
+      db.query('INSERT INTO USUARIOS_DATA SET ?', { nombre: nombre, correo: correo, usuario: usuario, contrasena: passwordHash }, 
       (error, results) => {
           if (error) {
               console.error(error);
@@ -204,10 +211,13 @@ app.post('/registro', async (req, res) => {
       res.status(500).json({ success: false, message: 'Error interno del servidor' });
   }
 });
+/* ************************************** 
+   ************************************** */
 
-// ENDPOINT REGISTRO DATOS
 
-// Endpoint 5 registros
+// **************************************
+// **          (FUNCIONA)              **
+// ENDPOINT 5 REGISTROS
 app.get('/5/registros', (req, res) => {
   const query = 'SELECT * FROM CGN_LLAMADAS_INBOUND LIMIT 5'; 
 
@@ -222,9 +232,14 @@ app.get('/5/registros', (req, res) => {
       }
   });
 });
-// Endpoint 5 registros
+// ENDPOINT 5 REGISTROS
+/* ************************************** 
+   ************************************** */
 
-// Endpoint 10 registros
+
+// **************************************
+// **          (FUNCIONA)              **
+// ENDPOINT 10 REGISTROS
 app.get('/10/registros', (req, res) => {
   const query = 'SELECT * FROM CGN_LLAMADAS_INBOUND LIMIT 10'; 
 
@@ -239,9 +254,13 @@ app.get('/10/registros', (req, res) => {
       }
   });
 });
-// Endpoint 10 registros
+// ENDPOINT 10 REGISTROS
+/* ************************************** 
+   ************************************** */
 
-// Endpoint 25 registros
+// **************************************
+// **          (FUNCIONA)              **
+// ENDPOINT 25 REGISTROS
 app.get('/25/registros', (req, res) => {
   const query = 'SELECT * FROM CGN_LLAMADAS_INBOUND LIMIT 25'; 
 
@@ -256,21 +275,33 @@ app.get('/25/registros', (req, res) => {
       }
   });
 });
-// Endpoint 25 registros
+// ENDPOINT 25 REGISTROS
+/* ************************************** 
+   ************************************** */
 
-// Endpoint nacionales
+// **************************************
+// **          (FUNCIONA)              **
+// ENDPOINT PAGINA NACIONALES
 app.get('/nacionales', (req, res) => {
   res.render('nacional')
 });
-// Endpoint nacionales
+// ENDPOINT PAGINA NACIONALES
+/* ************************************** 
+   ************************************** */
 
-// Endpoint internacionales
+// **************************************
+// **          (FUNCIONA)              **
+// ENDPOINT INTERNACIONALES
 app.get('/internacionales', (req, res) => {
   res.render('internacional');
 });
-// Endpoint internacionales
+// ENDPOINT INTERNACIONALES
+/* ************************************** 
+   ************************************** */
 
-// Añadir
+// **************************************
+// ***   (FALTA POR COMPLETAR)        ***
+// AÑADIR CAMPAÑA
 app.post('/añadir-campaña', (req, res) => {
   // Valores para el nuevo registro
   const valor1 = 'Valor1'; // Reemplaza con el valor real para columna1
@@ -297,9 +328,14 @@ app.post('/añadir-campaña', (req, res) => {
   // Envía una respuesta de éxito
   res.status(200).json({ mensaje: 'Contenido actualizado con éxito' });
 });
-// Añadir
+// AÑADIR CAMPAÑA
+/* ************************************** 
+   ************************************** */
 
-// Eliminar
+
+// **************************************
+// ***   (FALTA POR COMPLETAR)        ***
+// ELIMINAR CAMPAÑA
 app.post('/eliminar-campaña', (req, res) => {
   // ID del registro que deseas eliminar
   const idAeliminar = 1; // Reemplaza esto con el ID real del registro que deseas eliminar
@@ -324,16 +360,26 @@ app.post('/eliminar-campaña', (req, res) => {
   // Envía una respuesta de éxito
   res.status(200).json({ mensaje: 'Contenido actualizado con éxito' });
 });
-// Eliminar
+// ELIMINAR CAMPAÑA
+/* ************************************** 
+   ************************************** */
 
-// ACTUALIZAR 
-// Ruta para servir la página de configuración
+
+// **************************************
+// ***   (FALTA POR COMPLETAR)        ***
+// ACTUALIZAR
+// ENDPOINT DE CONFIGURACION 
 app.get('/configuracion', (req, res) => {
   // Asegúrate de que el archivo "configuracion.html" esté en la ubicación correcta
   res.sendFile(__dirname + '/Configuracion.html');
 });
+/* ************************************** 
+   ************************************** */
 
-// Endpoint para manejar las solicitudes relacionadas con la configuración
+
+// **************************************
+// ***   (FALTA POR COMPLETAR)        ***
+// ENDPOINT PARA MANEJAR SOLICITUDES RELACIONADAS CON LA CONFIGURACION
 app.post('/api/configuracion', (req, res) => {
   // ID del registro que deseas actualizar
   const idActualizar = 1; // Reemplaza esto con el ID real del registro que deseas actualizar
@@ -359,6 +405,9 @@ app.post('/api/configuracion', (req, res) => {
   res.status(200).json({ mensaje: 'Configuración actualizada con éxito' });
 });
 // ACTUALIZAR 
+// ENDPOINT PARA MANEJAR SOLICITUDES RELACIONADAS CON LA CONFIGURACION
+/* ************************************** 
+   ************************************** */
 
 app.listen(port, () => {
     console.log(`Servidor Node.js escuchando en el puerto ${port}`);

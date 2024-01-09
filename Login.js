@@ -201,9 +201,14 @@ $('.form-login').on('submit', (event) => {
 /* ************************************************ 
    ********************************************* */
 
+// EVENTO ELIMINAR OUTLINE 
+$("input[name='correo-login'], input[name='pasw-login']").on('input', function() {
+    $(this).css('outline', 'none');
+});
 // PETICION AL ENDPOINT DE LOGIN
 /* ************************************************ 
    ********************************************* */
+
 
 // ******************************************
 // **            (FUNCIONA)                **

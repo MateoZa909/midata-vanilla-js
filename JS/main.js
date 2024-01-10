@@ -121,52 +121,6 @@ $('#btn-twenty-five').click(function() {
   });
 });
 
-// Función para cargar contenido de nacionales
-const nationalButton = document.querySelector('.nationals');
-nationalButton.addEventListener('click', () => {
-  // Realizar una solicitud GET al endpoint
-  fetch('http://localhost:3000/nacionales', {
-      method: 'GET'
-  })
-  .then(response => {
-      // Verificar si la solicitud fue exitosa (código de respuesta 200)
-      if (response.ok) {
-          // Puedes hacer algo en función de la respuesta aquí
-          // Por ejemplo, redirigir a otra página
-          window.location.href = 'Nacional.html';
-      } else {
-          console.error('La solicitud no fue exitosa');
-      }
-  })
-  .catch(error => {
-      console.error('Error en la solicitud:', error);
-  });
-});
-// Función para cargar contenido de nacionales
-
-// Función para cargar contenido de internacionales
-const internationalButton = document.querySelector('.international');
-internationalButton.addEventListener('click', () => {
-  // Realizar una solicitud GET al endpoint
-  fetch('http://localhost:3000/internacionales', {
-      method: 'GET'
-  })
-  .then(response => {
-      // Verificar si la solicitud fue exitosa (código de respuesta 200)
-      if (response.ok) {
-          // Puedes hacer algo en función de la respuesta aquí
-          // Por ejemplo, redirigir a otra página
-          window.location.href = 'Internacional.html';
-      } else {
-          console.error('La solicitud no fue exitosa');
-      }
-  })
-  .catch(error => {
-      console.error('Error en la solicitud:', error);
-  });
-});
-// Función para cargar contenido de internacionales
-
 // Funcion para agregar campaña 
 $(document).ready(function() {
     $('.back-add').on('click', function() {

@@ -298,15 +298,16 @@ $(".form-register").on("submit", (event) => {
         setTimeout(() => { $(".msg").hide(); }, 3000);
     });
 });
-// PETICION AL ENDPOINT DE REGISTRO
-// ++++++++++++++++++++++++++++++++++++++++++
+
 
 // EVENTO ELIMINAR OUTLINE 
 $("input[name='nombre'], input[name='correo'], input[name='usuario'], input[name='clave']").on('input', function() {
     $(this).css('outline', 'none');
 });
+// PETICION AL ENDPOINT DE REGISTRO
 /* ************************************** 
    ************************************** */
+
 
 /* ************************************** 
    ************************************** */

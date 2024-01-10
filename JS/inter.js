@@ -122,24 +122,17 @@ $.ajax({
 });
 
 // Función para cargar contenido de nacionales
-const nationalButton = document.querySelector('#nacionales');
-nationalButton.addEventListener('click', () => {
-// Realizar una solicitud GET al endpoint
-fetch('http://localhost:3000/nacionales', {
-    method: 'GET'
-})
-.then(response => {
-    // Verificar si la solicitud fue exitosa (código de respuesta 200)
-    if (response.ok) {
-        // Puedes hacer algo en función de la respuesta aquí
-        // Por ejemplo, redirigir a otra página
-        window.location.href = 'Nacional.html';
-    } else {
-        console.error('La solicitud no fue exitosa');
-    }
-})
-.catch(error => {
-    console.error('Error en la solicitud:', error);
-});
+$('#nacionales').click(function() {
+    $.ajax({
+        url: '/nacionales',
+        type: 'GET',
+        success: function(response) {
+            window.location.href = '/nacionales'
+            console.log('Respuesta recibida:', response);
+        },
+        error: function(xhr, status, error) {
+            console.error('Error en la petición AJAX:', error);
+        }
+    });
 });
 // Función para cargar contenido de nacionales

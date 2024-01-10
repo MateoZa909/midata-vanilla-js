@@ -36,7 +36,7 @@ $('.get-five').click(function() {
             console.error('Error al obtener los últimos 5 registros:', error);
         }
     });
-    });
+});
     
 // Solicitud Ajax 10 regisrors
 $('.get-ten').click(function() {
@@ -135,5 +135,20 @@ $("#btn-logout").on("click", function() {
     .fail(function(error) {
         console.log("Error al cerrar sesión:", error.responseText);
         // Manejar el error aquí
+    });
+});
+
+// Solicitud Ajax botón internacionales
+$('#internacionales').click(function() {
+    $.ajax({
+        url: '/internacionales',
+        type: 'GET',
+        success: function(response) {
+            window.location.href = '/internacionales'
+            console.log('Respuesta recibida:', response);
+        },
+        error: function(xhr, status, error) {
+            console.error('Error en la petición AJAX:', error);
+        }
     });
 });

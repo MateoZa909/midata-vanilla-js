@@ -575,9 +575,9 @@ thead th {
     color: white;
     background: rgb(212,41,70);
     background: linear-gradient(90deg, rgba(212,41,70,1) 16%, rgba(107,201,162,1) 73%);
-    border-radius: 25px;
+    border-radius: 10px;
     width: 100%;
-    height: 100%;
+    height: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -586,13 +586,14 @@ thead th {
 
 #table-campaigns tr td .cira {
     width: 100%;
-    height: 100%;
+    border-radius: 10px;
+    height: 50%;
     background: rgb(177,216,253);
     background: linear-gradient(90deg, rgba(177,216,253,1) 16%, rgba(0,128,200,1) 73%);
     font-weight: bold;
     /* border-radius: 15px; */
     padding: 3px 0;
-    color: white;
+    color: black;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -600,21 +601,22 @@ thead th {
 
 #table-campaigns tr td .amavita {
     width: 100%;
-    height: 100%;
+    border-radius: 10px;
+    height: 50%;
     background: rgb(119,194,110);
     background: linear-gradient(90deg, rgba(119,194,110,1) 16%, rgba(107,195,216,1) 73%);
     font-weight: bold;
-    /* border-radius: 15px; */
     padding: 3px 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
+    color: black;
 }
 
 #table-campaigns tr td .dralex {
     width: 100%;
-    height: 100%;
+    border-radius: 10px;
+    height: 50%;
     padding: 3px 0;
     background: rgb(0,74,104);
     background: linear-gradient(90deg, rgba(0,74,104,1) 0%, rgba(255,255,255,1) 18%, rgba(255,255,255,1) 81%, rgba(0,74,104,1) 100%);

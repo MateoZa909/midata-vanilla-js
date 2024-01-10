@@ -216,7 +216,7 @@ $("input[name='correo-login'], input[name='pasw-login']").on('input', function()
 $(".form-register").on("submit", (event) => {
     event.preventDefault();
 
-    // Validación de los campos
+    // VALIDACION DE LOS CAMPOS QUE NO ESTEN VACIOS
     var nombre = $("input[name='nombre']").val().trim();
     var correo = $("input[name='correo']").val().trim();
     var usuario = $("input[name='usuario']").val().trim();
@@ -243,6 +243,44 @@ $(".form-register").on("submit", (event) => {
         
         return; // Detiene la ejecución si algún campo está vacío
     }
+    // VALIDACION DE LOS CAMPOS QUE NO ESTEN VACIOS
+
+    // VALIDACION FORMATO DE CORREO
+    var correoValido = /@gmail\.com$|@outlook\.com$|@hotmail\.com$/i;
+
+    if (!correo || !correoValido.test(correo)) {
+        if (!correo) {
+            $("input[name='correo']").css('outline', '2px solid red');
+        } else if (!correoValido.test(correo)) {
+            $("input[name='correo']").css('outline', '2px solid red');
+            // Puedes mostrar un mensaje de error específico para formato inválido
+            $(".msg").html("<p class='invalid-email'>Formato de correo no válido</p>")
+                    .css("display", "flex")
+                    .show();
+            setTimeout(() => { $(".msg").hide(); }, 3000);
+        }
+        return; // Detiene la ejecución si el correo está vacío o no es válido
+    }
+    // VALIDACION FORMATO DE CORREO
+
+
+    // VALIDACION DE NOMBRE NO ACEPTAR MAS DE 3 LETRAS REPETIDAS
+    var nombreValido = /(.)\1{3,}/;
+
+    if (!nombre || nombreValido.test(nombre)) {
+        if (!nombre) {
+            $("input[name='nombre']").css('outline', '2px solid red');
+        } else if (nombreValido.test(nombre)) {
+            $("input[name='nombre']").css('outline', '2px solid red');
+            // Muestra un mensaje de error específico para nombres no válidos
+            $(".msg").html("<p class='invalid-name-error'>Nombre no valido</p>")
+                    .css("display", "flex")
+                    .show();
+            setTimeout(() => { $(".msg").hide(); }, 3000);
+        }
+        return; // Detiene la ejecución si el nombre está vacío o no es válido
+    }
+    // VALIDACION DE NOMBRE NO ACEPTAR MAS DE 3 LETRAS REPETIDAS
 
     var userData = {
         nombre: nombre,

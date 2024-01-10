@@ -180,6 +180,15 @@ main {
     margin-top: 11px;
 }
 
+.msg .invalid-email {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.invalid-name-error {
+    font-size: 17px;
+}
+
 .name-warning, 
 .correo-warning, 
 .user-warning, 

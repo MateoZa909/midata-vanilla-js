@@ -548,10 +548,6 @@ thead th {
     top: 0;
 }
 
-/* #table-campaigns  tbody tr:active {
-    background-color: #171717;
-} */
-
 /* Seleccion de fila */
 #table-campaigns  tbody tr.selected {
     background-color: #000000;
@@ -565,11 +561,10 @@ thead th {
     font-size: 16px;
 }
 
-/* COLORES NOMBRES DE CAMPAÑAS */
-/* COLORES NOMBRES DE CAMPAÑAS */
-/* COLORES NOMBRES DE CAMPAÑAS */
-/* COLORES NOMBRES DE CAMPAÑAS */
-/* COLORES NOMBRES DE CAMPAÑAS */
+/* ***************************
+   COLORES NOMBRES DE CAMPAÑAS 
+********************************
+*/
 #table-campaigns tr td .CGN {
     font-weight: bold;
     color: white;
@@ -591,7 +586,6 @@ thead th {
     background: rgb(177,216,253);
     background: linear-gradient(90deg, rgba(177,216,253,1) 16%, rgba(0,128,200,1) 73%);
     font-weight: bold;
-    /* border-radius: 15px; */
     padding: 3px 0;
     color: black;
     display: flex;
@@ -624,14 +618,11 @@ thead th {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* border-radius: 15px; */
 }
-/* COLORES NOMBRES DE CAMPAÑAS */
-/* COLORES NOMBRES DE CAMPAÑAS */
-/* COLORES NOMBRES DE CAMPAÑAS */
-/* COLORES NOMBRES DE CAMPAÑAS */
-/* COLORES NOMBRES DE CAMPAÑAS */
-/* Seleccion de fila */
+/* ***************************
+   COLORES NOMBRES DE CAMPAÑAS 
+********************************
+*/
 
 /* Color de fondo encabezado */
 .contain-table table th {
@@ -645,7 +636,6 @@ thead th {
     background-color: #e0e0e0d7;
 }
 /* Color de fondo cuerpo */
-
 
 #table-campaigns {
     width: 100%;

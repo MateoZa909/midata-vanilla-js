@@ -1,4 +1,6 @@
-// Solicitud Ajax 5 regisrors
+// ******************************************
+// **            (FUNCIONA)                **
+// SOLICITUD AJAX 5 REGISTROS
 $('.get-five').click(function() {
 $.ajax({
     url: 'http://localhost:3000/5/registros',
@@ -37,8 +39,14 @@ $.ajax({
     }
 });
 });
+// SOLICITUD AJAX 5 REGISTROS
+/* ************************************** 
+   ************************************** */
 
-// Solicitud Ajax 10 regisrors
+
+// ******************************************
+// **            (FUNCIONA)                **
+// SOLICITUD AJAX 10 REGISTROS
 $('.get-ten').click(function() {
 $.ajax({
     url: 'http://localhost:3000/10/registros',
@@ -77,8 +85,14 @@ $.ajax({
     }
 });
 });
+// SOLICITUD AJAX 10 REGISTROS
+/* ************************************** 
+   ************************************** */
 
-// Solicitud Ajax 25 regisrors
+
+// ******************************************
+// **            (FUNCIONA)                **
+// SOLICITUD AJAX 25 REGISTROS  
 $('#btn-twenty-five').click(function() {
 $.ajax({
     url: 'http://localhost:3000/25/registros',
@@ -120,8 +134,35 @@ $.ajax({
     }
 });
 });
+// SOLICITUD AJAX 25 REGISTROS  
+/* ************************************** 
+   ************************************** */
 
-// Función para cargar contenido de nacionales
+// ******************************************
+// **            (FUNCIONA)                **
+// SOLICITUD AJAX CERRAR SESIÓN
+$("#btn-logout").on("click", function() {
+    $.ajax({
+        type: "POST",
+        url: "/logout",
+        dataType: "json"
+    })
+    .done(function(response) {
+        // Redirigir al usuario a la página de inicio de sesión
+        window.location.href = '/login-signup';
+    })
+    .fail(function(error) {
+        console.log("Error al cerrar sesión:", error.responseText);
+        // Manejar el error aquí
+    });
+});
+/* ************************************** 
+   ************************************** */
+  
+
+// ******************************************
+// **            (FUNCIONA)                **
+// FUNCION REDIRECCIONAMIENTO PAGINA NACIONALES
 $('#nacionales').click(function() {
     $.ajax({
         url: '/nacionales',
@@ -135,4 +176,6 @@ $('#nacionales').click(function() {
         }
     });
 });
-// Función para cargar contenido de nacionales
+// FUNCION REDIRECCIONAMIENTO PAGINA NACIONALES
+/* ************************************** 
+   ************************************** */

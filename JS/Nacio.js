@@ -1,4 +1,6 @@
-// Solicitud Ajax 5 regisrors
+// ******************************************
+// **            (FUNCIONA)                **
+// SOLICITUD AJAX 5 REGISTROS
 $('.get-five').click(function() {
     $.ajax({
         url: 'http://localhost:3000/5/registros',
@@ -37,8 +39,14 @@ $('.get-five').click(function() {
         }
     });
 });
+// SOLICITUD AJAX 5 REGISTROS
+/* ************************************** 
+    ************************************** */
     
-// Solicitud Ajax 10 regisrors
+    
+// ******************************************
+// **            (FUNCIONA)                **
+// SOLICITUD AJAX 10 REGISTROS
 $('.get-ten').click(function() {
 $.ajax({
     url: 'http://localhost:3000/10/registros',
@@ -77,8 +85,14 @@ $.ajax({
     }
 });
 });
+// SOLICITUD AJAX 10 REGISTROS
+/* ************************************** 
+    ************************************** */
+    
 
-// Solicitud Ajax 25 regisrors
+// ******************************************
+// **            (FUNCIONA)                **
+// SOLICITUD AJAX 25 REGISTROS  
 $('#btn-twenty-five').click(function() {
 $.ajax({
     url: 'http://localhost:3000/25/registros',
@@ -120,8 +134,14 @@ $.ajax({
     }
 });
 });
+// SOLICITUD AJAX 25 REGISTROS  
+/* ************************************** 
+    ************************************** */
 
-// Solicitud Ajax cerrar sesión
+    
+// ******************************************
+// **            (FUNCIONA)                **
+// SOLICITUD AJAX CERRAR SESIÓN
 $("#btn-logout").on("click", function() {
     $.ajax({
         type: "POST",
@@ -137,8 +157,14 @@ $("#btn-logout").on("click", function() {
         // Manejar el error aquí
     });
 });
+// SOLICITUD AJAX CERRAR SESIÓN
+/* ************************************** 
+    ************************************** */
 
-// Solicitud Ajax botón internacionales
+
+// *************************************************
+// **               (FUNCIONA)                    **
+// FUNCION REDIRECCIONAMIENTO PAGINA INTERNACIONALES
 $('#internacionales').click(function() {
     $.ajax({
         url: '/internacionales',
@@ -152,3 +178,6 @@ $('#internacionales').click(function() {
         }
     });
 });
+// FUNCION REDIRECCIONAMIENTO PAGINA INTERNACIONALES
+/* ************************************************* 
+    ********************************************* */

@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/Styles/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-    <link rel="shortcut icon" href="./assets/MD.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/assets/Recurso 1.png" type="image/x-icon">
 </head>
 <body>
 
@@ -121,7 +121,7 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <p class="CGN">Clinica General Del norte</p>
+                                    <div class="CGN">Clinica General Del norte</div>
                                 </td>
                                 <td>1370</td>
                                 <td>50</td>
@@ -231,6 +231,10 @@
                         
                     </tbody>
                 </table>
+
+                <div class="delete-search-btns" style="display: none;">
+                    <img src="../assets/delete.png" alt="eliminar busqueda">
+                </div>
             </div>
         </div>
         
@@ -299,6 +303,10 @@
     <!-- CDN Chart.JS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- CDN Chart.JS -->
+
+    <script>
+        const btnDeleteDataBtns = document.querySelector('.delete-search-btns');
+    </script>
 
     <!-- Contenedor validar eliminar campaña -->
     <script>
@@ -477,40 +485,40 @@
 
     <!-- Función para actualizar el contador de la próxima actualización -->
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      // Obtener todas las celdas con la clase 'countdown'
-      var countdownElements = document.querySelectorAll('.countdown');
+        document.addEventListener('DOMContentLoaded', function () {
+        // Obtener todas las celdas con la clase 'countdown'
+        var countdownElements = document.querySelectorAll('.countdown');
 
-      // Función para actualizar el contador regresivo
-      const actualizarContadorRegresivo = (element) => {
-        var tiempoFinal = element.dataset.time;
-        var fechaFinal = new Date('2023-12-15T' + tiempoFinal + ':00');
-        
-        const actualizar = () => {
-          var ahora = new Date();
-          var diferencia = Math.floor((fechaFinal - ahora) / 1000);
+        // Función para actualizar el contador regresivo
+        const actualizarContadorRegresivo = (element) => {
+            var tiempoFinal = element.dataset.time;
+            var fechaFinal = new Date('2023-12-15T' + tiempoFinal + ':00');
+            
+            const actualizar = () => {
+            var ahora = new Date();
+            var diferencia = Math.floor((fechaFinal - ahora) / 1000);
 
-          if (diferencia <= 0) {
-            element.textContent = '¡Tiempo terminado!';
-            return;
-          }
+            if (diferencia <= 0) {
+                element.textContent = '¡Tiempo terminado!';
+                return;
+            }
 
-          var horas = Math.floor(diferencia / 3600);
-          var minutos = Math.floor((diferencia % 3600) / 60);
-          var segundos = diferencia % 60;
+            var horas = Math.floor(diferencia / 3600);
+            var minutos = Math.floor((diferencia % 3600) / 60);
+            var segundos = diferencia % 60;
 
-          element.textContent = horas + 'h ' + minutos + 'm ' + segundos + 's';
+            element.textContent = horas + 'h ' + minutos + 'm ' + segundos + 's';
 
-          setTimeout(actualizar, 1000);
+            setTimeout(actualizar, 1000);
+            }
+
+            actualizar();
         }
 
-        actualizar();
-      }
-
-      countdownElements.forEach(function (element) {
-        actualizarContadorRegresivo(element);
-      });
-    });
+        countdownElements.forEach(function (element) {
+            actualizarContadorRegresivo(element);
+        });
+        });
     </script>
     <!-- Función para actualizar el contador de la próxima actualización -->
 

@@ -8,6 +8,10 @@ $('.get-five').click(function() {
         dataType: 'json',
         success: function(data) {
             console.log('Datos recibidos del servidor:', data);
+            if(data.length > 0) {
+                $('.delete-search-btns').show(); // Muestra el botón de eliminar si hay registros
+            }
+
             // Limpiar el contenido actual del tbody
             $('#tbody_datos').empty();
     
@@ -54,6 +58,10 @@ $.ajax({
     dataType: 'json',
     success: function(data) {
         console.log('Datos recibidos del servidor:', data);
+        if(data.length > 0) {
+            $('.delete-search-btns').show(); // Muestra el botón de eliminar si hay registros
+        }
+
         // Limpiar el contenido actual del tbody
         $('#tbody_datos').empty();
 
@@ -103,6 +111,10 @@ $.ajax({
     },
     success: function(data) {
         console.log('Datos recibidos del servidor:', data);
+        if(data.length > 0) {
+            $('.delete-search-btns').show(); // Muestra el botón de eliminar si hay registros
+        }
+
         // Limpiar el contenido actual del tbody
         $('#tbody_datos').empty();
 
@@ -179,5 +191,15 @@ $('#internacionales').click(function() {
     });
 });
 // FUNCION REDIRECCIONAMIENTO PAGINA INTERNACIONALES
+/* ************************************************* 
+    ********************************************* */
+
+// *************************************************
+// **               (FUNCIONA)                    **
+// EVENTO ELIMINAR REGISTTROS DE TABLA
+$('.delete-search-btns').click(function() {
+    $('#tbody_datos').empty();
+    $('.delete-search-btns').hide(); // OCultar boton
+})
 /* ************************************************* 
     ********************************************* */

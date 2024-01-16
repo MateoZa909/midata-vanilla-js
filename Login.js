@@ -273,9 +273,9 @@ $(".form-register").on("submit", (event) => {
         } else if (nombreValido.test(nombre)) {
             $("input[name='nombre']").css('outline', '2px solid red');
             // Muestra un mensaje de error específico para nombres no válidos
-            $(".msg").html("<p class='invalid-name-error'>Nombre no valido</p>")
-                    .css("display", "flex")
-                    .show();
+            $(".msg").html("<p class='invalid-name-error'>Nombre no válido</p>")
+                     .css("display", "flex")
+                     .show();
             setTimeout(() => { $(".msg").hide(); }, 3000);
         }
         return; // Detiene la ejecución si el nombre está vacío o no es válido

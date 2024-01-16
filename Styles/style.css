@@ -1,4 +1,4 @@
- @import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300;700&family=Concert+One&family=Lalezar&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300;700&family=Concert+One&family=Lalezar&display=swap');
 
 @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@300&display=swap');
 
@@ -77,6 +77,26 @@ body {
     transform: rotate(180deg);
     cursor: pointer;
     margin-bottom: 10px;
+}
+
+/* up-section 3 column empty */
+.up-section .back-btn-log-out {
+    /* background-color: lightblue; */
+    display: flex;
+    justify-content: end;
+}
+
+.up-section .back-btn-log-out button {
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    margin-top: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-top-left-radius: 8px;
+    border: none;
 }
 
 .tools {
@@ -169,7 +189,9 @@ body {
     transform: scale(.98);
 }
 
-/* SECTION TABLE */
+/* ********* NEXT-ONE-SECTION ****************** */
+/* ********* NEXT-ONE-SECTION ****************** */
+/* ********* NEXT-ONE-SECTION ****************** */
 .nextOne-section {
     position: relative;
     width: 100%;
@@ -569,7 +591,6 @@ thead th {
     font-weight: bold;
     color: white;
     background: rgb(212,41,70);
-    background: linear-gradient(90deg, rgba(212,41,70,1) 16%, rgba(107,201,162,1) 73%);
     border-radius: 10px;
     width: 100%;
     height: 50%;
@@ -583,11 +604,11 @@ thead th {
     width: 100%;
     border-radius: 10px;
     height: 50%;
-    background: rgb(177,216,253);
-    background: linear-gradient(90deg, rgba(177,216,253,1) 16%, rgba(0,128,200,1) 73%);
+    background: #0080C8;
+    /* background: linear-gradient(90deg, rgba(177,216,253,1) 16%, rgba(0,128,200,1) 73%); */
     font-weight: bold;
     padding: 3px 0;
-    color: black;
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -598,7 +619,7 @@ thead th {
     border-radius: 10px;
     height: 50%;
     background: rgb(119,194,110);
-    background: linear-gradient(90deg, rgba(119,194,110,1) 16%, rgba(107,195,216,1) 73%);
+    /* background: linear-gradient(90deg, rgba(119,194,110,1) 16%, rgba(107,195,216,1) 73%); */
     font-weight: bold;
     padding: 3px 0;
     display: flex;
@@ -613,9 +634,10 @@ thead th {
     height: 50%;
     padding: 3px 0;
     background: rgb(0,74,104);
-    background: linear-gradient(90deg, rgba(0,74,104,1) 0%, rgba(255,255,255,1) 18%, rgba(255,255,255,1) 81%, rgba(0,74,104,1) 100%);
+    /* background: linear-gradient(90deg, rgba(0,74,104,1) 0%, rgba(255,255,255,1) 18%, rgba(255,255,255,1) 81%, rgba(0,74,104,1) 100%); */
     font-weight: bold;
     display: flex;
+    color: white;
     justify-content: center;
     align-items: center;
 }
@@ -742,25 +764,7 @@ thead th {
 }
 /********************************************++ */
 
-/* up-section 3 column empty */
-.up-section .back-btn-log-out {
-    /* background-color: lightblue; */
-    display: flex;
-    justify-content: end;
-}
 
-.up-section .back-btn-log-out button {
-    width: 50px;
-    height: 50px;
-    background-color: white;
-    margin-top: 14px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    border-top-left-radius: 8px;
-    border: none;
-}
 
 .up-section .back-btn-log-out button:active {
     transform: scale(.97);
@@ -900,29 +904,6 @@ thead th {
     transform: var(--scale-button);
 }
 
-
-
-
-
-/* .content-empty-icons {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-} */
-
-/* .container-del-icon,
-.container-set-icon {
-    width: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.container-del-icon:active,
-.container-set-icon:active {
-    background-color: rgb(211, 211, 211);
-} */
-
 .settings-section .content-request-btns {
     height: 190px;
     width: 100%;
@@ -992,7 +973,15 @@ thead th {
     transform: var(--scale-button);
 }
 /* settings section */
+/* ********* NEXT-ONE-SECTION ****************** */
+/* ********* NEXT-ONE-SECTION ****************** */
+/* ********* NEXT-ONE-SECTION ****************** */
 
+
+
+/* ********* CHART-AND-TABLE ****************** */
+/* ********* CHART-AND-TABLE ****************** */
+/* ********* CHART-AND-TABLE ****************** */
 .chart-and-table {
     width: 100%;
     /* background-color: lightcoral; */
@@ -1018,16 +1007,37 @@ canvas {
 .section-table-db  {
     background-color: rgb(226, 226, 226);
     min-width: 750px;
-    max-height: 450px; /* Establece la altura máxima que deseas para la tabla */
-    overflow-y: auto; 
+    max-height: 450px;
+    overflow-y: auto;
     border-radius: 10px;
-    height: auto;
     box-shadow: 0 4px 10px 2px rgba(0, 0, 0, 0.167);
     animation: container-table 0.5s;
+    /* Asegúrate de que el padding no afecte el cálculo del tamaño */
+    box-sizing: border-box;
+    position: relative;
+}
+
+.section-table-db .delete-search-btns {
+    position: fixed;
+    background-color: rgba(255, 255, 255, 0.555);
+    box-shadow: var(--box-shadow-main);
+    width: 40px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    right: 19px;
+    bottom: 44%;
+    cursor: pointer;
+}
+
+.section-table-db .delete-search-btns img {
+    width: 30px;
 }
 
 /* .section-table-db::-webkit-scrollbar-track {
-    background-color: transparent;
+    background-color: transparent;nom
 } */
 
 .section-table-db::-webkit-scrollbar {
